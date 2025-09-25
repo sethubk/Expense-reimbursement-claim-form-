@@ -1,12 +1,11 @@
-
 <div class="header1">
-  <h1>Expense reimbursement claim form </h1>
+    <h1>Expense reimbursement claim form </h1>
 </div>
 
 
 
 <!-- new-claim.component.html -->
-<clr-dropdown>
+<!-- <clr-dropdown>
   <button clrDropdownTrigger class="btn btn-primary">
     {{ selectedCategory || 'Select Category' }}
   </button>
@@ -20,106 +19,117 @@
 
 
   </clr-dropdown-menu>
-</clr-dropdown>
+</clr-dropdown> -->
+<div class="buttons">
+ <button  class="btn btn-primary" (click)="goToPersonalDetails('Expense')">New Expense claim </button>
+    <button class=" btn btn-primary"  (click)="goToPersonalDetails('InternationalTravels')">New International Travels claim</button>
+
+    <button class=" btn btn-primary"  (click)="goToPersonalDetails('DomesticTravels')">
+     new  Domestic Travels claim
+    </button>
+</div>
 
 
 
-
-<clr-modal [(clrModalOpen)]="showPersonalModal" [clrModalSize]="'md'">
-  <h3 class="modal-title">Personal Details</h3>
-  <div class="modal-body">
-    <form clrForm #personalForm="ngForm">
-      <clr-input-container>
-        <label>Date of Submission</label>
-        <input clrInput [value]="today" readonly style="border-radius: 8px;" />
-      </clr-input-container>
-      <!-- <clr-input-container>
+    <clr-modal [(clrModalOpen)]="showPersonalModal" [clrModalSize]="'md'" >
+        <h3 class="modal-title">Personal Details</h3>
+        <div class="modal-body">
+            <form clrForm #personalForm="ngForm">
+                <clr-input-container>
+                    <label>Date of Submission</label>
+                    <input clrInput [value]="personl.today" readonly style="border-radius: 8px;" />
+                </clr-input-container>
+                <!-- <clr-input-container>
     <label>Expense statement of</label>
     <input clrInput [(ngModel)]="username" name="username" required  readonly style="border-radius: 8px;" />
   </clr-input-container> -->
-      <clr-input-container>
-        <label>Expense statement of</label>
-        <input clrInput [(ngModel)]="username" name="username" required style="border-radius: 8px;" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>Employee Code</label>
-        <input clrInput [(ngModel)]="employeeCode" name="employeeCode" required style="border-radius: 8px;" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>Purpose & Place</label>
-        <input clrInput [(ngModel)]="purposePlace" name="purposePlace" required style="border-radius: 8px;" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>Company & Plant</label>
-        <input clrInput [(ngModel)]="companyPlant" name="companyPlant" required style="border-radius: 8px;" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>Cost Center</label>
-        <input clrInput [(ngModel)]="costCenter" name="costCenter" required style="border-radius: 8px;" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>Vendor Code</label>
-        <input clrInput [(ngModel)]="vendorCode" name="vendorCode" required style="border-radius: 8px;" />
-      </clr-input-container>
-      <div class="modal-footer">
-        <button class="btn btn-primary" [disabled]="!personalForm.valid" (click)="onPersonalNext(personalForm)">
-          Next
-        </button>
-      </div>
-    </form>
+                <clr-input-container>
+                    <label>Expense statement of</label>
+                    <input clrInput [(ngModel)]="personl.username" name="username" required style="border-radius: 8px;" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Employee Code</label>
+                    <input clrInput [(ngModel)]="personl.employeeCode" name="employeeCode" required
+                        style="border-radius: 8px;" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Purpose & Place</label>
+                    <input clrInput [(ngModel)]="personl.purposePlace" name="purposePlace" required
+                        style="border-radius: 8px;" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Company & Plant</label>
+                    <input clrInput [(ngModel)]="personl.companyPlant" name="companyPlant" required
+                        style="border-radius: 8px;" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Cost Center</label>
+                    <input clrInput [(ngModel)]="personl.costCenter" name="costCenter" required style="border-radius: 8px;" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Vendor Code</label>
+                    <input clrInput [(ngModel)]="personl.vendorCode" name="vendorCode" required style="border-radius: 8px;" />
+                </clr-input-container>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" [disabled]="!personalForm.valid"
+                        (click)="onPersonalNext(personalForm)">
+                        Next
+                    </button>
+                    <button class="btn btn-denger" type="reset"  (click)="reset()">reset</button>
+                </div>
+            </form>
 
-  </div>
+        </div>
 
-</clr-modal>
-
-
-  <div class="table-wrapper mat-elevation-z2">
-    <table mat-table >
-
-
-      <ng-container>
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-        <td mat-cell *matCellDef="let row">
-
-        </td>
-      </ng-container>
-
-      <!-- Created Date -->
-      <ng-container matColumnDef="createdDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
-        <td mat-cell *matCellDef="let row">
-
-        </td>
-      </ng-container>
-
-      <!-- Purpose & Place -->
-      <ng-container matColumnDef="purposePlace">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Purpose &amp; Place </th>
-        <td mat-cell *matCellDef="let row">
-
-        </td>
-      </ng-container>
-
-      <!-- Amount -->
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-        <td mat-cell *matCellDef="let row">
+    </clr-modal>
 
 
-          <!-- Status -->
-          <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let row">
+    <div class="table-wrapper mat-elevation-z2">
+        <table mat-table>
 
-        </td>
-      </ng-container>
 
-      <!-- Expense -->
-      <ng-container matColumnDef="expense">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Expense </th>
+            <ng-container>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                <td mat-cell *matCellDef="let row">
 
-      </ng-container>
-      </td></ng-container>
-      </table>
-      </div>
+                </td>
+            </ng-container>
 
+            <!-- Created Date -->
+            <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+                <td mat-cell *matCellDef="let row">
+
+                </td>
+            </ng-container>
+
+            <!-- Purpose & Place -->
+            <ng-container matColumnDef="purposePlace">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Purpose &amp; Place </th>
+                <td mat-cell *matCellDef="let row">
+
+                </td>
+            </ng-container>
+
+            <!-- Amount -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                <td mat-cell *matCellDef="let row">
+
+
+                    <!-- Status -->
+                    <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let row">
+
+                </td>
+            </ng-container>
+
+            <!-- Expense -->
+            <ng-container matColumnDef="expense">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Expense </th>
+
+            </ng-container>
+            </td></ng-container>
+        </table>
+    </div>

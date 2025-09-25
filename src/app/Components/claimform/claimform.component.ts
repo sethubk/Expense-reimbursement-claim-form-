@@ -25,19 +25,22 @@ export interface Expense {
 })
 export class ClaimformComponent {
   
-showPersonalModal = false;
+showPersonalModal = true;
 
-  today: string = '';
-  username: string = ''; 
-  employeeCode = '';
-  purposePlace = '';
-  companyPlant = '';
-  costCenter = '';
-  vendorCode = '';
+personl:any={
+today:  '',
+  username:  '',
+  employeeCode:  '',
+  purposePlace:  '',
+  companyPlant : '',
+  costCenter:  '',
+  vendorCode:  '',
+  
+}
   
 ngOnInit() {
     const now = new Date();
-    this.today = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    this.personl.today = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
   }
 
 
@@ -57,12 +60,12 @@ onPersonalNext(form:NgForm) {
   //store the dates in 
     if (form.valid) {
 this.service.setDetails({
-      employeeCode: this.employeeCode,
-      purposePlace: this.purposePlace,
-      companyPlant: this.companyPlant,
-      costCenter: this.costCenter,
-      vendorCode: this.vendorCode,
-      username: this.username
+      employeeCode: this.personl.employeeCode,
+      purposePlace: this.personl.purposePlace,
+      companyPlant: this.personl.companyPlant,
+      costCenter: this.personl.costCenter,
+      vendorCode: this.personl.vendorCode,
+      username: this.personl.username
 })
   this.showPersonalModal = false;
   if(this.selectedCategory === 'Expense') {
@@ -75,4 +78,9 @@ this.service.setDetails({
 
 
 }
-}}
+
+}
+reset(){
+
+}
+}

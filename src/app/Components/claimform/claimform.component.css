@@ -1,0 +1,29 @@
+.header1{
+    text-align: center;
+}
+/* .buttons{
+    display: flex;
+    justify-content:space-around;
+    
+} */
+
+clr-modal {
+    border-radius: 20px;
+    overflow: hidden;
+
+label{
+    width: px;
+}
+}
+
+::ng-deep clr-modal  {
+  border-radius: 20px;
+}
+.modal-title{
+    color: rgb(206, 206, 206);
+    text-align: center;
+}
+.modal-body{
+margin-bottom: 10px;
+
+}
