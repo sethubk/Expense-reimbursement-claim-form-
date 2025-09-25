@@ -6,24 +6,155 @@
     justify-content:space-around;
     
 } */
-
-clr-modal {
-    border-radius: 20px;
-    overflow: hidden;
-
-label{
-    width: px;
+ /* button designs */
+ .custom-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  padding: 10px;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 20px;
 }
+
+.custom-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 20px; /* Rounded corners */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.8s ease;
 }
 
-::ng-deep clr-modal  {
-  border-radius: 20px;
+.custom-btn:hover {
+  background-color: #0056b3;
 }
+/* 
+model designs */
+/* Prevent scroll and fix modal size */
 .modal-title{
-    color: rgb(206, 206, 206);
     text-align: center;
 }
-.modal-body{
-margin-bottom: 10px;
-
+.personal-card-form{
+    overflow: hidden;
 }
+.modal-body {
+  
+  padding: 34px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+/* Two-column layout */
+.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+/* Align label and input side-by-side */
+clr-input-container {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  margin-bottom: 1px;
+}
+
+/* Label styling with red asterisk for required fields */
+clr-input-container label::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+
+clr-input-container label {
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Input styling */
+clr-input-container input {
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  margin: 0;
+  
+  box-sizing: border-box; /* Ensures padding doesn't overflow */
+  width: 100%;
+   outline: none; 
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 10px 0;
+  margin-top: 10px;
+}
+
+/* Button area */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #3f51ff, #2b35d9);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 6px 18px rgba(45, 55, 230, 0.18);
+  cursor: pointer;
+}
+
+.submit-btn[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Reset button */
+.btn-outline-danger {
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Responsive for mobile */
+@media (max-width: 720px) {
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  clr-input-container
+  {
+    grid-template-columns: 1fr;
+  }
+}
+

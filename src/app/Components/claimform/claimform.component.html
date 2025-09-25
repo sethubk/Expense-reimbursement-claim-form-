@@ -20,68 +20,80 @@
 
   </clr-dropdown-menu>
 </clr-dropdown> -->
-<div class="buttons">
- <button  class="btn btn-primary" (click)="goToPersonalDetails('Expense')">New Expense claim </button>
-    <button class=" btn btn-primary"  (click)="goToPersonalDetails('InternationalTravels')">New International Travels claim</button>
+<div class="custom-buttons">
+  <button class="custom-btn" (click)="goToPersonalDetails('Expense')">
+    New Expense Claim
+  </button>
 
-    <button class=" btn btn-primary"  (click)="goToPersonalDetails('DomesticTravels')">
-     new  Domestic Travels claim
-    </button>
+  <button class="custom-btn" (click)="goToPersonalDetails('InternationalTravels')">
+    New International Travels Claim
+  </button>
+
+  <button class="custom-btn" (click)="goToPersonalDetails('DomesticTravels')">
+    New Domestic Travels Claim
+  </button>
 </div>
 
 
+<clr-modal [(clrModalOpen)]="showPersonalModal" [clrModalSize]="'md'">
+  <h3 class="modal-title">Personal Details</h3>
 
-    <clr-modal [(clrModalOpen)]="showPersonalModal" [clrModalSize]="'md'" >
-        <h3 class="modal-title">Personal Details</h3>
-        <div class="modal-body">
-            <form clrForm #personalForm="ngForm">
-                <clr-input-container>
-                    <label>Date of Submission</label>
-                    <input clrInput [value]="personl.today" readonly style="border-radius: 8px;" />
-                </clr-input-container>
-                <!-- <clr-input-container>
-    <label>Expense statement of</label>
-    <input clrInput [(ngModel)]="username" name="username" required  readonly style="border-radius: 8px;" />
-  </clr-input-container> -->
-                <clr-input-container>
-                    <label>Expense statement of</label>
-                    <input clrInput [(ngModel)]="personl.username" name="username" required style="border-radius: 8px;" />
-                </clr-input-container>
-                <clr-input-container>
-                    <label>Employee Code</label>
-                    <input clrInput [(ngModel)]="personl.employeeCode" name="employeeCode" required
-                        style="border-radius: 8px;" />
-                </clr-input-container>
-                <clr-input-container>
-                    <label>Purpose & Place</label>
-                    <input clrInput [(ngModel)]="personl.purposePlace" name="purposePlace" required
-                        style="border-radius: 8px;" />
-                </clr-input-container>
-                <clr-input-container>
-                    <label>Company & Plant</label>
-                    <input clrInput [(ngModel)]="personl.companyPlant" name="companyPlant" required
-                        style="border-radius: 8px;" />
-                </clr-input-container>
-                <clr-input-container>
-                    <label>Cost Center</label>
-                    <input clrInput [(ngModel)]="personl.costCenter" name="costCenter" required style="border-radius: 8px;" />
-                </clr-input-container>
-                <clr-input-container>
-                    <label>Vendor Code</label>
-                    <input clrInput [(ngModel)]="personl.vendorCode" name="vendorCode" required style="border-radius: 8px;" />
-                </clr-input-container>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" [disabled]="!personalForm.valid"
-                        (click)="onPersonalNext(personalForm)">
-                        Next
-                    </button>
-                    <button class="btn btn-denger" type="reset"  (click)="reset()">reset</button>
-                </div>
-            </form>
+  <div class="modal-body">
+    <form clrForm #personalForm="ngForm" class="personal-card-form">
+      <div class="grid-two">
+        <clr-input-container>
+          <label >Date of Submission</label>
+          <input clrInput [value]="personl.today" readonly />
+        </clr-input-container>
 
-        </div>
+        <clr-input-container>
+          <label>Expense statement of</label>
+          <input clrInput [(ngModel)]="personl.username" name="username" required />
+        </clr-input-container>
+      </div>
 
-    </clr-modal>
+      <div class="grid-two">
+        <clr-input-container>
+          <label>Employee Code</label>
+          <input clrInput [(ngModel)]="personl.employeeCode" name="employeeCode" required />
+        </clr-input-container>
+
+        <clr-input-container>
+          <label>Purpose & Place</label>
+          <input clrInput [(ngModel)]="personl.purposePlace" name="purposePlace" required />
+        </clr-input-container>
+      </div>
+
+      <div class="grid-two">
+        <clr-input-container>
+          <label>Company & Plant</label>
+          <input clrInput [(ngModel)]="personl.companyPlant" name="companyPlant" required />
+        </clr-input-container>
+
+        <clr-input-container>
+          <label>Cost Center</label>
+          <input clrInput [(ngModel)]="personl.costCenter" name="costCenter" required />
+        </clr-input-container>
+      </div>
+
+      <clr-input-container>
+        <label>Vendor Code</label>
+        <input clrInput [(ngModel)]="personl.vendorCode" name="vendorCode" required />
+      </clr-input-container>
+
+      <div class="divider"></div>
+
+      <div class="actions">
+        <button class="submit-btn" [disabled]="!personalForm.valid" (click)="onPersonalNext(personalForm)">
+          Next
+        </button>
+        <button class="btn-outline-danger" type="reset" (click)="reset()">Reset</button>
+      </div>
+    </form>
+  </div>
+</clr-modal>
+
+
 
 
     <div class="table-wrapper mat-elevation-z2">
@@ -133,3 +145,5 @@
             </td></ng-container>
         </table>
     </div>
+    <div class="grid-wrapper">
+  

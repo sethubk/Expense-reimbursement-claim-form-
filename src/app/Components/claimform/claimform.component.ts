@@ -25,7 +25,7 @@ export interface Expense {
 })
 export class ClaimformComponent {
   
-showPersonalModal = true;
+showPersonalModal = false;
 
 personl:any={
 today:  '',
