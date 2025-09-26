@@ -80,7 +80,15 @@ this.service.setDetails({
 }
 
 }
-reset(){
+//displayedColumns: string[] = ['type', 'createdDate', 'purposePlace', 'amount', 'status', 'expense'];
 
-}
+dataSource = [
+  {
+    type: 'Travel',
+    createdDate: '2025-09-25',
+    purposePlace: 'Client Visit - Chennai',
+    amount: 1500,
+    status: 'Approved',
+    expense: 'Taxi'
+  },]
 }

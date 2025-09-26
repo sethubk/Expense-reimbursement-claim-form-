@@ -49,7 +49,7 @@ model designs */
   overflow: hidden;
 }
 
-/* Two-column layout */
+
 .grid-two {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -57,7 +57,7 @@ model designs */
   margin-bottom: 14px;
 }
 
-/* Align label and input side-by-side */
+
 clr-input-container {
   display: grid;
   grid-template-columns: 150px 1fr;
@@ -67,7 +67,7 @@ clr-input-container {
   margin-bottom: 1px;
 }
 
-/* Label styling with red asterisk for required fields */
+
 clr-input-container label::after {
   content: " *";
   color: red;
@@ -82,19 +82,19 @@ clr-input-container label {
   white-space: nowrap;
 }
 
-/* Input styling */
+
 clr-input-container input {
   border-radius: 10px;
   padding: 8px 12px;
   font-size: 14px;
   margin: 0;
   
-  box-sizing: border-box; /* Ensures padding doesn't overflow */
+  box-sizing: border-box; 
   width: 100%;
    outline: none; 
 }
 
-/* Divider */
+
 .divider {
   height: 1px;
   background: #eee;
@@ -102,7 +102,7 @@ clr-input-container input {
   margin-top: 10px;
 }
 
-/* Button area */
+
 .actions {
   display: flex;
   justify-content: center;
@@ -110,7 +110,6 @@ clr-input-container input {
   margin-top: 10px;
 }
 
-/* Submit button */
 .submit-btn {
   width: 100%;
   max-width: 200px;
@@ -130,7 +129,7 @@ clr-input-container input {
   cursor: default;
 }
 
-/* Reset button */
+
 .btn-outline-danger {
   background-color: transparent;
   border: 1px solid #dc3545;
@@ -158,3 +157,11 @@ clr-input-container input {
   }
 }
 
+.datagriid{
+margin-top: 200px;
+
+overflow-y: auto;
+  overflow-x: auto;
+
+
+}
