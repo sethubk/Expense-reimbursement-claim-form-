@@ -134,20 +134,13 @@ clr-input-container input {
   background-color: #dc3545;
   color: white;
 }
-clr-datagrid{
-    max-height: 70vh; /* or any suitable value */
+/* clr-datagrid{
+    max-height: 70vh; 
   overflow-y: auto;
   padding-bottom: 1rem;
-}
-
-.extracted-data-section{
-  
-max-height: 70vh; /* or any suitable value */
-  overflow-y: auto;
-  padding-bottom: 1rem;
+} */
 
 
-}
 
 /* clr-datagrid{
   overflow-y: auto;
@@ -202,12 +195,12 @@ clr-dg-column.auto-fit {
 float:right
 
 } */
- clr-dg-cell {
-  white-space: normal !important;
-  word-wrap: break-word;
-  word-break: break-word;
-  max-width: 300px; /* Optional: limit width to avoid overly wide columns */
-}
+
+
+
+
+
+
 
 .personaldata {
   display: grid;
@@ -236,3 +229,5 @@ float:right
 button{
   margin-left: 500px;
 }
+
+
