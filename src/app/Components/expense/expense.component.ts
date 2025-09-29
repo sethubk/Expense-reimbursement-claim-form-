@@ -68,12 +68,21 @@ export class ExpenseComponent implements OnInit {
       }
 else{
   this.entries.push({ ...this.formData });
-      this.Service.setentries(this.entries)
+      
      
     }
      
       this.formopen = false
 }
+this.Service.setentries(this.entries)
+// this.Service.setentries({
+//         date: this.formData.Date,
+//         supportingNo: this.formData.supportingNo,
+//         particulars: this.formData.particulars,
+//         paymentMode: 'Cash',
+//         amount: this.formData.amount,
+//         remarks: this.formData.remarks,
+// })
     
   }
   removeentry(index: number) {
