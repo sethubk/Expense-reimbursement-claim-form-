@@ -109,4 +109,7 @@ this.entries.splice(index, 1)
     
 
   }
+  gotoreview(){
+    this.router.navigate(['expensereview'])
+  }
 }

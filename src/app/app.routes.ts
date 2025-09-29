@@ -4,5 +4,6 @@ import { ExpenseComponent } from './Components/expense/expense.component';
 
 export const routes: Routes = [
     {path:'',component:ClaimformComponent},
-    {path:'expense',component:ExpenseComponent}
+    {path:'expense',component:ExpenseComponent},
+    
 ];
