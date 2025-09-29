@@ -21,7 +21,7 @@
     <div class="grid-two">
       <clr-input-container>
         <label>Date</label>
-        <input clrInput type="date" [(ngModel)]="formData.date" name="date" required />
+        <input clrInput type="date" [(ngModel)]="formData.date" name="date"  required />
       </clr-input-container>
 
       <clr-input-container>
@@ -79,27 +79,27 @@
 </clr-modal>
 
 <clr-datagrid *ngIf="entries.length > 0">
-  <clr-dg-column>Sno</clr-dg-column>
-  <clr-dg-column>Date</clr-dg-column>
-  <clr-dg-column>Supporting No</clr-dg-column>
-  <clr-dg-column>Particulars</clr-dg-column>
-  <clr-dg-column>Payment Mode</clr-dg-column>
-  <clr-dg-column>Amount</clr-dg-column>
-  <clr-dg-column>Remarks</clr-dg-column>
-  <clr-dg-column>Screenshot</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Sno</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Date</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Supporting No</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Particulars</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Payment Mode</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Amount</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Remarks</clr-dg-column>
+  <clr-dg-column class="auto-fit" >Screenshot</clr-dg-column>
 
-   <clr-dg-column>Actions</clr-dg-column>
+   <clr-dg-column class="auto-fit">Actions</clr-dg-column>
 
   <clr-dg-row *ngFor="let entry of entries let i = index">
-     <clr-dg-cell>{{ i }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
-     <clr-dg-cell>
+     <clr-dg-cell class="auto-fit" >{{ i }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.date }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.supportingNo }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.particulars }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.paymentMode }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.amount }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.remarks }}</clr-dg-cell>
+    <clr-dg-cell class="auto-fit">{{ entry.screenshot }}</clr-dg-cell>
+     <clr-dg-cell  >
         <button (click)="removeentry(i)">-</button>
         <button (click)="Editentry(entry,i)">EDIT</button>
      </clr-dg-cell>
@@ -108,6 +108,6 @@
 </clr-datagrid>
 
 
-<div class="preview">
+<div class="preview" *ngIf="entries.length > 0">
   <button class="btn btn-primary" (click)="gotoreview()"> review </button>
 </div>

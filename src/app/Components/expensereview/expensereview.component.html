@@ -1,1 +1,91 @@
-<p>expensereview works!</p>
+
+
+<div class="clr-row">
+    <div class="clr-col-8">
+        <div class="personaldetails">
+            <div *ngIf="personalData " class="personaldata">
+                <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
+                <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
+                <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
+                <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
+                <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
+                <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
+                <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+        <span>4</span>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="entries.length > 0">
+  <clr-dg-column>Sno</clr-dg-column>
+  <clr-dg-column>Date</clr-dg-column>
+  <clr-dg-column>Supporting No</clr-dg-column>
+  <clr-dg-column>Particulars</clr-dg-column>
+  <clr-dg-column>Payment Mode</clr-dg-column>
+  <clr-dg-column>Amount</clr-dg-column>
+  <clr-dg-column>Remarks</clr-dg-column>
+
+  <clr-dg-row *ngFor="let entry of entries; let i = index">
+    <clr-dg-cell>{{ i + 1 }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+ 
+  </clr-dg-row>
+
+<clr-dg-row>
+    <clr-dg-cell colspan="5"></clr-dg-cell>
+    <clr-dg-cell><strong>Total: ₹{{ totalAmount }}</strong></clr-dg-cell>
+    <clr-dg-cell></clr-dg-cell>
+  </clr-dg-row>
+
+  <!-- Total Row -->
+ 
+  
+</clr-datagrid>
+
+
+
+
+
+<div class="clr-row1">
+  <div class="clr-col-12 clr-col-md-4">
+    <div class="summary-box">
+      <table class="table table-compact">
+        <tbody>
+          <tr>
+            <td>Total Expenses Bill</td>
+            <td>₹{{ totalAmount }}</td>
+          </tr>
+          <tr>
+            <td>Expense Paid by Employee</td>
+            <td>₹</td>
+          </tr>
+          <tr>
+            <td>Expense Paid by Company</td>
+            <td>₹</td>
+          </tr>
+          <tr class="highlight">
+            <td>Advance Amount Payable to Employee</td>
+            <td class="green-text">₹{{ totalAmount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="button-group" style="margin: 20px 0;">
+  <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
+  <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
+  <button class="btn btn-info" (click)="showClaimSummary()">📄 View Claim</button>
+</div>
+
+
+

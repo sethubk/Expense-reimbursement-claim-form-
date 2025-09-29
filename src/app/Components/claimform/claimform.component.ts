@@ -38,9 +38,22 @@ today:  '',
   
 }
   
+dataSource = [
+  {
+    type: 'Travel',
+    createdDate: '2025-09-25',
+    purposePlace: 'Client Visit - Chennai',
+    totalAmount: 1500,
+    status: 'Approved',
+    expense: 'Taxi'
+  },]
+
 ngOnInit() {
     const now = new Date();
     this.personl.today = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    this.dataSource=this.service.getExpense()
+   console.log("expense to claim ",this)
+   
   }
 
 
@@ -60,6 +73,7 @@ onPersonalNext(form:NgForm) {
   //store the dates in 
     if (form.valid) {
 this.service.setDetails({
+  today: this.personl.today,
       employeeCode: this.personl.employeeCode,
       purposePlace: this.personl.purposePlace,
       companyPlant: this.personl.companyPlant,
@@ -82,13 +96,5 @@ this.service.setDetails({
 }
 //displayedColumns: string[] = ['type', 'createdDate', 'purposePlace', 'amount', 'status', 'expense'];
 
-dataSource = [
-  {
-    type: 'Travel',
-    createdDate: '2025-09-25',
-    purposePlace: 'Client Visit - Chennai',
-    amount: 1500,
-    status: 'Approved',
-    expense: 'Taxi'
-  },]
+
 }

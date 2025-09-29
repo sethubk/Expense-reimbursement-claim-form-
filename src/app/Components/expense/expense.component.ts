@@ -30,6 +30,7 @@ export class ExpenseComponent implements OnInit {
   };
 
   //expenseForm: FormGroup;
+maxDate: string = '';
 
   entries: any[] = [];
   constructor(private router: Router, private Service: PersonalDataService, private fb: FormBuilder) {
@@ -44,7 +45,10 @@ export class ExpenseComponent implements OnInit {
   }
   personalData: any;
   ngOnInit() {
+    
+ 
     this.personalData = this.Service.getDetails();
+      
   }
 
   // onFileChange(event: any) {
