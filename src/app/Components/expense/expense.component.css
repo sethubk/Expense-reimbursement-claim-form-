@@ -142,7 +142,7 @@ clr-input-container input {
 
 
 
-/* clr-datagrid{
+/* /* clr-datagrid{
   overflow-y: auto;
   max-height:800px;
  overflow-x: auto;
@@ -170,7 +170,7 @@ clr-dg-column.auto-fit {
 
   align-items: center;
 
-}
+} 
 
 ::ng-deep clr-dg-cell {
   white-space: wrap;
@@ -195,12 +195,12 @@ clr-dg-column.auto-fit {
 float:right
 
 } */
-
-
-
-
-
-
+ clr-dg-cell {
+  white-space: normal !important;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 300px; /* Optional: limit width to avoid overly wide columns */
+}
 
 .personaldata {
   display: grid;
@@ -229,5 +229,3 @@ float:right
 button{
   margin-left: 500px;
 }
-
-
