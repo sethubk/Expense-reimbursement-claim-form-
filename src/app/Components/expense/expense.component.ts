@@ -83,7 +83,7 @@ this.entries.splice(index, 1)
     }
     
   }
-  formopen: boolean = true;
+  formopen: boolean = false;
   openmodel() {
     debugger
     this.formopen = true;

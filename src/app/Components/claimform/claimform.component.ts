@@ -53,7 +53,7 @@ goToPersonalDetails(category: string){
   
 this.selectedCategory = category;
     this.showPersonalModal = true;
- this.showPersonalModal = true;
+
 }
 
 onPersonalNext(form:NgForm) {
