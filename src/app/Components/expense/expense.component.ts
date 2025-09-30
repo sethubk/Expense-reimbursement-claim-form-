@@ -18,7 +18,7 @@ import { PersonalDataService } from '../../services/personal-data.service';
 export class ExpenseComponent implements OnInit {
   username: string = '';
   editIndex: number | null = null;
-  isEdit:boolean=false;
+  isEdit: boolean = false;
   formData: any = {
     date: '',
     supportingNo: '',
@@ -30,7 +30,7 @@ export class ExpenseComponent implements OnInit {
   };
 
   //expenseForm: FormGroup;
-maxDate: string = '';
+  maxDate: string = '';
 
   entries: any[] = [];
   constructor(private router: Router, private Service: PersonalDataService, private fb: FormBuilder) {
@@ -45,10 +45,10 @@ maxDate: string = '';
   }
   personalData: any;
   ngOnInit() {
-    
- 
+
+
     this.personalData = this.Service.getDetails();
-      
+
   }
 
   // onFileChange(event: any) {
@@ -60,69 +60,69 @@ maxDate: string = '';
 
   addEntry(form: NgForm) {
     debugger
-  
+
     if (form.valid) {
-      if (this.editIndex != null &&this.isEdit) {
+      if (this.editIndex != null && this.isEdit) {
 
         // Update existing entry
         this.entries[this.editIndex] = this.formData;
         this.editIndex = null;
-        this.isEdit=false
+        this.isEdit = false
 
       }
-else{
-  this.entries.push({ ...this.formData });
-      
-     
-    }
-     
+      else {
+        this.entries.push({ ...this.formData });
+
+
+      }
+
       this.formopen = false
-}
-this.Service.setentries(this.entries)
-// this.Service.setentries({
-//         date: this.formData.Date,
-//         supportingNo: this.formData.supportingNo,
-//         particulars: this.formData.particulars,
-//         paymentMode: 'Cash',
-//         amount: this.formData.amount,
-//         remarks: this.formData.remarks,
-// })
-    
+    }
+    this.Service.setentries(this.entries)
+    // this.Service.setentries({
+    //         date: this.formData.Date,
+    //         supportingNo: this.formData.supportingNo,
+    //         particulars: this.formData.particulars,
+    //         paymentMode: 'Cash',
+    //         amount: this.formData.amount,
+    //         remarks: this.formData.remarks,
+    // })
+
   }
   removeentry(index: number) {
-    const of=confirm("are you sure")
-    if(of){
-this.entries.splice(index, 1)
+    const of = confirm("are you sure")
+    if (of) {
+      this.entries.splice(index, 1)
     }
-    
+
   }
   formopen: boolean = false;
   openmodel() {
     debugger
     this.formopen = true;
-    this.isEdit=false;
+    this.isEdit = false;
     this.formData = {
-        date: '',
-        supportingNo: '',
-        particulars: '',
-        paymentMode: 'Cash',
-        amount: null,
-        remarks: '',
-        screenshot: ''
-      };
+      date: '',
+      supportingNo: '',
+      particulars: '',
+      paymentMode: 'Cash',
+      amount: null,
+      remarks: '',
+      screenshot: ''
+    };
   }
 
-  Editentry( entry: any,index: number) {
+  Editentry(entry: any, index: number) {
     debugger
     this.formData = ({ ...entry })
     this.editIndex = index;
     this.formopen = true
-    this.isEdit=true;
-   console.log("forms",this.formData);
-    
+    this.isEdit = true;
+    console.log("forms", this.formData);
+
 
   }
-  gotoreview(){
+  gotoreview() {
     this.router.navigate(['expensereview'])
   }
 }
