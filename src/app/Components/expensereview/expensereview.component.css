@@ -51,3 +51,29 @@ display: flex;
 justify-content:space-around;
 align-items: center;
 }
+/* .navbar {
+  display: flex;
+  justify-content: space-between;
+ 
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+} */
+
+
+
+.brand-logo {
+  height: 40px;
+  margin-right: 30px;
+  width: 250px;
+
+}
+
+
+.brand-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-block;
+  
+}
