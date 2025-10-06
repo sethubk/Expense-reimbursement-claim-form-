@@ -2,7 +2,7 @@
   <h1>Expense reimbursement Page </h1>
 </div>
 
-<h3>Expense Page</h3>
+
 <div *ngIf="personalData " class="personaldata">
   <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
   <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
@@ -101,11 +101,12 @@
     <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
      <clr-dg-cell>
-        <button (click)="removeentry(i)">-</button>
-        <button (click)="Editentry(entry,i)">EDIT</button>
-     </clr-dg-cell>
+  <button class="crud-btn remove" (click)="removeentry(i)">-</button>
+  <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
+</clr-dg-cell>
+
     
-  </clr-dg-row>
+</clr-dg-row>
 </clr-datagrid>
 
 

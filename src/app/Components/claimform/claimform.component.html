@@ -1,5 +1,5 @@
 <div class="header1">
-    <h1>Expense reimbursement claim form </h1>
+  <h1>Expense reimbursement claim form </h1>
 </div>
 
 
@@ -39,10 +39,10 @@
   <h3 class="modal-title">Personal Details</h3>
 
   <div class="modal-body">
-    <form clrForm #personalForm="ngForm" class="personal-card-form" >
+    <form clrForm #personalForm="ngForm" class="personal-card-form">
       <div class="grid-two">
         <clr-input-container>
-          <label >Date of Submission</label>
+          <label>Date of Submission</label>
           <input clrInput [value]="personl.today" readonly />
         </clr-input-container>
 
@@ -87,7 +87,7 @@
         <button class="submit-btn" [disabled]="!personalForm.valid" (click)="onPersonalNext(personalForm)">
           Next
         </button>
-        <button class="btn-outline-danger" type="reset" >Reset</button>
+        <button class="btn-outline-danger" type="reset">Reset</button>
       </div>
     </form>
   </div>
@@ -96,37 +96,65 @@
 
 
 <div class="datagriid">
-<clr-datagrid  >
+  <clr-datagrid>
 
-  <!-- Column Headers -->
-  <clr-dg-column>Type</clr-dg-column>
-  <clr-dg-column>Created Date</clr-dg-column>
-  <clr-dg-column>Purpose & Place</clr-dg-column>
-  <clr-dg-column>Amount</clr-dg-column>
-  <clr-dg-column>Status</clr-dg-column>
 
-  <!-- Row Rendering -->
-  <clr-dg-row *clrDgItems="let item of dataSource">
-    <clr-dg-cell>{{ item.type }}</clr-dg-cell>
-    <clr-dg-cell>{{ item.createdDate | date:'mediumDate' }}</clr-dg-cell>
-    <clr-dg-cell>{{ item.purposePlace }}</clr-dg-cell>
-    <clr-dg-cell>{{ item.totalAmount }}</clr-dg-cell>
-    <clr-dg-cell>{{ item.status }}</clr-dg-cell>
-  </clr-dg-row>
+    <clr-dg-column>Type</clr-dg-column>
+    <clr-dg-column>Created Date</clr-dg-column>
+    <clr-dg-column>Purpose & Place</clr-dg-column>
+    <clr-dg-column>Amount</clr-dg-column>
+    <clr-dg-column>Status</clr-dg-column>
 
-  <!-- Footer with Pagination -->
-  <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="10">
-      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
-        Items per page
-      </clr-dg-page-size>
-      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
-      {{ pagination.totalItems }} items
-    </clr-dg-pagination>
-  </clr-dg-footer>
 
-</clr-datagrid>
+    <clr-dg-row *clrDgItems="let item of dataSource">
+      <clr-dg-cell>{{ item.type }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.createdDate | date:'mediumDate' }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.purposePlace }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.totalAmount }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.status }}</clr-dg-cell>
+    </clr-dg-row>
 
-</div>
-   
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
+          Items per page
+        </clr-dg-page-size>
+        {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+        {{ pagination.totalItems }} items
+      </clr-dg-pagination>
+    </clr-dg-footer>
 
+  </clr-datagrid>
+</div>  
+
+  <!-- 
+<div class="card">
+  <table class="claim-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Created Date</th>
+        <th>Purpose & Place</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataSource">
+        <td>{{ item.type }}</td>
+        <td>{{ item.createdDate | date:'mediumDate'}}</td>
+        <td>{{ item.purposePlace }}</td>
+        <td>{{ item.totalAmount }}</td>
+        <td>
+          <span class="status" [ngClass]="{
+             'in-progress': item.status === 'In Progress',
+             'approved': item.status === 'Approved',
+             'rejected': item.status === 'Rejected'
+           }">
+            {{ item.status }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->

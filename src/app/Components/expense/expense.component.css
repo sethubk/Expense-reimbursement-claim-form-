@@ -1,3 +1,10 @@
+.header1{
+  h1{
+    text-align: center;
+  }
+}
+
+
 .modal-title{
     text-align: center;
 }
@@ -225,4 +232,32 @@ float:right
   color: #333;
   min-width: 160px;
   display: inline-block;
+}
+
+.crud-btn {
+  padding: 4px 8px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.crud-btn.remove {
+  background-color: #dc3545; /* red */
+  color: white;
+}
+
+.crud-btn.remove:hover {
+  background-color: #c82333;
+}
+
+.crud-btn.edit {
+  background-color: #007bff; /* blue */
+  color: white;
+}
+
+.crud-btn.edit:hover {
+  background-color: #0056b3;
 }

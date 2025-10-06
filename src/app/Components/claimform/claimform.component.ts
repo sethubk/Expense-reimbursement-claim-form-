@@ -28,7 +28,7 @@ export class ClaimformComponent {
 showPersonalModal = false;
 
 personl:any={
-today:  '',
+  today:  '',
   username:  '',
   employeeCode:  '',
   purposePlace:  '',
@@ -52,7 +52,7 @@ ngOnInit() {
     const now = new Date();
     this.personl.today = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
     this.dataSource=this.service.getExpense()
-   console.log("expense to claim ",this)
+   console.log("expense to claim ",this.personl.today)
    
   }
 
