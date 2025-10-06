@@ -1,0 +1,35 @@
+.modal-title {
+  text-align: center;
+}
+h1{
+    text-align: center;
+    color: rgb(149, 149, 255);
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+
+}
+  .first{
+display: flex;
+justify-content: space-around;
+  }
+
+  .datagrid-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+ 
+}
+
+.datagrid-box {
+  flex: 1;
+  min-width: 400px;
+}

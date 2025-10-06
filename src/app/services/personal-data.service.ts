@@ -12,6 +12,8 @@ private details: any = {};
 private entries:any=[];
 private expense:any=[];
 
+
+
   setDetails(data: any) {
     this.details = data;
   }
@@ -31,4 +33,5 @@ setExpense(data: any)  {
 getExpense(){
   return this.expense
 }
+
 }
