@@ -5,9 +5,9 @@ import { ExpensereviewComponent } from './Components/expensereview/expensereview
 import { InternationalComponent } from './Components/international page/international/international.component';
 
 export const routes: Routes = [
-    // {path:'',component:ClaimformComponent},
+    {path:'',component:ClaimformComponent},
     {path:'expense',component:ExpenseComponent},
     {path:'expensereview',component:ExpensereviewComponent},
-{path:'',component:InternationalComponent    }
+{path:'international',component:InternationalComponent    }
     
 ];

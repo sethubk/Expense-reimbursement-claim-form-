@@ -17,12 +17,12 @@
 <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
   <div class="modal-body">
 
-<form clrForm #epenseForm="ngForm" class="expense-form">
-    <div class="grid-two">
-      <clr-input-container>
-        <label>Date</label>
-        <input clrInput type="date" [(ngModel)]="formData.date" name="date" required />
-      </clr-input-container>
+    <form clrForm #epenseForm="ngForm" class="expense-form">
+      <div class="grid-two">
+        <clr-input-container>
+          <label>Date</label>
+          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required />
+        </clr-input-container>
 
         <clr-input-container>
           <label>Supporting No</label>
@@ -78,44 +78,44 @@
   </div>
 
 </clr-modal>
-<div  style="overflow-x: auto;">
-<clr-datagrid *ngIf="entries.length > 0">
-  <clr-dg-column>Sno</clr-dg-column>
-  <clr-dg-column>Date</clr-dg-column>
-  <clr-dg-column>Supporting No</clr-dg-column>
-  <clr-dg-column>Particulars</clr-dg-column>
-  <clr-dg-column>Payment Mode</clr-dg-column>
-  <clr-dg-column>Amount</clr-dg-column>
-  <clr-dg-column>Remarks</clr-dg-column>
-  <clr-dg-column>Screenshot</clr-dg-column>
+<div style="overflow-x: auto;">
+  <clr-datagrid *ngIf="entries.length > 0">
+    <clr-dg-column>Sno</clr-dg-column>
+    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column>Supporting No</clr-dg-column>
+    <clr-dg-column>Particulars</clr-dg-column>
+    <clr-dg-column>Payment Mode</clr-dg-column>
+    <clr-dg-column>Amount</clr-dg-column>
+    <clr-dg-column>Remarks</clr-dg-column>
+    <clr-dg-column>Screenshot</clr-dg-column>
 
-   <clr-dg-column>Actions</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
 
-  <clr-dg-row *ngFor="let entry of entries let i = index">
-     <clr-dg-cell>{{ i }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
-     <clr-dg-cell>
-  <button class="crud-btn remove" (click)="removeentry(i)">-</button>
-  <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
-</clr-dg-cell>
-
-    
-</clr-dg-row>
-</clr-datagrid>
+    <clr-dg-row *ngFor="let entry of entries let i = index">
+      <clr-dg-cell>{{ i }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
+      <clr-dg-cell>
+        <button class="crud-btn remove" (click)="removeentry(i)">-</button>
+        <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
+      </clr-dg-cell>
 
 
-<!-- <div class="preview">
+    </clr-dg-row>
+  </clr-datagrid>
+
+
+  <!-- <div class="preview">
   <button class="btn btn-primary" (click)="gotoreview()"> review </button>
 </div> -->
 
 
 
-<div class="preview">
-  <button class="btn btn-primary" *ngIf="entries.length > 0" (click)="gotoreview()"> review </button>
-</div>
+  <div class="preview">
+    <button class="btn btn-primary" *ngIf="entries.length > 0" (click)="gotoreview()"> review </button>
+  </div>

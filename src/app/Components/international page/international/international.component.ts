@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { TravelEntryService } from '../../../services/travel-entry.service';
+import { PersonalDataService } from '../../../services/personal-data.service';
 
 @Component({
   selector: 'app-international',
@@ -14,22 +14,56 @@ import { TravelEntryService } from '../../../services/travel-entry.service';
   templateUrl: './international.component.html',
   styleUrl: './international.component.css'
 })
-export class InternationalComponent {
+export class InternationalComponent implements OnInit{
 
+  constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
+
+    personalData: any;
+ngOninit(){
+  debugger
+   this.personalData = this.service.getDetails();
+   console.log('perso',this.personalData)
+}
 selectedCurrency: string = '';
   currencyModalOpen: boolean = false;
-
+formopen: boolean = false;
   entry: any = {
     type: 'Card',
     inrRate: null,
     totalLoaded: null,
     loadedDate: ''
   };
+   username: string = '';
 
+  isEdit: boolean = false;
+  formData: any = {
+    date: '',
+    supportingNo: '',
+    particulars: '',
+    paymentMode: 'Cash',
+    amount: null,
+    remarks: '',
+    screenshot: ''
+  };
+  openmodel() {
+    debugger
+    this.formopen = true;
+    this.isEdit = false;
+    this.formData = {
+      date: '',
+      supportingNo: '',
+      particulars: '',
+      paymentMode: 'Cash',
+      amount: null,
+      remarks: '',
+      screenshot: ''
+    };
+  }
+
+ entries: any[] = [];
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
 
-  constructor(private travelService:TravelEntryService) {}
 
   ngOnInit() {}
 
@@ -89,4 +123,48 @@ calculateDays(start: string, end: string): number {
   const diffDays = diffMs / (1000 * 60 * 60 * 24);
   return parseFloat(diffDays.toFixed(2));
 }
+
+
+addEntry(form: NgForm) {
+    debugger
+
+    if (form.valid) {
+      if (this.editIndex != null && this.isEdit) {
+
+        // Update existing entry
+        this.entries[this.editIndex] = this.formData;
+        this.editIndex = null;
+        this.isEdit = false
+
+      }
+      else {
+        this.entries.push({ ...this.formData });
+
+
+      }
+
+      this.formopen = false
+    }
+  }
+
+    Editentry(entry: any, index: number) {
+    debugger
+    this.formData = ({ ...entry })
+    this.editIndex = index;
+    this.formopen = true
+    this.isEdit = true;
+    console.log("forms", this.formData);
+
+
+  }
+  removeentry(index: number) {
+    const of = confirm("are you sure")
+    if (of) {
+      this.entries.splice(index, 1)
+    }
+
+  }
+  gotoreview() {
+    this.router.navigate(['expensereview'])
+  }
 }
