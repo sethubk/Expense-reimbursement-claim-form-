@@ -145,6 +145,7 @@ addEntry(form: NgForm) {
 
       this.formopen = false
     }
+     this.travelService.setentries(this.entries)
   }
 
     Editentry(entry: any, index: number) {
@@ -165,6 +166,6 @@ addEntry(form: NgForm) {
 
   }
   gotoreview() {
-    this.router.navigate(['expensereview'])
+    this.router.navigate(['internationalreview'])
   }
 }

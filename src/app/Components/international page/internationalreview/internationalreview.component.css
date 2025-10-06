@@ -1,0 +1,39 @@
+*{
+    margin: 0%;
+    padding: 0
+}
+
+.brand-logo {
+  height: 40px;
+  margin-right: 30px;
+  width: 250px;
+
+}
+
+
+.brand-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-block;
+  
+}
+.personaldetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+  padding: 10px;
+  
+  font-size: 14px;
+}
+
+.personaldata p {
+  margin: 4px 0;
+  word-wrap: break-word;
+}
+
+.button-group{
+display: flex;
+justify-content:space-around;
+align-items: center;
+}

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class TravelEntryService {
   private cardEntries: any[] = [];
   private cashEntries: any[] = [];
-
+private entries:any=[];
   getCardEntries() {
     return this.cardEntries;
   }
@@ -44,4 +44,11 @@ export class TravelEntryService {
       this.cashEntries.splice(index, 1);
     }
   }
+
+  setentries(entries:any){
+this.entries=entries
+}
+getentries(){
+  return this.entries
+}
 }

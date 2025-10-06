@@ -1,0 +1,73 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a>
+            <img src="assets/logo.png" alt="Brand Logo" class="brand-logo">
+            <h1 class="brand-title">International Travel reimbursement claim form</h1>
+
+        </a>
+    </div>
+
+</nav>
+<div class="clr-row">
+    <div class="clr-col-8">
+        <div class="personaldetails">
+            <div *ngIf="personalData " class="personaldata">
+                <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
+                <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
+                <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
+                <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
+                <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
+                <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
+                <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-4">
+
+    </div>
+</div>
+
+<div class="dates">
+    <clr-datagrid *ngIf="entries.length > 0">
+        <clr-dg-column>S.No</clr-dg-column>
+        <clr-dg-column>Date</clr-dg-column>
+        <clr-dg-column>Supporting No</clr-dg-column>
+        <clr-dg-column>Particulars</clr-dg-column>
+        <clr-dg-column>Payment Mode</clr-dg-column>
+        <clr-dg-column>Amount</clr-dg-column>
+        <clr-dg-column>Remarks</clr-dg-column>
+       
+
+        <!-- Expense Entries -->
+        <clr-dg-row *ngFor="let entry of entries; let i = index">
+            <clr-dg-cell>{{ i + 1 }}</clr-dg-cell>
+            <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+            <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+            <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+            <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+            <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+            <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+            
+        </clr-dg-row>
+
+        <!-- Totals Row -->
+        <clr-dg-row *ngFor="let total of getTotalsByPaymentMode()">
+            <clr-dg-cell colspan="4"><strong>Total for {{ total.mode }}</strong></clr-dg-cell>
+            <clr-dg-cell colspan="2"><strong> ₹{{ total.total }}</strong></clr-dg-cell>
+            
+            <clr-dg-cell colspan="2"></clr-dg-cell>
+        </clr-dg-row>
+        
+<clr-dg-row>
+  <clr-dg-cell colspan="4"><strong>Grand Total</strong></clr-dg-cell>
+  <clr-dg-cell colspan="2"><strong>₹{{ getGrandTotal() }}</strong></clr-dg-cell>
+  <clr-dg-cell colspan="2"></clr-dg-cell>
+</clr-dg-row>
+
+    </clr-datagrid>
+</div>
+
+<div class="button-group" style="margin: 20px 0;">
+  <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
+  <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
+</div>
