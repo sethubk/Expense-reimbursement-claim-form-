@@ -25,10 +25,13 @@ export class InternationalreviewComponent implements OnInit {
 constructor(private router:Router,private service:PersonalDataService,private TravelService:TravelEntryService){}
 entries:any[]=[];
 personalData: any;
+advance:number=130000;
   ngOnInit(): void {
  
     this.entries=this.TravelService.getentries();
     this.personalData = this.service.getDetails();
+//this.advance=this.TravelService.getAllowance()
+
     console.log(this.entries)
    
 }
@@ -69,6 +72,12 @@ printPage() {
 }
 
 
+getTotalByMode(mode: string): number {
+  const totals = this.getTotalsByPaymentMode();
+  const found = totals.find(t => t.mode === mode);
+  return found ? found.total : 0;
+}
+
 submitExpense() {
   const expenseData = {
     type: 'international travel',
@@ -82,6 +91,20 @@ submitExpense() {
   alert('Expense saved locally!');
 this.router.navigate([''])
 
+}
+
+
+getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pay' | 'none' } {
+  const cashPaid = this.getTotalByMode('Cash');
+  const difference =  cashPaid -this.advance ;
+
+  if (difference < 0) {
+    return { message: 'Amount Recover from Employee', amount: Math.abs(difference), type: 'recover' };
+  } else if (difference > 0) {
+    return { message: 'Amount Payable to Employee', amount: Math.abs(difference), type: 'pay' };
+  } else {
+    return { message: '', amount: 0, type: 'none' };
+  }
 }
 
 }

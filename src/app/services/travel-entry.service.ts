@@ -15,6 +15,26 @@ private entries:any=[];
     return this.cashEntries;
   }
 
+getallowance() : number{
+  let InrRate = 0;
+  let totalInr = 0;
+  let allowance = 0;
+  this.cardEntries.forEach(x=>{
+   InrRate +=  x['inrRate'];
+   totalInr += x['totalInr'];
+
+  })
+
+  this.cashEntries.forEach(x=>{
+   InrRate +=  x['inrRate'];
+   totalInr += x['inrRate'];
+
+  })
+  allowance = totalInr/InrRate
+
+  return allowance ;
+}
+
   addEntry(entry: any) {
     const totalInr = entry.inrRate * entry.totalLoaded;
     const newEntry = { ...entry, totalInr };

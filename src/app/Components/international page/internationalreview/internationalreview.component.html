@@ -36,7 +36,7 @@
         <clr-dg-column>Payment Mode</clr-dg-column>
         <clr-dg-column>Amount</clr-dg-column>
         <clr-dg-column>Remarks</clr-dg-column>
-       
+
 
         <!-- Expense Entries -->
         <clr-dg-row *ngFor="let entry of entries; let i = index">
@@ -47,27 +47,64 @@
             <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
             <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
             <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-            
+
         </clr-dg-row>
 
         <!-- Totals Row -->
         <clr-dg-row *ngFor="let total of getTotalsByPaymentMode()">
             <clr-dg-cell colspan="4"><strong>Total for {{ total.mode }}</strong></clr-dg-cell>
             <clr-dg-cell colspan="2"><strong> ₹{{ total.total }}</strong></clr-dg-cell>
-            
+
             <clr-dg-cell colspan="2"></clr-dg-cell>
         </clr-dg-row>
-        
-<clr-dg-row>
-  <clr-dg-cell colspan="4"><strong>Grand Total</strong></clr-dg-cell>
-  <clr-dg-cell colspan="2"><strong>₹{{ getGrandTotal() }}</strong></clr-dg-cell>
-  <clr-dg-cell colspan="2"></clr-dg-cell>
-</clr-dg-row>
+
+        <clr-dg-row>
+            <clr-dg-cell colspan="4"><strong>Grand Total</strong></clr-dg-cell>
+            <clr-dg-cell colspan="2"><strong>₹{{ getGrandTotal() }}</strong></clr-dg-cell>
+            <clr-dg-cell colspan="2"></clr-dg-cell>
+        </clr-dg-row>
 
     </clr-datagrid>
 </div>
 
+
+<div class="clr-row1">
+    <div class="clr-col-12 clr-col-md-4">
+        <div class="summary-box">
+            <table class="table table-compact">
+                <tbody>
+                    <tr>
+                        <td>Total Expenses Bill</td>
+                        <td>₹{{ getGrandTotal() }}</td>
+                    </tr>
+                    <tr>
+                        <td>Expense Paid by Employee</td>
+                        <td>₹{{ getTotalByMode('Cash') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Expense Paid by Company</td>
+                        <td>₹{{ getTotalByMode('Card') }}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Advance </td>
+                        <td>₹{{ advance }}</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td colspan="2" [ngStyle]="{
+    color: getSettlementDetails().type === 'recover' ? 'red' : 'green'
+  }">
+                            {{ getSettlementDetails().message }}:    ₹{{ getSettlementDetails().amount }}
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <div class="button-group" style="margin: 20px 0;">
-  <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
-  <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
+    <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
+    <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
 </div>

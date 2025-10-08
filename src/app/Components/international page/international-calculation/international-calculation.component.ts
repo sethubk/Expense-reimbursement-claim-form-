@@ -15,13 +15,23 @@ import { CommonModule } from '@angular/common';
 })
 export class InternationalCalculationComponent implements OnInit{
 isEdit: boolean = false;
+
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
 
 ngOnInit(): void {
-  //this.entries=this.travelService.getAllowance();
+ 
+const allowance = this.travelService.getAllowance();
+  console.log("calculation", allowance);
+this.entries.push({
+  particulars:'Allowance',
+  amount:allowance
+ })
 }
+
+
 formopen: boolean = false;
  entries: any[] = [];
+ index1:number=this.entries.length
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
 
