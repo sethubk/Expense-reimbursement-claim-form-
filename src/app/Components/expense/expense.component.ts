@@ -45,7 +45,9 @@ export class ExpenseComponent implements OnInit {
   }
   personalData: any;
   ngOnInit() {
-
+const today = new Date();
+  this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
+ 
 
     this.personalData = this.Service.getDetails();
 

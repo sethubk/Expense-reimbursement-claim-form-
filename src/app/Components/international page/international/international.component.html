@@ -14,7 +14,7 @@
 <div class="first">
   <clr-select-container>
     <label>Select Currency type</label>
-    <select clrSelect [(ngModel)]="selectedCurrency" name="currency" (change)="openCurrencyModal()">
+    <select clrSelect [(ngModel)]="selectedCurrency" name="currency">
       <option value="INR">INR</option>
       <option value="EUR">EUR</option>
       <option value="USD">USD</option>
@@ -29,7 +29,8 @@
 
   <clr-input-container>
     <label>Travel End Date & Time</label>
-    <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd" required />
+    <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd" required min="travelStart"
+      [max]="maxDate" />
   </clr-input-container>
 
 
@@ -39,9 +40,16 @@
       <label>Number of Days</label>
       <input clrInput type="number" [value]="calculateDays(travelStart, travelEnd)" readonly />
     </clr-input-container>
+    
   </div>
-</div>
+  
 
+</div>
+  <clr-input-container>
+    <label>Euro</label>
+    <input clrInput type="number" [(ngModel)]="travelEnd" />
+  </clr-input-container>
+<button (click)="openCurrencyModal()" class="btn btn-primary">add cash </button>
 <!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
   <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Entry' }}</h3>
@@ -131,9 +139,9 @@
 </div>
 
 
-<button class="btn btn-primary" (click)="openmodel()">Fill the International  Claim form </button>
+<button class="btn btn-primary" (click)="openmodel()">goto International Claim form </button>
 
-<clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
+<!-- <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
   <div class="modal-body">
 
     <form clrForm #epenseForm="ngForm" class="expense-form">
@@ -155,14 +163,14 @@
           <label>Particulars</label>
           <select clrSelect [(ngModel)]="formData.particulars" name="particulars" required>
             <option value="Hotel">Hotel</option>
-               <option value="Hotel">flight</option>
+            <option value="Hotel">flight</option>
             <option value="Transport">Transport</option>
             <option value="Food">Food</option>
             <option value="Allowance">Allowance</option>
             <option value="Communication">Communication</option>
             <option value="Visa Process Fees">Visa Process Fees</option>
-               <option value="Hotel">	Pre-Travel kit allowance</option>
-               <option value="Others">Extra Baggage</option>
+            <option value="Hotel"> Pre-Travel kit allowance</option>
+            <option value="Others">Extra Baggage</option>
             <option value="Others">Others</option>
           </select>
         </clr-select-container>
@@ -171,9 +179,9 @@
           <label>Payment Mode</label>
           <select clrSelect [(ngModel)]="formData.paymentMode" name="paymentMode" required>
             <option value="Cash">Cash</option>
-             <option value="CC">CC</option>
-              <option value="itilite">itilite</option>
-            
+            <option value="CC">CC</option>
+            <option value="itilite">itilite</option>
+
           </select>
         </clr-select-container>
 
@@ -204,35 +212,35 @@
 
 </clr-modal>
 
-  <clr-datagrid *ngIf="entries.length > 0">
-    <clr-dg-column>Sno</clr-dg-column>
-    <clr-dg-column>Date</clr-dg-column>
-    <clr-dg-column>Supporting No</clr-dg-column>
-    <clr-dg-column>Particulars</clr-dg-column>
-    <clr-dg-column>Payment Mode</clr-dg-column>
-    <clr-dg-column>Amount</clr-dg-column>
-    <clr-dg-column>Remarks</clr-dg-column>
-    <clr-dg-column>Screenshot</clr-dg-column>
+<clr-datagrid *ngIf="entries.length > 0">
+  <clr-dg-column>Sno</clr-dg-column>
+  <clr-dg-column>Date</clr-dg-column>
+  <clr-dg-column>Supporting No</clr-dg-column>
+  <clr-dg-column>Particulars</clr-dg-column>
+  <clr-dg-column>Payment Mode</clr-dg-column>
+  <clr-dg-column>Amount</clr-dg-column>
+  <clr-dg-column>Remarks</clr-dg-column>
+  <clr-dg-column>Screenshot</clr-dg-column>
 
-    <clr-dg-column>Actions</clr-dg-column>
+  <clr-dg-column>Actions</clr-dg-column>
 
-    <clr-dg-row *ngFor="let entry of entries let i = index">
-      <clr-dg-cell>{{ i }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
-      <clr-dg-cell>
-        <button class="crud-btn remove" (click)="removeentry(i)">-</button>
-        <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
-      </clr-dg-cell>
+  <clr-dg-row *ngFor="let entry of entries let i = index">
+    <clr-dg-cell>{{ i }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+    <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="crud-btn remove" (click)="removeentry(i)">-</button>
+      <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
+    </clr-dg-cell>
 
 
-    </clr-dg-row>
-  </clr-datagrid>
-  <div class="preview">
-    <button class="btn btn-primary" *ngIf="entries.length > 0" (click)="gotoreview()"> review </button>
-  </div>
+  </clr-dg-row>
+</clr-datagrid> -->
+<div class="preview">
+  <button class="btn btn-primary" *ngIf="entries.length > 0" (click)="gotoreview()"> review </button>
+</div>

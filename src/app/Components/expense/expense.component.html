@@ -21,7 +21,7 @@
       <div class="grid-two">
         <clr-input-container>
           <label>Date</label>
-          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required />
+          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required   [max]="maxDate"/>
         </clr-input-container>
 
         <clr-input-container>

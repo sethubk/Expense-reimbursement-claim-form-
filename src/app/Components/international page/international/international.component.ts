@@ -17,21 +17,27 @@ import { PersonalDataService } from '../../../services/personal-data.service';
 export class InternationalComponent implements OnInit{
 
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
-
+maxDate:string=''
     personalData: any;
-ngOninit(){
-  debugger
-   this.personalData = this.service.getDetails();
-   console.log('perso',this.personalData)
+ngOnInit(): void {
+  //  debugger
+  // const today = new Date();
+  // this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
+ 
+  //  this.personalData = this.service.getDetails();
+  //  console.log('perso',this.personalData)
 }
+
 selectedCurrency: string = '';
   currencyModalOpen: boolean = false;
 formopen: boolean = false;
-  entry: any = {
+  
+entry: any = {
     type: 'Card',
     inrRate: null,
     totalLoaded: null,
-    loadedDate: ''
+    loadedDate: '',
+    currerncy:''
   };
    username: string = '';
 
@@ -46,18 +52,7 @@ formopen: boolean = false;
     screenshot: ''
   };
   openmodel() {
-    debugger
-    this.formopen = true;
-    this.isEdit = false;
-    this.formData = {
-      date: '',
-      supportingNo: '',
-      particulars: '',
-      paymentMode: 'Cash',
-      amount: null,
-      remarks: '',
-      screenshot: ''
-    };
+    this.router.navigate(['/internationalcal'])
   }
 
  entries: any[] = [];
@@ -65,7 +60,7 @@ formopen: boolean = false;
   editType: 'Card' | 'Cash' | null = null;
 
 
-  ngOnInit() {}
+  
 
   get cardEntries() {
     return this.travelService.getCardEntries();
@@ -80,7 +75,8 @@ formopen: boolean = false;
       type: 'Card',
       inrRate: null,
       totalLoaded: null,
-      loadedDate: ''
+      loadedDate: '',
+ currerncy:this.selectedCurrency
     };
     this.editIndex = null;
     this.editType = null;
@@ -112,18 +108,29 @@ formopen: boolean = false;
   deleteEntry(index: number, type: 'Card' | 'Cash') {
     this.travelService.deleteEntry(index, type);
   }
-  travelStart: string = '';
+travelStart: string = '';
 travelEnd: string = '';
+totaldays: number =0;
 
 calculateDays(start: string, end: string): number {
   if (!start || !end) return 0;
+
   const startDate = new Date(start);
   const endDate = new Date(end);
   const diffMs = endDate.getTime() - startDate.getTime();
   const diffDays = diffMs / (1000 * 60 * 60 * 24);
-  return parseFloat(diffDays.toFixed(2));
+  const roundedDays = parseFloat(diffDays.toFixed(2));
+ 
+  this.totaldays = roundedDays; // Assigning to totaldays as a string
+  return roundedDays;
 }
+allowanceAmount: number = 0;
 
+calculateAllowance(): number {
+  const allowance = this.totaldays * 100;
+  this.travelService.setAllowance(allowance)
+  return this.allowanceAmount;
+}
 
 addEntry(form: NgForm) {
     debugger
@@ -167,5 +174,6 @@ addEntry(form: NgForm) {
   }
   gotoreview() {
     this.router.navigate(['internationalreview'])
+    this.calculateAllowance()
   }
 }

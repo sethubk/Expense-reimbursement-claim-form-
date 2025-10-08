@@ -51,4 +51,16 @@ this.entries=entries
 getentries(){
   return this.entries
 }
+
+private allowanceAmount: number = 0;
+
+  setAllowance(amount: number): void {
+    this.allowanceAmount = amount;
+  }
+
+  getAllowance(): number {
+    return this.allowanceAmount;
+  }
+
+
 }
