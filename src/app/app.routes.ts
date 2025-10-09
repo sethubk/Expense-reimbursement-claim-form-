@@ -5,6 +5,10 @@ import { ExpensereviewComponent } from './Components/expensereview/expensereview
 import { InternationalComponent } from './Components/international page/international/international.component';
 import { InternationalreviewComponent } from './Components/international page/internationalreview/internationalreview.component';
 import { InternationalCalculationComponent } from './Components/international page/international-calculation/international-calculation.component';
+import { DomesticComponent } from './Components/Domestic/domestic/domestic.component';
+import { downloadIconName } from '@cds/core/icon';
+import { DomesticExpenseComponent } from './Components/Domestic/domestic-expense/domestic-expense.component';
+import { DomesticreviewComponent } from './Components/Domestic/domesticreview/domesticreview.component';
 
 export const routes: Routes = [
     {path:'',component:ClaimformComponent},
@@ -12,6 +16,9 @@ export const routes: Routes = [
     {path:'expensereview',component:ExpensereviewComponent},
 {path:'international',component:InternationalComponent    },
 {path:'internationalreview',component:InternationalreviewComponent},
-{path:'internationalcal',component:InternationalCalculationComponent}
+{path:'internationalcal',component:InternationalCalculationComponent},
+{path:'domestic',component:DomesticComponent},
+{path:'domesticexpense',component:DomesticExpenseComponent},
+{path:'domesticreview',component:DomesticreviewComponent}
     
 ];

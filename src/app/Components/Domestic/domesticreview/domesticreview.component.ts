@@ -5,7 +5,6 @@ import { TravelEntryService } from '../../../services/travel-entry.service';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 interface Entry {
   date: string;
   supportingNo: string;
@@ -15,27 +14,25 @@ interface Entry {
   remarks: string;
 }
 @Component({
-  selector: 'app-internationalreview',
+  selector: 'app-domesticreview',
   standalone: true,
   imports: [ClarityModule,FormsModule,CommonModule],
-  templateUrl: './internationalreview.component.html',
-  styleUrl: './internationalreview.component.css'
+  templateUrl: './domesticreview.component.html',
+  styleUrl: './domesticreview.component.css'
 })
-export class InternationalreviewComponent implements OnInit {
+export class DomesticreviewComponent implements OnInit {
 constructor(private router:Router,private service:PersonalDataService,private TravelService:TravelEntryService){}
 entries:any[]=[];
 personalData: any;
 advance:number=130000;
-  ngOnInit(): void {
- 
-    this.entries=this.TravelService.getentries();
+
+ngOnInit(): void {
+  this.entries=this.TravelService.getentries();
     this.personalData = this.service.getDetails();
-//this.advance=this.TravelService.getAllowance()
-
-    console.log(this.entries)
-   
+    this.advance=this.TravelService.getallowance();
+    this.advance = isNaN(this.advance) ? 0 : this.advance;
+this.calculateTotal()
 }
-
 getTotalsByPaymentMode(): { mode: string; total: number }[] {
   const totals: { [key: string]: number } = {};
 
@@ -62,29 +59,28 @@ totalAmount: number = 0;
 calculateTotal() {
   this.totalAmount = this.entries.reduce((sum, entry: Entry) => sum + entry.amount, 0);
 console.log(this.totalAmount)
+return  this.totalAmount
 
 }
 getGrandTotal(): number {
   return this.entries.reduce((sum, entry) => sum + Number(entry.amount), 0);
 }
-get totalAmounts(): number {
-  return this.entries.reduce((sum, entry) => sum + Number(entry.amount || 0), 0);
-
-}
 printPage() {
   window.print();
 }
-
-
 getTotalByMode(mode: string): number {
   const totals = this.getTotalsByPaymentMode();
   const found = totals.find(t => t.mode === mode);
   return found ? found.total : 0;
 }
 
+get totalAmounts(): number {
+  return this.entries.reduce((sum, entry) => sum + Number(entry.amount || 0), 0);
+
+}
 submitExpense() {
   const expenseData = {
-    type: 'international travel',
+    type: 'Domestic travel',
     createdDate: new Date().toISOString(),
     purposePlace: this.personalData?.purposePlace || '',
     totalAmount: this.getGrandTotal(),

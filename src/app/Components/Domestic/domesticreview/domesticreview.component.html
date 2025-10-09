@@ -2,7 +2,7 @@
     <div class="navbar-brand">
         <a>
             <img src="assets/logo.png" alt="Brand Logo" class="brand-logo">
-            <h1 class="brand-title">International Travel reimbursement claim form</h1>
+            <h1 class="brand-title">Domestic reimbursement claim form</h1>
 
         </a>
     </div>
@@ -26,7 +26,6 @@
 
     </div>
 </div>
-
 <div class="dates">
     <clr-datagrid *ngIf="entries.length > 0">
         <clr-dg-column>S.No</clr-dg-column>
@@ -60,14 +59,12 @@
 
         <clr-dg-row>
             <clr-dg-cell colspan="4"><strong>Grand Total</strong></clr-dg-cell>
-            <clr-dg-cell colspan="2"><strong>₹{{ totalAmounts }}</strong></clr-dg-cell>
+            <clr-dg-cell colspan="2"><strong>₹{{ totalAmounts}}</strong></clr-dg-cell>
             <clr-dg-cell colspan="2"></clr-dg-cell>
         </clr-dg-row>
 
     </clr-datagrid>
 </div>
-
-
 <div class="clr-row1">
     <div class="clr-col-12 clr-col-md-4">
         <div class="summary-box">
@@ -103,7 +100,6 @@
         </div>
     </div>
 </div>
-
 <div class="button-group" style="margin: 20px 0;">
     <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
     <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>

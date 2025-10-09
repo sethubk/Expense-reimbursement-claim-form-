@@ -1,23 +1,11 @@
-<!-- <h1>International Travel </h1> -->
-
-<div *ngIf="personalData " class="personaldata">
-  <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-  <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-  <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-  <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-  <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-  <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-  <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
-</div>
-
+<h1>Domestic </h1>
 
 <div class="first">
   <clr-select-container>
     <label>Select Currency type</label>
-    <select clrSelect [(ngModel)]="selectedCurrency" name="currency">
+    <select clrSelect [(ngModel)]="selectedCurrency"  name="currency">
       <option value="INR">INR</option>
-      <option value="EUR">EUR</option>
-      <option value="USD">USD</option>
+     
     </select>
   </clr-select-container>
 
@@ -45,10 +33,6 @@
   
 
 </div>
-  <!-- <clr-input-container>
-    <label>Euro</label>
-    <input clrInput type="number" [(ngModel)]="Euro" />
-  </clr-input-container> -->
 <button (click)="openCurrencyModal()" class="btn btn-primary" >add cash </button>
 <!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
@@ -65,7 +49,7 @@
 
       <clr-input-container>
         <label>INR Rate</label>
-        <input clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate" required />
+        <input clrInput type="number" [value]="entry.inrRate" name="inrRate"  readonly />
       </clr-input-container>
 
       <clr-input-container>
@@ -84,8 +68,6 @@
     <button class="btn btn-outline" (click)="currencyModalOpen = false">Cancel</button>
   </div>
 </clr-modal>
-
-<!-- Card Table -->
 <div class="datagrid-row">
   <!-- Card Table -->
   <div class="datagrid-box">
@@ -125,7 +107,7 @@
 
       <clr-dg-row *ngFor="let item of cashEntries ; let i = index">
         <clr-dg-cell>{{ item.currency }}</clr-dg-cell>
-        <clr-dg-cell>{{ item.inrRate }}</clr-dg-cell>
+        <clr-dg-cell>{{ item.inrRate }} </clr-dg-cell>
         <clr-dg-cell>{{ item.totalLoaded }}</clr-dg-cell>
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
@@ -137,9 +119,7 @@
     </clr-datagrid>
   </div>
 </div>
-
-
-
+ 
  
 <div class="preview">
   <button class="btn btn-primary"  (click)="gotoreview()" > go to claim page </button>

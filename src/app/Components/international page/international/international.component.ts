@@ -87,8 +87,9 @@ entry: any = {
     this.currencyModalOpen = true;
   }
 
-  saveEntry() {
-    if (this.editIndex !== null && this.editType) {
+  saveEntry(form:NgForm) {
+    if (form.valid) {
+ if (this.editIndex !== null && this.editType) {
       this.travelService.updateEntry(this.editIndex, this.entry, this.editType);
     } else {
       this.entry.currency = this.selectedCurrency;
@@ -100,6 +101,9 @@ entry: any = {
     this.editType = null;
   }
 
+
+    }
+   
   editEntry(index: number, type: 'Card' | 'Cash') {
     const source = type === 'Card' ? this.cardEntries : this.cashEntries;
     this.entry = { ...source[index] };
