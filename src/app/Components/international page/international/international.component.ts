@@ -15,17 +15,21 @@ import { PersonalDataService } from '../../../services/personal-data.service';
   styleUrl: './international.component.css'
 })
 export class InternationalComponent implements OnInit{
+travelStart: string = '';
+travelEnd: string = '';
+totaldays: number =0;
 
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
 maxDate:string=''
     personalData: any;
 ngOnInit(): void {
-  //  debugger
-  // const today = new Date();
-  // this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
+   debugger
+  
+const today = new Date();
+this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
  
-  //  this.personalData = this.service.getDetails();
-  //  console.log('perso',this.personalData)
+   //this.personalData = this.service.getDetails();
+   console.log('perso',this.personalData)
 }
 
 selectedCurrency: string = '';
@@ -108,9 +112,6 @@ entry: any = {
   deleteEntry(index: number, type: 'Card' | 'Cash') {
     this.travelService.deleteEntry(index, type);
   }
-travelStart: string = '';
-travelEnd: string = '';
-totaldays: number =0;
 
 calculateDays(start: string, end: string): number {
   if (!start || !end) return 0;

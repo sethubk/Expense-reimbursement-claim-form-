@@ -37,3 +37,38 @@ display: flex;
 justify-content:space-around;
 align-items: center;
 }
+
+.clr-row1{
+  float: right;
+}
+.summary-box {
+  width: 300px;
+ 
+  padding: 16px;
+ 
+  
+
+  overflow-y: auto;
+}
+
+.green-text {
+  color: green;
+  font-weight: bold;
+}
+
+.highlight td {
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+.button-group{
+display: flex;
+justify-content:space-around;
+align-items: center;
+}
+
+/* @media print {
+  .button-group {
+    display: none !important;
+  }
+} */
+
