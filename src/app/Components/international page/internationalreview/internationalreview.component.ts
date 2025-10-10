@@ -30,7 +30,7 @@ advance:number=130000;
  
     this.entries=this.TravelService.getentries();
     this.personalData = this.service.getDetails();
-//this.advance=this.TravelService.getAllowance()
+this.advance=this.TravelService.getAllowance()
 
     console.log(this.entries)
    

@@ -4,13 +4,13 @@
 
 
 <div *ngIf="personalData " class="personaldata">
-  <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-  <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-  <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-  <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-  <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-  <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-  <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+  <strong>Date of Submission:</strong>   <p> {{ personalData.today }}</p>
+  <strong>Expense Statement of:</strong> <p> {{ personalData.username }}</p>
+  <strong>Employee Code:</strong>        <p>{{ personalData.employeeCode }}</p>
+  <strong>Purpose & Place:</strong>      <p>{{ personalData.purposePlace }}</p>
+  <strong>Company & Plant:</strong>      <p>{{ personalData.companyPlant }}</p>
+  <strong>Cost Center:</strong>          <p>{{ personalData.costCenter }}</p>
+  <strong>Vendor Code:</strong>          <p> {{ personalData.vendorCode }}</p>
 </div>
 <button class="btn btn-primary" (click)="openmodel()">Fill the Expense Claim form </button>
 
