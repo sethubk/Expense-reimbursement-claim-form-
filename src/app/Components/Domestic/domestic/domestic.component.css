@@ -1,3 +1,24 @@
+*{
+    margin: 0%;
+    padding: 0
+}
+.personaldetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+  padding: 10px;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.personaldetails strong{
+ 
+}
+.personaldata p {
+  margin: 4px 0;
+  word-wrap: break-word;
+}
+
 .first {
   background-color: #ffffff;
   padding: 20px;

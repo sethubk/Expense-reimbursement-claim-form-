@@ -1,8 +1,6 @@
 
-<div class="clr-row">
-    <div class="clr-col-8">
-        <div class="personaldetails">
-            <div *ngIf="personalData " class="personaldata">
+
+<div *ngIf="personalData " class="personaldata">
                 <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
                 <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
                 <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
@@ -11,13 +9,6 @@
                 <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
                 <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
             </div>
-        </div>
-    </div>
-    <div class="clr-col-4">
-       
-    </div>
-</div>
-
 
 <button class="btn btn-primary" (click)="openmodel()">Fill the Domestic Claim form </button>
 
