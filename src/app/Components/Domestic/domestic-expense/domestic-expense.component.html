@@ -19,7 +19,7 @@
       <div class="grid-two">
         <clr-input-container>
           <label>Date</label>
-          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required />
+          <input clrInput type="date" [(ngModel)]="formData.date" name="date"  [max]="maxDate" required />
         </clr-input-container>
 
         <clr-input-container>
@@ -103,8 +103,8 @@
     <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
   
     <clr-dg-cell>
-      <button class="crud-btn remove" (click)="removeentry(i)">-</button>
-      <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
+      <button  *ngIf="entry.particulars!='Allowance'"  class="crud-btn remove" (click)="removeentry(i)">-</button>
+      <button    *ngIf="entry.particulars!='Allowance'" class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
     </clr-dg-cell>
 
 

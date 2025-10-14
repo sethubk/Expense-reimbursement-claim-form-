@@ -8,7 +8,7 @@
       <div class="grid-two">
         <clr-input-container>
           <label>Date</label>
-          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required />
+          <input clrInput type="date" [(ngModel)]="formData.date"  [max]="maxDate" name="date" required />
         </clr-input-container>
 
         <clr-input-container>
@@ -84,18 +84,18 @@
 
   <clr-dg-column>Actions</clr-dg-column>
 
-  <clr-dg-row *ngFor="let entry of entries let i = index">
+  <clr-dg-row *ngFor="let entry of entries let i = index" >
     <clr-dg-cell>{{ i}}</clr-dg-cell>
     <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+    <clr-dg-cell >{{ entry.particulars }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
   
-    <clr-dg-cell>
-      <button class="crud-btn remove" (click)="removeentry(i)">-</button>
-      <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
+    <clr-dg-cell >
+      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn remove" (click)="removeentry(i)">-</button>
+      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
     </clr-dg-cell>
 
 

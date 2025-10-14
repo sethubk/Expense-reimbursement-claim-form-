@@ -89,7 +89,10 @@ submitExpense() {
   };
 
   this.service.setExpense(expenseData);
+
   alert('Expense saved locally!');
+  
+this.TravelService.clearCardEntries()
 this.router.navigate([''])
 
 }

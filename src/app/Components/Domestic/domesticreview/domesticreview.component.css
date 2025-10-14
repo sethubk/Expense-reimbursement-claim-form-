@@ -66,9 +66,9 @@ justify-content:space-around;
 align-items: center;
 }
 
-/* @media print {
+@media print {
   .button-group {
     display: none !important;
   }
-} */
+}
 

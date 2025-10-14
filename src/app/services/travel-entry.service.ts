@@ -83,7 +83,10 @@ private allowanceAmount: number = 0;
   }
 
 
-
+clearCardEntries(): void {
+  this.cardEntries = [];
+  this.cashEntries=[];
+}
 
 
 

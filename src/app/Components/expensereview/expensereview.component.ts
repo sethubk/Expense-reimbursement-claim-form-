@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TravelEntryService } from '../../services/travel-entry.service';
 
 interface Entry {
   date: string;
@@ -22,7 +23,7 @@ interface Entry {
   styleUrl: './expensereview.component.css'
 })
 export class ExpensereviewComponent implements OnInit {
- constructor(private service:PersonalDataService ,private router:Router){
+ constructor(private service:PersonalDataService , private router:Router,private TravelService:TravelEntryService){
 
  }
  entries:Entry[]=[];
@@ -80,8 +81,9 @@ submitExpense() {
 
   this.service.setExpense(expenseData);
   alert('Expense saved locally!');
-this.router.navigate([''])
 
+
+this.router.navigate(['']);
 }
 
 

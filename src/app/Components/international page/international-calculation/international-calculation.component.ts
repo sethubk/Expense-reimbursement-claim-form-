@@ -17,8 +17,10 @@ export class InternationalCalculationComponent implements OnInit{
 isEdit: boolean = false;
 
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
-
+maxDate:string='';
 ngOnInit(): void {
+ const today = new Date();
+  this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
  
 const allowance = this.travelService.getAllowance();
   console.log("calculation", allowance);

@@ -24,10 +24,13 @@ formopen: boolean = false;
   editType: 'Card' | 'Cash' | null = null;
 
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
-
+maxDate:string='';
  personalData: any;
 allowance:number=0
   ngOnInit(): void {
+
+    const today = new Date();
+  this.maxDate = today.toISOString().split('T')[0];
     this.personalData=this.service.getDetails()
   this.allowance=this.travelService.getallowance()
   this.entries.push({
