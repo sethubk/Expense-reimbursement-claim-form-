@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { TravelEntryService } from '../../../services/travel-entry.service';
 import { PersonalDataService } from '../../../services/personal-data.service';
+import { EntryModel, FormDataModel } from '../../../Models/formsData';
 
 @Component({
   selector: 'app-international',
@@ -36,7 +37,7 @@ selectedCurrency: string = '';
   currencyModalOpen: boolean = false;
 formopen: boolean = false;
   
-entry: any = {
+entry:EntryModel = {
     type: 'Card',
     inrRate: null,
     totalLoaded: null,
@@ -46,7 +47,7 @@ entry: any = {
    username: string = '';
 
   isEdit: boolean = false;
-  formData: any = {
+  formData:FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
@@ -59,12 +60,14 @@ entry: any = {
     this.router.navigate(['/internationalcal']);
   }
 
- entries: any[] = [];
+ entries:FormDataModel[] = [];
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
 
 
-  
+  get travelEndDateOnly(): string {
+  return this.travelEnd ? this.travelEnd.split('T')[0] : '';
+}
 
   get cardEntries() {
     return this.travelService.getCardEntries();
@@ -92,7 +95,9 @@ entry: any = {
  if (this.editIndex !== null && this.editType) {
       this.travelService.updateEntry(this.editIndex, this.entry, this.editType);
     } else {
-      this.entry.currency = this.selectedCurrency;
+      this.entry.currerncy
+   
+       = this.selectedCurrency;
       this.travelService.addEntry(this.entry);
     }
 
@@ -107,7 +112,7 @@ entry: any = {
   editEntry(index: number, type: 'Card' | 'Cash') {
     const source = type === 'Card' ? this.cardEntries : this.cashEntries;
     this.entry = { ...source[index] };
-    this.selectedCurrency = this.entry.currency;
+    this.selectedCurrency = this.entry.currerncy;
     this.editIndex = index;
     this.editType = type;
     this.currencyModalOpen = true;

@@ -5,6 +5,7 @@ import { PersonalDataService } from '../../../services/personal-data.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { CommonModule } from '@angular/common';
+import { FormDataModel } from '../../../Models/formsData';
 
 @Component({
   selector: 'app-domestic-expense',
@@ -33,13 +34,13 @@ allowance:number=0
     date: '',
       supportingNo: '', 
   particulars:'Allowance',
-  amount:this.allowance,
+  amount:this.allowance || 0,
   paymentMode:'Cash',
   remarks: '',
  })
 }
 
-  formData: any = {
+  formData:FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',

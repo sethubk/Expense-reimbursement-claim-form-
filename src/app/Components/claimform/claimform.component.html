@@ -111,7 +111,12 @@
       <clr-dg-cell>{{ item.createdDate | date:'mediumDate' }}</clr-dg-cell>
       <clr-dg-cell>{{ item.purposePlace }}</clr-dg-cell>
       <clr-dg-cell>{{ item.totalAmount }}</clr-dg-cell>
-      <clr-dg-cell>{{ item.status }}</clr-dg-cell>
+     <clr-dg-cell>
+   <span [ngClass]="getStatusClass(item.status)" class="status-badge">
+  {{ item.status }}
+</span>
+
+     </clr-dg-cell>
     </clr-dg-row>
 
     <clr-dg-footer>

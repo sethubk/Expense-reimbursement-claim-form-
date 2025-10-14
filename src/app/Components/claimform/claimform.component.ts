@@ -10,10 +10,20 @@ export interface Expense {
   type: 'International' | 'Domestic' | '' | string;
   createdDate?: Date | null;
   purposePlace?: string;
-  amount?: number | null;
+  totalAmount?: number | null;
   status: 'In progress' | 'Approved' | 'Rejected' | string;
   expense?: string;
 }
+export interface Personal{
+ today:string;
+  username:string;
+  employeeCode:string;  
+  purposePlace:string;  
+  companyPlant : string;
+  costCenter:  string;
+  vendorCode: string;
+}
+
 
 
 @Component({
@@ -27,7 +37,7 @@ export class ClaimformComponent {
   
 showPersonalModal = false;
 
-personl:any={
+personl:Personal={
   today:  '',
   username:  '',
   employeeCode:  '',
@@ -38,15 +48,9 @@ personl:any={
   
 }
   
-dataSource = [
-  {
-    type: 'Travel',
-    createdDate: '2025-09-25',
-    purposePlace: 'Client Visit - Chennai',
-    totalAmount: 1500,
-    status: 'Approved',
-    expense: 'Taxi'
-  },]
+dataSource:Expense[]=[
+ ];
+  
 
 ngOnInit() {
     const now = new Date();
@@ -96,5 +100,16 @@ this.service.setDetails({
 }
 //displayedColumns: string[] = ['type', 'createdDate', 'purposePlace', 'amount', 'status', 'expense'];
 
-
+getStatusClass(status: string): string {
+  switch (status) {
+    case 'Approved':
+      return 'badge badge-success';
+    case 'Pending':
+      return 'badge badge-warning';
+    case 'Rejected':
+      return 'badge badge-danger';
+    default:
+      return 'badge badge-info';
+  }
+}
 }

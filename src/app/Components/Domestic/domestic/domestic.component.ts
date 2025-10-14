@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule,NgForm } from '@angular/forms';
 import { TravelEntryService } from '../../../services/travel-entry.service';
+import { EntryModel, FormDataModel } from '../../../Models/formsData';
 
 @Component({
   selector: 'app-domestic',
@@ -24,7 +25,7 @@ export class DomesticComponent implements OnInit{
   selectedCurrency: string = 'INR';
   currencyModalOpen: boolean = false;
 formopen: boolean = false;
-entries: any[] = [];
+ entries: any[] = [];
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
 
@@ -37,19 +38,21 @@ const today = new Date();
 this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
 this.personalData=this.Service.getDetails()
 }
-  entry: any = {
-    type: 'Card',
-    inrRate: null,
-    totalLoaded: null,
-    loadedDate: '',
-    currerncy:''
-  };
+ 
+ entry: EntryModel = {
+  type: 'Card',
+  inrRate: null,
+  totalLoaded: null,
+  loadedDate: '',
+  currerncy: ''
+};
+
    username: string = '';
 
   isEdit: boolean = false;
   
   
-  formData: any = {
+  formData:FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
@@ -59,6 +62,9 @@ this.personalData=this.Service.getDetails()
     screenshot: ''
   };
 
+  get travelEndDateOnly(): string {
+  return this.travelEnd ? this.travelEnd.split('T')[0] : '';
+}
   calculateDays(start: string, end: string): number {
   if (!start || !end) return 0;
 
@@ -97,7 +103,7 @@ this.personalData=this.Service.getDetails()
 if (this.editIndex !== null && this.editType) {
       this.travelService.updateEntry(this.editIndex, this.entry, this.editType);
     } else {
-      this.entry.currency = this.selectedCurrency;
+      this.entry.currerncy = this.selectedCurrency;
       this.travelService.addEntry(this.entry);
     }
 
@@ -112,7 +118,7 @@ if (this.editIndex !== null && this.editType) {
   editEntry(index: number, type: 'Card' | 'Cash') {
     const source = type === 'Card' ? this.cardEntries : this.cashEntries;
     this.entry = { ...source[index] };
-    this.selectedCurrency = this.entry.currency;
+    this.selectedCurrency = this.entry.currerncy;
     this.editIndex = index;
     this.editType = type;
     this.currencyModalOpen = true;

@@ -75,7 +75,7 @@
 
       <clr-input-container>
         <label>Loaded Date</label>
-        <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" required />
+       <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="travelEndDateOnly" required />
       </clr-input-container>
     </form>
   </div>

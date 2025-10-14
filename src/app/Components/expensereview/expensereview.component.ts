@@ -74,7 +74,8 @@ submitExpense() {
     createdDate: new Date().toISOString(),
     purposePlace: this.personalData?.purposePlace || '',
     totalAmount: this.totalAmount,
-    entries: this.entries
+    entries: this.entries,
+    status:'Pending'
   };
 
   this.service.setExpense(expenseData);

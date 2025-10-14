@@ -3,9 +3,9 @@
 <div class="first">
   <clr-select-container>
     <label>Select Currency type</label>
-    <select clrSelect [(ngModel)]="selectedCurrency"  name="currency">
+    <select clrSelect [(ngModel)]="selectedCurrency" name="currency">
       <option value="INR">INR</option>
-     
+
     </select>
   </clr-select-container>
 
@@ -17,8 +17,8 @@
 
   <clr-input-container>
     <label>Travel End Date & Time</label>
-    <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd"  [min]="travelStart"
-      [max]="maxDate" required/>
+    <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd" [min]="travelStart" [max]="maxDate"
+      required />
   </clr-input-container>
 
 
@@ -28,12 +28,12 @@
       <label>Number of Days</label>
       <input clrInput type="number" [value]="calculateDays(travelStart, travelEnd)" readonly />
     </clr-input-container>
-    
+
   </div>
-  
+
 
 </div>
-<button (click)="openCurrencyModal()" class="btn btn-primary" >add cash </button>
+<button (click)="openCurrencyModal()" class="btn btn-primary">add cash </button>
 <!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
   <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Entry' }}</h3>
@@ -49,7 +49,7 @@
 
       <clr-input-container>
         <label>INR Rate</label>
-        <input clrInput type="number" [value]="entry.inrRate" name="inrRate"  readonly />
+        <input clrInput type="number" [value]="entry.inrRate" name="inrRate" readonly />
       </clr-input-container>
 
       <clr-input-container>
@@ -59,7 +59,7 @@
 
       <clr-input-container>
         <label>Loaded Date</label>
-        <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" required />
+        <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="maxDate" required />
       </clr-input-container>
     </form>
   </div>
@@ -119,8 +119,8 @@
     </clr-datagrid>
   </div>
 </div>
- 
- 
+
+
 <div class="preview">
-  <button class="btn btn-primary"  (click)="gotoreview()" > go to claim page </button>
+  <button class="btn btn-primary" (click)="gotoreview()"> go to claim page </button>
 </div>

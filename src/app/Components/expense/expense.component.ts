@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, NgForm, Validators } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { PersonalDataService } from '../../services/personal-data.service';
+import { FormDataModel } from '../../Models/formsData';
 
 @Component({
   selector: 'app-expense',
@@ -19,7 +20,7 @@ export class ExpenseComponent implements OnInit {
   username: string = '';
   editIndex: number | null = null;
   isEdit: boolean = false;
-  formData: any = {
+  formData:FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
@@ -32,7 +33,7 @@ export class ExpenseComponent implements OnInit {
   //expenseForm: FormGroup;
   maxDate: string = '';
 
-  entries: any[] = [];
+  entries: FormDataModel[] = [];
   constructor(private router: Router, private Service: PersonalDataService, private fb: FormBuilder) {
     //  this.expenseForm = this.fb.group({
     //     date: ['', Validators.required],

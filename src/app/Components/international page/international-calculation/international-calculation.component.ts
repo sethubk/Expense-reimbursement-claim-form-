@@ -23,8 +23,9 @@ ngOnInit(): void {
 const allowance = this.travelService.getAllowance();
   console.log("calculation", allowance);
 this.entries.push({
+  paymentMode:'Cash',
   particulars:'Allowance',
-  amount:allowance
+  amount:allowance || 0
  })
 }
 
