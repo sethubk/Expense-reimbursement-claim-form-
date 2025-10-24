@@ -1,4 +1,26 @@
 
+<div class="header1">
+ <h1>International Travels</h1>
+</div>
+<clr-accordion>
+  <clr-accordion-panel >
+    <clr-accordion-title>personaldata</clr-accordion-title>
+    <clr-accordion-content>
+      <div class="personal-info-row">
+        <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
+        <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
+        <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
+        <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
+        <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
+        <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
+        <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+      </div>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
+
+
 <button class="btn btn-primary" (click)="openmodel()">Fill the International Claim form </button>
 
 <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
@@ -57,6 +79,11 @@
         <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
 
+ <clr-input-container class="amount1">
+        <label>Screenshot</label>
+        <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
+        <img *ngIf="preview" [src]="preview" class="preview" />
+      </clr-input-container>
 
 
       <div class="divider"></div>
@@ -85,14 +112,17 @@
   <clr-dg-column>Actions</clr-dg-column>
 
   <clr-dg-row *ngFor="let entry of entries let i = index" >
-    <clr-dg-cell>{{ i}}</clr-dg-cell>
+    <clr-dg-cell>{{ i+1}}</clr-dg-cell>
     <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
     <clr-dg-cell >{{ entry.particulars }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-  
+   <clr-dg-cell>
+        <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
+      </clr-dg-cell>
+
     <clr-dg-cell >
       <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn remove" (click)="removeentry(i)">-</button>
       <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>

@@ -66,29 +66,43 @@ allowance:number=0
       screenshot: ''
     };
   }
+  
+preview:any;
+ onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+ 
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
     addEntry(form: NgForm) {
-      debugger
-  
-      if (form.valid) {
-        if (this.editIndex != null && this.isEdit) {
-  
-          // Update existing entry
-          this.entries[this.editIndex] = this.formData;
-          this.editIndex = null;
-          this.isEdit = false
-  
-        }
-        else {
-          this.entries.push({ ...this.formData });
-  
-  
-        }
-  
-        this.formopen = false
-      }
-       this.travelService.setentries(this.entries)
-    }
-  
+    debugger
+
+    if (form.valid) {
+  const entry = {
+    ...this.formData,
+    preview: this.preview // include the image preview here
+  };
+
+  if (this.editIndex != null && this.isEdit) {
+    // Update existing entry
+    this.entries[this.editIndex] = entry;
+    this.editIndex = null;
+    this.isEdit = false;
+  } else {
+    // Add new entry
+    this.entries.push(entry);
+  }
+
+  this.formopen = false;
+
+  // Save entries using the service
+  this.service.setentries(this.entries);
+}}
       Editentry(entry: any, index: number) {
       debugger
       this.formData = ({ ...entry })

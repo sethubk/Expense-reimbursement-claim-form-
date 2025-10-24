@@ -1,3 +1,6 @@
+<div class="header1">
+<h1>Domestic </h1>
+</div>
 
 
 <div *ngIf="personalData " class="personaldata">
@@ -66,7 +69,11 @@
         <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
 
-
+<clr-input-container class="amount1">
+        <label>Screenshot</label>
+        <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
+        <img *ngIf="preview" [src]="preview" class="preview" />
+      </clr-input-container>
 
       <div class="divider"></div>
       <div class="actions">
@@ -101,7 +108,9 @@
     <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-  
+    <clr-dg-cell>
+        <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
+      </clr-dg-cell>
     <clr-dg-cell>
       <button  *ngIf="entry.particulars!='Allowance'"  class="crud-btn remove" (click)="removeentry(i)">-</button>
       <button    *ngIf="entry.particulars!='Allowance'" class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>

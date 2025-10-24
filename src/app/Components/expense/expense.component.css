@@ -13,7 +13,7 @@
 }
 .modal-body {
   
-  padding: 34px;
+  padding: 25px;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
@@ -79,6 +79,7 @@ clr-input-container input {
   background-color: #fff;
 }
 
+
 .amount1  {
     display: grid;
   border-radius: 10px;
@@ -88,14 +89,40 @@ clr-input-container input {
   outline: none;
   width: 100%;
   position: relative;
+    white-space: nowrap;
+
+input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
  
+}
+
+.preview {
+  margin-top: 10px;
+  width: 70px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  object-fit: cover;
 }
 
 
 .divider {
   height: 1px;
   background: #eee;
-  margin: 10px 0;
+  margin: 1px 0;
   margin-top: 10px;
 }
 
@@ -105,6 +132,10 @@ clr-input-container input {
   justify-content: center;
   gap: 15px;
   margin-top: 10px;
+}
+.Screenshot{
+margin-top: 20px;
+padding: 10px;
 }
 
 .submit-btn {
@@ -192,6 +223,11 @@ clr-dg-column.auto-fit {
 
 
 
+.thumb {
+  width: 70px;
+  height: auto;
+  border-radius: 4px;
+}
 
 
 .modal-body{
@@ -219,7 +255,7 @@ float:right
   background-color: #f9f9f9;
    /* optional: control width */
   margin: 0 auto; /* center the block */
-  font-family: Arial, sans-serif;
+  font-family: Arial, sfans-serif;
   font-size: 14px;
 }
 
@@ -260,4 +296,29 @@ float:right
 
 .crud-btn.edit:hover {
   background-color: #0056b3;
+}
+
+.personal-info-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
+}
+
+.personal-info-row p {
+  flex: 1 1 calc(33.333% - 1rem);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.thumb {
+  width: 70px;
+  height: auto;
+  border-radius: 4px;
+}
+
+
+.preview1{
+  text-align: right;
+  margin-top: 20px;
 }

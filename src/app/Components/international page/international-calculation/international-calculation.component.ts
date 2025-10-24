@@ -15,13 +15,13 @@ import { CommonModule } from '@angular/common';
 })
 export class InternationalCalculationComponent implements OnInit{
 isEdit: boolean = false;
-
+personalData:any;
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
 maxDate:string='';
 ngOnInit(): void {
  const today = new Date();
   this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
- 
+    this.personalData = this.service.getDetails();
 const allowance = this.travelService.getAllowance();
   console.log("calculation", allowance);
 this.entries.push({
@@ -62,30 +62,48 @@ formopen: boolean = false;
   }
 
 
+preview:any;
+ onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+ 
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+
 
   
-  addEntry(form: NgForm) {
-      debugger
   
-      if (form.valid) {
-        if (this.editIndex != null && this.isEdit) {
-  
-          // Update existing entry
-          this.entries[this.editIndex] = this.formData;
-          this.editIndex = null;
-          this.isEdit = false
-  
-        }
-        else {
-          this.entries.push({ ...this.formData });
-  
-  
-        }
-  
-        this.formopen = false
-      }
-       this.travelService.setentries(this.entries)
-    }
+
+addEntry(form: NgForm) {
+    debugger
+
+    if (form.valid) {
+  const entry = {
+    ...this.formData,
+    preview: this.preview // include the image preview here
+  };
+
+  if (this.editIndex != null && this.isEdit) {
+    // Update existing entry
+    this.entries[this.editIndex] = entry;
+    this.editIndex = null;
+    this.isEdit = false;
+  } else {
+    // Add new entry
+    this.entries.push(entry);
+  }
+
+  this.formopen = false;
+
+  // Save entries using the service
+  this.service.setentries(this.entries);
+}
+}
   
       Editentry(entry: any, index: number) {
       debugger

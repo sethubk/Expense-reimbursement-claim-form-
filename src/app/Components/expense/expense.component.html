@@ -3,14 +3,24 @@
 </div>
 
 
-<div *ngIf="personalData " class="personaldata">
-  <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-  <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-  <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-  <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-  <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-  <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-  <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+<div *ngIf="personalData ">
+  <clr-accordion>
+    <clr-accordion-panel>
+      <clr-accordion-title>personaldata</clr-accordion-title>
+      <clr-accordion-content>
+        <div class="personal-info-row">
+          <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
+          <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
+          <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
+          <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
+          <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
+          <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
+          <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+        </div>
+      </clr-accordion-content>
+    </clr-accordion-panel>
+  </clr-accordion>
+
 </div>
 <button class="btn btn-primary" (click)="openmodel()">Fill the Expense Claim form </button>
 
@@ -21,7 +31,7 @@
       <div class="grid-two">
         <clr-input-container>
           <label>Date</label>
-          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required   [max]="maxDate"/>
+          <input clrInput type="date" [(ngModel)]="formData.date" name="date" required [max]="maxDate" />
         </clr-input-container>
 
         <clr-input-container>
@@ -63,7 +73,11 @@
         <label>Remarks</label>
         <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
-
+      <clr-input-container class="amount1">
+        <label>Screenshot</label>
+        <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
+        <img *ngIf="preview" [src]="preview" class="preview" />
+      </clr-input-container>
 
 
       <div class="divider"></div>
@@ -79,7 +93,7 @@
 
 </clr-modal>
 <div style="overflow-x: auto;">
-  <clr-datagrid *ngIf="entries.length > 0">
+  <clr-datagrid>
     <clr-dg-column>Sno</clr-dg-column>
     <clr-dg-column>Date</clr-dg-column>
     <clr-dg-column>Supporting No</clr-dg-column>
@@ -92,14 +106,18 @@
     <clr-dg-column>Actions</clr-dg-column>
 
     <clr-dg-row *ngFor="let entry of entries let i = index">
-      <clr-dg-cell>{{ i }}</clr-dg-cell>
+      <clr-dg-cell>{{ i +1}}</clr-dg-cell>
       <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-      <clr-dg-cell>{{ entry.screenshot }}</clr-dg-cell>
+      <clr-dg-cell>
+        <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
+      </clr-dg-cell>
+
+
       <clr-dg-cell>
         <button class="crud-btn remove" (click)="removeentry(i)">-</button>
         <button class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
@@ -110,12 +128,10 @@
   </clr-datagrid>
 
 
-  <!-- <div class="preview">
-  <button class="btn btn-primary" (click)="gotoreview()"> review </button>
-</div> -->
+ 
 
 
 
-  <div class="preview">
-    <button class="btn btn-primary" *ngIf="entries.length > 0" (click)="gotoreview()"> review </button>
+  <div class="preview1"  >
+    <button class="btn btn-primary" [disabled]="!entries.length" (click)="gotoreview()"> review </button>
   </div>

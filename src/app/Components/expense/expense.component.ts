@@ -20,6 +20,8 @@ export class ExpenseComponent implements OnInit {
   username: string = '';
   editIndex: number | null = null;
   isEdit: boolean = false;
+  formopen: boolean = false;
+  personal_open:boolean=false;
   formData:FormDataModel = {
     date: '',
     supportingNo: '',
@@ -29,7 +31,17 @@ export class ExpenseComponent implements OnInit {
     remarks: '',
     screenshot: ''
   };
-
+  preview:any;
+ onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+ 
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
   //expenseForm: FormGroup;
   maxDate: string = '';
 
@@ -65,23 +77,26 @@ const today = new Date();
     debugger
 
     if (form.valid) {
-      if (this.editIndex != null && this.isEdit) {
+  const entry = {
+    ...this.formData,
+    preview: this.preview // include the image preview here
+  };
 
-        // Update existing entry
-        this.entries[this.editIndex] = this.formData;
-        this.editIndex = null;
-        this.isEdit = false
+  if (this.editIndex != null && this.isEdit) {
+    // Update existing entry
+    this.entries[this.editIndex] = entry;
+    this.editIndex = null;
+    this.isEdit = false;
+  } else {
+    // Add new entry
+    this.entries.push(entry);
+  }
 
-      }
-      else {
-        this.entries.push({ ...this.formData });
+  this.formopen = false;
 
-
-      }
-
-      this.formopen = false
-    }
-    this.Service.setentries(this.entries)
+  // Save entries using the service
+  this.Service.setentries(this.entries);
+}
     // this.Service.setentries({
     //         date: this.formData.Date,
     //         supportingNo: this.formData.supportingNo,
@@ -99,7 +114,7 @@ const today = new Date();
     }
 
   }
-  formopen: boolean = false;
+  
   openmodel() {
     debugger
     this.formopen = true;

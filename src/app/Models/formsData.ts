@@ -6,6 +6,7 @@ export interface FormDataModel {
   amount: number | null;
   remarks: string;
   screenshot: string;
+   preview?: string;
 }
 
 export interface EntryModel {

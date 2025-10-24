@@ -5,6 +5,11 @@
 .modal-title{
     text-align: center;
 }
+.header1{
+  h1{
+    text-align: center;
+  }
+}
 .personal-card-form{
     overflow: hidden;
 }
@@ -87,6 +92,9 @@ clr-input-container input {
   width: 100%;
    outline: none; 
 }
+.remarks-box{
+  margin-top: 10px;
+}
 .remarks-box textarea {
   width: 400px;
   border-radius: 10px;
@@ -97,6 +105,7 @@ clr-input-container input {
   outline: none;
   border: 1px solid #ccc;
   background-color: #fff;
+  margin: 15px;
 }
 
 .amount1  {
@@ -108,7 +117,20 @@ clr-input-container input {
   outline: none;
   width: 100%;
   position: relative;
- 
+ input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
 }
 
 
@@ -213,3 +235,8 @@ clr-input-container input {
   display: inline-block;
 }
 
+.thumb {
+  width: 70px;
+  height: auto;
+  border-radius: 4px;
+}

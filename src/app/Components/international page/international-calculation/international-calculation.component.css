@@ -5,7 +5,11 @@
   margin-top: 20px;
  
 }
-
+.header1{
+  h1{
+    text-align: center;
+  }
+}
 .datagrid-box {
   flex: 1;
   min-width: 400px;
@@ -94,6 +98,21 @@ clr-input-container input {
   outline: none;
   width: 100%;
   position: relative;
+  
+input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
  
 }
 
@@ -173,4 +192,27 @@ clr-input-container input {
 
 .crud-btn.edit:hover {
   background-color: #0056b3;
+}
+
+.personal-info-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
+}
+
+.personal-info-row p {
+  flex: 1 1 calc(33.333% - 1rem);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.preview {
+  text-align: right;
+  margin-top: 20px;
+}
+.thumb {
+  width: 70px;
+  height: auto;
+  border-radius: 4px;
 }
