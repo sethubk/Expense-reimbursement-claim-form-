@@ -77,9 +77,7 @@ preview:any;
 
 
   
-  
-
-addEntry(form: NgForm) {
+  addEntry(form: NgForm) {
     debugger
 
     if (form.valid) {
@@ -99,11 +97,9 @@ addEntry(form: NgForm) {
   }
 
   this.formopen = false;
-
-  // Save entries using the service
-  this.service.setentries(this.entries);
-}
-}
+    }
+       this.travelService.setentries(this.entries)
+    }
   
       Editentry(entry: any, index: number) {
       debugger

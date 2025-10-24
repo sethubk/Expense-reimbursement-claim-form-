@@ -86,6 +86,7 @@
       </clr-input-container>
 
 
+
       <div class="divider"></div>
       <div class="actions">
         <button class="submit-btn" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
@@ -107,8 +108,8 @@
   <clr-dg-column>Payment Mode</clr-dg-column>
   <clr-dg-column>Amount</clr-dg-column>
   <clr-dg-column>Remarks</clr-dg-column>
-
-
+  
+<clr-dg-column>Screenshot</clr-dg-column>
   <clr-dg-column>Actions</clr-dg-column>
 
   <clr-dg-row *ngFor="let entry of entries let i = index" >
@@ -119,9 +120,10 @@
     <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
     <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-   <clr-dg-cell>
+    <clr-dg-cell>
         <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
       </clr-dg-cell>
+
 
     <clr-dg-cell >
       <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn remove" (click)="removeentry(i)">-</button>

@@ -95,9 +95,8 @@ entry:EntryModel = {
  if (this.editIndex !== null && this.editType) {
       this.travelService.updateEntry(this.editIndex, this.entry, this.editType);
     } else {
-      this.entry.currerncy
-   
-       = this.selectedCurrency;
+      this.entry.currerncy= this.selectedCurrency;
+      console.log("cureency",this.entry)
       this.travelService.addEntry(this.entry);
     }
 

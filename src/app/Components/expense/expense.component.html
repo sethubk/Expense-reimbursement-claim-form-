@@ -4,8 +4,8 @@
 
 
 <div *ngIf="personalData ">
-  <clr-accordion>
-    <clr-accordion-panel>
+  <clr-accordion >
+    <clr-accordion-panel [clrAccordionPanelOpen]="true">
       <clr-accordion-title>personaldata</clr-accordion-title>
       <clr-accordion-content>
         <div class="personal-info-row">
@@ -22,6 +22,8 @@
   </clr-accordion>
 
 </div>
+
+
 <button class="btn btn-primary" (click)="openmodel()">Fill the Expense Claim form </button>
 
 <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">

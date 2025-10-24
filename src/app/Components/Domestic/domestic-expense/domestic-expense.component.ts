@@ -101,7 +101,7 @@ preview:any;
   this.formopen = false;
 
   // Save entries using the service
-  this.service.setentries(this.entries);
+  this.travelService.setentries(this.entries);
 }}
       Editentry(entry: any, index: number) {
       debugger

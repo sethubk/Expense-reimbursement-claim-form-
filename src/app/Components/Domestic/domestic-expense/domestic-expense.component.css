@@ -240,3 +240,8 @@ clr-input-container input {
   height: auto;
   border-radius: 4px;
 }
+
+.preview{
+  text-align: right;
+  margin: 20px;
+}

@@ -1,4 +1,4 @@
-<!-- <h1>International Travel </h1> -->
+<h1>International Travel </h1>
 
 <div *ngIf="personalData " class="personaldata">
   <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
@@ -99,7 +99,7 @@
       <clr-dg-column>Actions</clr-dg-column>
 
       <clr-dg-row *ngFor="let item of cardEntries ; let i = index">
-        <clr-dg-cell>{{ item.currency }}</clr-dg-cell>
+        <clr-dg-cell>{{ item.currerncy }}</clr-dg-cell>
         <clr-dg-cell>{{ item.inrRate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalLoaded }}</clr-dg-cell>
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
@@ -124,7 +124,7 @@
       <clr-dg-column>Actions</clr-dg-column>
 
       <clr-dg-row *ngFor="let item of cashEntries ; let i = index">
-        <clr-dg-cell>{{ item.currency }}</clr-dg-cell>
+        <clr-dg-cell>{{ item.currerncy }}</clr-dg-cell>
         <clr-dg-cell>{{ item.inrRate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalLoaded }}</clr-dg-cell>
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
