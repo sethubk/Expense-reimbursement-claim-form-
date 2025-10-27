@@ -54,7 +54,8 @@ dataSource:Expense[]=[
 
 ngOnInit() {
     const now = new Date();
-    this.personl.today = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    const today= now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    this.personl.today=today 
     this.dataSource=this.service.getExpense()
    console.log("expense to claim ",this.personl.today)
    
@@ -67,7 +68,16 @@ selectedCategory: string | null = null;
 goToPersonalDetails(category: string){
   // localStorage.setItem('selectedCategory', category);
   // this.router.navigate(['/personal'])
+    this.personl={
+  today: this.personl.today,
+  username:  '',
+  employeeCode:  '',
+  purposePlace:  '',
+  companyPlant : '',
+  costCenter:  '',
+  vendorCode:  '',
   
+}
 this.selectedCategory = category;
     this.showPersonalModal = true;
 
@@ -111,5 +121,18 @@ getStatusClass(status: string): string {
     default:
       return 'badge badge-info';
   }
+}
+
+reset(){
+  this.personl={
+  today: this.personl.today,
+  username:  '',
+  employeeCode:  '',
+  purposePlace:  '',
+  companyPlant : '',
+  costCenter:  '',
+  vendorCode:  '',
+  
+}
 }
 }

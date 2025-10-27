@@ -4,33 +4,35 @@
 
 
 <div *ngIf="personalData ">
-  <clr-accordion >
-    <clr-accordion-panel [clrAccordionPanelOpen]="true">
-      <clr-accordion-title>personaldata</clr-accordion-title>
-      <clr-accordion-content>
-        <div class="personal-info-row">
-          <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-          <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-          <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-          <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-          <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-          <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-          <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
-        </div>
-      </clr-accordion-content>
-    </clr-accordion-panel>
-  </clr-accordion>
+ <clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true" >
+    <clr-accordion-title>Personal Datails</clr-accordion-title>
+    <clr-accordion-content>
+      <div class="personal-info-row">
+        <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
+        <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
+        <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
+        <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
+        <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
+        <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
+        <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+      </div>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
 
 </div>
 
 
 <button class="btn btn-primary" (click)="openmodel()">Fill the Expense Claim form </button>
 
-<clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
+<clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'" class="model">
   <div class="modal-body">
-
+<div class="modal-title">
+<h1>Expense Claim</h1>
+</div>
     <form clrForm #epenseForm="ngForm" class="expense-form">
-      <div class="grid-two">
+    
         <clr-input-container>
           <label>Date</label>
           <input clrInput type="date" [(ngModel)]="formData.date" name="date" required [max]="maxDate" />
@@ -42,8 +44,7 @@
         </clr-input-container>
 
 
-      </div>
-      <div class="grid-two">
+      
         <clr-select-container>
           <label>Particulars</label>
           <select clrSelect [(ngModel)]="formData.particulars" name="particulars" required>
@@ -64,9 +65,9 @@
           </select>
         </clr-select-container>
 
-      </div>
+     
 
-      <div class="divider"></div>
+      
       <clr-input-container class="amount1">
         <label>Amount</label>
         <input clrInput type="number" [(ngModel)]="formData.amount" name="amount" required />
@@ -76,16 +77,16 @@
         <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
       <clr-input-container class="amount1">
-        <label>Screenshot</label>
+        <label class="Screenshot">Screenshot</label>
         <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
         <img *ngIf="preview" [src]="preview" class="preview" />
       </clr-input-container>
 
 
-      <div class="divider"></div>
+      
       <div class="actions">
         <button class="submit-btn" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
-          {{!isEdit? 'add': 'Update'}}</button>
+          {{!isEdit? 'Add': 'Update'}}</button>
         <button class="btn-outline-danger" type="reset">Reset</button>
       </div>
     </form>
@@ -94,7 +95,10 @@
   </div>
 
 </clr-modal>
-<div style="overflow-x: auto;">
+
+
+
+<div class="datagriid">
   <clr-datagrid>
     <clr-dg-column>Sno</clr-dg-column>
     <clr-dg-column>Date</clr-dg-column>
@@ -127,13 +131,26 @@
 
 
     </clr-dg-row>
+
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
+          Items per page
+        </clr-dg-page-size>
+        {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+        {{ pagination.totalItems }} items
+      </clr-dg-pagination>
+    </clr-dg-footer>
   </clr-datagrid>
 
 
- 
 
 
 
-  <div class="preview1"  >
+</div>
+
+
+
+  <div class="preview1">
     <button class="btn btn-primary" [disabled]="!entries.length" (click)="gotoreview()"> review </button>
   </div>

@@ -20,7 +20,7 @@ export class ExpenseComponent implements OnInit {
   username: string = '';
   editIndex: number | null = null;
   isEdit: boolean = false;
-  formopen: boolean = false;
+  formopen: boolean = true;
   personal_open:boolean=false;
   formData:FormDataModel = {
     date: '',

@@ -74,7 +74,7 @@ submitExpense() {
     type: 'Expense',
     createdDate: new Date().toISOString(),
     purposePlace: this.personalData?.purposePlace || '',
-    totalAmount: this.totalAmount,
+    totalAmount: '₹'+this.totalAmount,
     entries: this.entries,
     status:'Pending'
   };

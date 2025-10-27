@@ -130,17 +130,18 @@ clr-input-container input {
 }
 
 
-.btn-outline-danger {
-  background-color: transparent;
-  border: 1px solid #dc3545;
-  color: #dc3545;
+
+.actions{
+  button{
+    width: 100%;
+  max-width: 200px;
   padding: 12px 20px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+  }
 }
-
-.btn-outline-danger:hover {
+.btn btn-danger:hover {
   background-color: #dc3545;
   color: white;
 }
@@ -157,11 +158,14 @@ clr-input-container input {
   }
 }
 
-.datagriid{
-margin-top: 200px;
-
-overflow-y: auto;
-  overflow-x: auto;
-
-
+.datagriid {
+  height: 500px;
+  overflow-y: auto;
+  display: block;
+  margin-top: 20px;
+}
+clr-datagrid{
+  overflow-y: auto;
+  height:400px;
+ overflow-x: auto;
 }
