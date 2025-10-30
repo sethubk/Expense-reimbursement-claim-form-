@@ -20,7 +20,7 @@ export class ExpenseComponent implements OnInit {
   username: string = '';
   editIndex: number | null = null;
   isEdit: boolean = false;
-  formopen: boolean = true;
+  formopen: boolean = false;
   personal_open:boolean=false;
   formData:FormDataModel = {
     date: '',
@@ -60,10 +60,12 @@ export class ExpenseComponent implements OnInit {
   ngOnInit() {
 const today = new Date();
   this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
- 
+  this.personalData = this.Service.getDetails();
 
-    this.personalData = this.Service.getDetails();
-
+const existingEntries=this.Service.getentries()
+   if (existingEntries && existingEntries.length > 0) {
+    // Load all entries (including allowance and user-added)
+    this.entries = existingEntries;}
   }
 
   // onFileChange(event: any) {
@@ -142,5 +144,8 @@ const today = new Date();
   }
   gotoreview() {
     this.router.navigate(['expensereview'])
+  }
+  backbtn(){
+    this.router.navigate([''])
   }
 }

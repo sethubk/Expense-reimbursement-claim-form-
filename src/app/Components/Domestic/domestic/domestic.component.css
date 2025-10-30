@@ -289,7 +289,8 @@ clr-modal .modal-footer {
 }
 
 /* Preview Button */
-.preview {
-  text-align: right;
-  margin-top: 20px;
+.preview{
+  display: flex;
+justify-content:space-between;
+  margin: 20px;
 }

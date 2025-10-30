@@ -3,7 +3,7 @@
 }
 h1{
     text-align: center;
-    color: rgb(149, 149, 255);
+    color: rgb(109, 109, 109);
 }
 
 .btn-outline-danger {
@@ -282,14 +282,22 @@ clr-modal .modal-footer {
 /* Datagrid Styling */
 .datagrid-box {
   margin-top: 20px;
+ 
   background-color: #ffffff;
   padding: 15px;
   border-radius: 6px;
+   overflow-y: auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+clr-datagrid{
+  overflow-y: auto;
+  height:200px;
+ overflow-x: auto;
 
+}
 /* Preview Button */
-.preview {
-  text-align: right;
-  margin-top: 20px;
+.preview{
+  display: flex;
+justify-content:space-between;
+  margin: 20px;
 }

@@ -18,7 +18,7 @@
   <clr-input-container>
     <label>Travel End Date & Time</label>
     <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd"  [min]="travelStart"
-      [max]="maxDate" required/>
+      [max]="maxDate" [disabled]="!travelStart" required/>
   </clr-input-container>
 
 
@@ -48,7 +48,10 @@
       </clr-select-container>
 
       <clr-input-container>
-        <label>INR Rate</label>
+        <label>INR Rate
+              <span class="badge badge-info ml-2">for 1 {{selectedCurrency}}</span>
+
+        </label>
         <input clrInput type="number" [value]="entry.inrRate" name="inrRate"  readonly />
       </clr-input-container>
 
@@ -59,7 +62,7 @@
 
       <clr-input-container>
         <label>Loaded Date</label>
-        <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="maxDate" required />
+        <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="travelEndDateOnly" required />
       </clr-input-container>
     </form>
   </div>
@@ -87,8 +90,8 @@
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
         <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Card')">Edit</button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Card')">Delete</button>
+          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Card')"><cds-icon shape="pencil"></cds-icon></button>
+          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Card')">   <cds-icon shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
@@ -122,5 +125,6 @@
  
  
 <div class="preview">
-  <button class="btn btn-primary"  (click)="gotoreview()"  > go to claim page </button>
+  <button class="btn btn-info" (click)="backbtn()">back to </button>
+  <button class="btn btn-success"  (click)="gotoreview()"  > go cto claim page </button>
 </div>

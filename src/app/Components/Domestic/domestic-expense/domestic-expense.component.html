@@ -1,19 +1,25 @@
 <div class="header1">
-<h1>Domestic </h1>
+  <h1>Domestic </h1>
 </div>
 
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Personal Datails</clr-accordion-title>
+    <clr-accordion-content>
+      <div class="personal-info-row">
+        <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
+        <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
+        <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
+        <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
+        <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
+        <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
+        <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
+      </div>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
 
-<div *ngIf="personalData " class="personaldata">
-                <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-                <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-                <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-                <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-                <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-                <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-                <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
-            </div>
-
-<button class="btn btn-primary" (click)="openmodel()">Fill the Domestic Claim form </button>
+<button class="btn btn-primary" (click)="openmodel()" style="margin: 10px;">Fill the Domestic Claim form </button>
 
 <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
   <div class="modal-body">
@@ -22,7 +28,7 @@
       <div class="grid-two">
         <clr-input-container>
           <label>Date</label>
-          <input clrInput type="date" [(ngModel)]="formData.date" name="date"  [max]="maxDate" required />
+          <input clrInput type="date" [(ngModel)]="formData.date" name="date" [max]="maxDate" required />
         </clr-input-container>
 
         <clr-input-container>
@@ -40,11 +46,11 @@
             <option value="Hotel">flight</option>
             <option value="Transport">Transport</option>
             <option value="Food">Food</option>
-           
+
             <option value="Communication">Communication</option>
             <option value="Visa Process Fees">Visa Process Fees</option>
-           
-         
+
+
             <option value="Others">Others</option>
           </select>
         </clr-select-container>
@@ -53,7 +59,7 @@
           <label>Payment Mode</label>
           <select clrSelect [(ngModel)]="formData.paymentMode" name="paymentMode" required>
             <option value="Cash">Cash</option>
-           
+
           </select>
         </clr-select-container>
 
@@ -69,8 +75,8 @@
         <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
 
-<clr-input-container class="amount1">
-        <label>Screenshot</label>
+      <clr-input-container class="amount1">
+        <label  class="Screenshot">Screenshot</label>
         <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
         <img *ngIf="preview" [src]="preview" class="preview" />
       </clr-input-container>
@@ -87,40 +93,52 @@
   </div>
 
 </clr-modal>
+<div class="datagriid">
+  <clr-datagrid *ngIf="entries.length > 0">
+    <clr-dg-column>Sno</clr-dg-column>
+    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column>Supporting No</clr-dg-column>
+    <clr-dg-column>Particulars</clr-dg-column>
+    <clr-dg-column>Payment Mode</clr-dg-column>
+    <clr-dg-column>Amount</clr-dg-column>
+    <clr-dg-column>Remarks</clr-dg-column>
+    <clr-dg-column>Screenshot</clr-dg-column>
 
-<clr-datagrid *ngIf="entries.length > 0">
-  <clr-dg-column>Sno</clr-dg-column>
-  <clr-dg-column>Date</clr-dg-column>
-  <clr-dg-column>Supporting No</clr-dg-column>
-  <clr-dg-column>Particulars</clr-dg-column>
-  <clr-dg-column>Payment Mode</clr-dg-column>
-  <clr-dg-column>Amount</clr-dg-column>
-  <clr-dg-column>Remarks</clr-dg-column>
-  <clr-dg-column>Screenshot</clr-dg-column>
 
+    <clr-dg-column>Actions</clr-dg-column>
 
-  <clr-dg-column>Actions</clr-dg-column>
-
-  <clr-dg-row *ngFor="let entry of entries let i = index">
-    <clr-dg-cell>{{ i+1}}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-    <clr-dg-cell>
+    <clr-dg-row *ngFor="let entry of entries let i = index">
+      <clr-dg-cell>{{ i+1}}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+      <clr-dg-cell>
         <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
       </clr-dg-cell>
-    <clr-dg-cell>
-      <button  *ngIf="entry.particulars!='Allowance'"  class="crud-btn remove" (click)="removeentry(i)">-</button>
-      <button    *ngIf="entry.particulars!='Allowance'" class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
-    </clr-dg-cell>
+      <clr-dg-cell>
+        <button *ngIf="entry.particulars!='Allowance'" class="crud-btn remove" (click)="removeentry(i)"> <cds-icon shape="trash"></cds-icon></button>
+        <button *ngIf="entry.particulars!='Allowance'" class="crud-btn edit" (click)="Editentry(entry, i)"><cds-icon shape="pencil"></cds-icon></button>
+      </clr-dg-cell>
 
 
-  </clr-dg-row>
-</clr-datagrid>
+    </clr-dg-row>
+    <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
+        Items per page
+      </clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+      {{ pagination.totalItems }} items
+    </clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+</div>
+
 
 <div class="preview">
-  <button class="btn btn-primary" (click)="gotoreview()"> review </button>
+  <button class="btn btn-info" (click)="backbtn()">back to </button>
+  <button class="btn btn-success" (click)="gotoreview()"> review </button>
 </div>

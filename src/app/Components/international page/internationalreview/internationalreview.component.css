@@ -18,19 +18,28 @@
   
 }
 .personaldetails {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 200px;
+  max-width: 500px;
   padding: 10px;
-  
   font-size: 14px;
 }
 
-.personaldata p {
-  margin: 4px 0;
+.personaldata {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.data-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 10px;
   word-wrap: break-word;
 }
+
+.data-row strong {
+  font-weight: bold;
+}
+
 
 .button-group{
 display: flex;

@@ -110,5 +110,8 @@ getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pa
     return { message: '', amount: 0, type: 'none' };
   }
 }
+backbtn(){
+      this.router.navigate(['domesticexpense'])
+    }
 
 }

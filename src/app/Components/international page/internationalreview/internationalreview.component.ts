@@ -30,7 +30,7 @@ advance:number=130000;
  
     this.entries=this.TravelService.getentries();
     this.personalData = this.service.getDetails();
-this.advance=this.TravelService.getAllowance()
+    //his.advance=this.TravelService.getAllowance()
 
     console.log(this.entries)
    
@@ -102,10 +102,11 @@ this.router.navigate([''])
 
 
 getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pay' | 'none' } {
+  debugger
   const cashPaid = this.getTotalByMode('Cash');
-  const difference =  cashPaid -this.advance ;
+  const difference =  this.advance -cashPaid ;
 
-  if (difference < 0) {
+  if (difference > 0) {
     return { message: 'Amount Recover from Employee', amount: Math.abs(difference), type: 'recover' };
   } else if (difference > 0) {
     return { message: 'Amount Payable to Employee', amount: Math.abs(difference), type: 'pay' };
@@ -113,5 +114,8 @@ getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pa
     return { message: '', amount: 0, type: 'none' };
   }
 }
+ backbtn(){
+this.router.navigate(['internationalcal'])
+    }
 
 }

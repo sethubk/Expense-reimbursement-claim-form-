@@ -1,14 +1,5 @@
 <h1>International Travel </h1>
 
-<div *ngIf="personalData " class="personaldata">
-  <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-  <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-  <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-  <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-  <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-  <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-  <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
-</div>
 
 
 <div class="first">
@@ -27,10 +18,10 @@
     <input clrInput type="datetime-local" [(ngModel)]="travelStart" name="travelStart" [max]="maxDate" required />
   </clr-input-container>
 
-  <clr-input-container>
+  <clr-input-container >
     <label>Travel End Date & Time</label>
     <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd"  [min]="travelStart"
-      [max]="maxDate" required/>
+      [max]="maxDate" required [disabled]="!travelStart"/>
   </clr-input-container>
 
 
@@ -52,7 +43,7 @@
 <button (click)="openCurrencyModal()" class="btn btn-primary" [disabled]="totaldays ==0" >add cash </button>
 <!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
-  <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Entry' }}</h3>
+  <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Cash or Card Entry' }}</h3>
   <div class="modal-body">
     <form clrForm #entryForm="ngForm">
       <clr-select-container>
@@ -62,12 +53,13 @@
           <option value="Cash">Cash</option>
         </select>
       </clr-select-container>
-
-      <clr-input-container>
-        <label>INR Rate</label>
-        <input clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate" required />
-      </clr-input-container>
-
+<clr-input-container>
+  <label>
+    INR Rate
+    <span class="badge badge-info ml-2">for 1 {{selectedCurrency}}</span>
+  </label>
+  <input clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate" required />
+</clr-input-container>
       <clr-input-container>
         <label>Total Loaded</label>
         <input clrInput type="number" [(ngModel)]="entry.totalLoaded" name="totalLoaded" required />
@@ -105,12 +97,13 @@
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
         <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Card')">Edit</button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Card')">Delete</button>
+          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Card')"><cds-icon shape="pencil"></cds-icon></button>
+          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Card')"> <cds-icon shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
   </div>
+  
 
   <!-- Cash Table -->
   <div class="datagrid-box">
@@ -130,8 +123,8 @@
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
         <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Cash')">Edit</button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Cash')">Delete</button>
+          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Cash')"> <cds-icon shape="pencil"></cds-icon></button>
+          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Cash')"> <cds-icon shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
@@ -142,5 +135,9 @@
 
  
 <div class="preview">
-  <button class="btn btn-primary"  (click)="gotoreview()" c> go to claim page </button>
-</div>
+  <button class="btn btn-info" (click)="backbtn()">back to </button>
+<button class="btn btn-success"
+        (click)="gotoreview()" 
+        [disabled]="cardEntries.length === 0 && cashEntries.length === 0">
+  Go to Claim Page
+</button></div>

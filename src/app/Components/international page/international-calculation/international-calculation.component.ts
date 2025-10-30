@@ -19,16 +19,34 @@ personalData:any;
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
 maxDate:string='';
 ngOnInit(): void {
- const today = new Date();
-  this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
-    this.personalData = this.service.getDetails();
-const allowance = this.travelService.getAllowance();
-  console.log("calculation", allowance);
-this.entries.push({
-  paymentMode:'Cash',
-  particulars:'Allowance',
-  amount:allowance || 0
- })
+  const today = new Date();
+  this.maxDate = today.toISOString().split('T')[0];
+
+  this.personalData = this.service.getDetails();
+
+  // Check if entries already exist
+  const existingEntries = this.service.getentries();
+
+  if (existingEntries && existingEntries.length > 0) {
+    // Load all entries (including allowance and user-added)
+    this.entries = existingEntries;
+  } else {
+    // First time: only push allowance
+    const allowance = this.travelService.getAllowance();
+    console.log("calculation", allowance);
+
+    this.entries = [{
+      paymentMode: 'Cash',
+      particulars: 'Allowance',
+      amount: allowance || 0
+    }];
+
+    // Save to service
+    this.service.setentries(this.entries);
+  }
+
+// const additionalEntries = this.service.getentries(); // Make sure it's a method
+// this.entries.push(...additionalEntries);
 }
 
 
@@ -120,5 +138,8 @@ preview:any;
     }
     gotoreview() {
       this.router.navigate(['internationalreview'])
+    }
+    backbtn(){
+this.router.navigate(['international'])
     }
 }

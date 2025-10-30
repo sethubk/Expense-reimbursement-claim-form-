@@ -96,5 +96,8 @@ showClaimSummary() {
   `;
   alert(summary);
 }
+backbtn(){
+  this.router.navigate(['expense'])
+}
 
 }

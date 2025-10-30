@@ -1,3 +1,4 @@
+
  .datagrid-row {
   display: flex;
   gap: 20px;
@@ -208,11 +209,31 @@ input[type="file"] {
 }
 
 .preview {
-  text-align: right;
+display: flex;
+justify-content: space-between;
   margin-top: 20px;
 }
 .thumb {
   width: 70px;
   height: auto;
   border-radius: 4px;
+}
+
+.datagriid {
+  height: 350px;
+  overflow-y: auto;
+  display: block;
+  
+}
+
+
+clr-datagrid{
+   height:350px;
+  overflow-y: auto;
+ 
+ 
+} 
+ 
+clr-input-container label.Screenshot::after {
+  content: "";
 }

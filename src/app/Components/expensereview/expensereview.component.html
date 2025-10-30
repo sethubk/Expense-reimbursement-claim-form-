@@ -10,22 +10,19 @@
 </nav>
 
 <div class="clr-row">
-    <div class="clr-col-8">
-        <div class="personaldetails">
-            <div *ngIf="personalData " class="personaldata">
-                <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-                <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-                <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-                <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-                <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-                <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-                <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
-            </div>
-        </div>
+  <div class="clr-col-8">
+    <div class="personaldetails">
+      <div *ngIf="personalData" class="personaldata">
+        <div class="data-row"><strong>Date of Submission:</strong><span>{{ personalData.today }}</span></div>
+        <div class="data-row"><strong>Expense Statement of:</strong><span>{{ personalData.username }}</span></div>
+        <div class="data-row"><strong>Employee Code:</strong><span>{{ personalData.employeeCode }}</span></div>
+        <div class="data-row"><strong>Purpose & Place:</strong><span>{{ personalData.purposePlace }}</span></div>
+        <div class="data-row"><strong>Company & Plant:</strong><span>{{ personalData.companyPlant }}</span></div>
+        <div class="data-row"><strong>Cost Center:</strong><span>{{ personalData.costCenter }}</span></div>
+        <div class="data-row"><strong>Vendor Code:</strong><span>{{ personalData.vendorCode }}</span></div>
+      </div>
     </div>
-    <div class="clr-col-4">
-       
-    </div>
+  </div>
 </div>
 
 <clr-datagrid *ngIf="entries.length > 0">
@@ -38,21 +35,25 @@
   <clr-dg-column>Remarks</clr-dg-column>
 
   <clr-dg-row *ngFor="let entry of entries; let i = index">
-    <clr-dg-cell>{{ i + 1 }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
- 
-  </clr-dg-row>
+  <clr-dg-cell>{{ i + 1 }}</clr-dg-cell>
+  <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+  <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+  <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+  <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+  <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+  <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+</clr-dg-row>
 
+<!-- Total row -->
 <clr-dg-row>
-    <clr-dg-cell colspan="5"></clr-dg-cell>
-    <clr-dg-cell><strong>Total: ₹{{ totalAmount }}</strong></clr-dg-cell>
-    <clr-dg-cell></clr-dg-cell>
-  </clr-dg-row>
+  <clr-dg-cell ></clr-dg-cell>
+  <clr-dg-cell ></clr-dg-cell>
+  <clr-dg-cell ></clr-dg-cell>
+  <clr-dg-cell ></clr-dg-cell>
+  <clr-dg-cell ></clr-dg-cell>
+  <clr-dg-cell><strong>Total: ₹{{ totalAmount }}</strong></clr-dg-cell>
+  <clr-dg-cell></clr-dg-cell>
+</clr-dg-row>
 
 
  
@@ -91,6 +92,8 @@
 </div>
 
 <div class="button-group" style="margin: 20px 0;">
+      <button class="btn btn-info" (click)="backbtn()">back to </button>
+
   <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
   <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
   <button class="btn btn-info" (click)="showClaimSummary()">📄 View Claim</button>

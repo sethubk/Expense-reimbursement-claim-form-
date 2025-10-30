@@ -11,43 +11,43 @@ import { EntryModel, FormDataModel } from '../../../Models/formsData';
 @Component({
   selector: 'app-international',
   standalone: true,
-  imports: [CommonModule,ClarityModule,FormsModule],
+  imports: [CommonModule, ClarityModule, FormsModule],
   templateUrl: './international.component.html',
   styleUrl: './international.component.css'
 })
-export class InternationalComponent implements OnInit{
-travelStart: string = '';
-travelEnd: string = '';
-totaldays: number =0;
+export class InternationalComponent implements OnInit {
+  travelStart: string = '';
+  travelEnd: string = '';
+  totaldays: number = 0;
 
-  constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
-maxDate:string=''
-    personalData: any;
-ngOnInit(): void {
-   debugger
-  
-const today = new Date();
-this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
- 
-   //this.personalData = this.service.getDetails();
-   console.log('perso',this.personalData)
-}
+  constructor(private travelService: TravelEntryService, private router: Router, private service: PersonalDataService) { }
+  maxDate: string = ''
+  personalData: any;
+  ngOnInit(): void {
+    debugger
 
-selectedCurrency: string = '';
+    const today = new Date();
+    this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
+
+    //this.personalData = this.service.getDetails();
+    console.log('perso', this.personalData)
+  }
+
+  selectedCurrency: string = '';
   currencyModalOpen: boolean = false;
-formopen: boolean = false;
-  
-entry:EntryModel = {
+  formopen: boolean = false;
+
+  entry: EntryModel = {
     type: 'Card',
     inrRate: null,
     totalLoaded: null,
     loadedDate: '',
-    currerncy:''
+    currerncy: ''
   };
-   username: string = '';
+  username: string = '';
 
   isEdit: boolean = false;
-  formData:FormDataModel = {
+  formData: FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
@@ -60,14 +60,14 @@ entry:EntryModel = {
     this.router.navigate(['/internationalcal']);
   }
 
- entries:FormDataModel[] = [];
+  entries: FormDataModel[] = [];
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
 
 
   get travelEndDateOnly(): string {
-  return this.travelEnd ? this.travelEnd.split('T')[0] : '';
-}
+    return this.travelEnd ? this.travelEnd.split('T')[0] : '';
+  }
 
   get cardEntries() {
     return this.travelService.getCardEntries();
@@ -83,31 +83,31 @@ entry:EntryModel = {
       inrRate: null,
       totalLoaded: null,
       loadedDate: '',
- currerncy:this.selectedCurrency
+      currerncy: this.selectedCurrency
     };
     this.editIndex = null;
     this.editType = null;
     this.currencyModalOpen = true;
   }
 
-  saveEntry(form:NgForm) {
+  saveEntry(form: NgForm) {
     if (form.valid) {
- if (this.editIndex !== null && this.editType) {
-      this.travelService.updateEntry(this.editIndex, this.entry, this.editType);
-    } else {
-      this.entry.currerncy= this.selectedCurrency;
-      console.log("cureency",this.entry)
-      this.travelService.addEntry(this.entry);
+      if (this.editIndex !== null && this.editType) {
+        this.travelService.updateEntry(this.editIndex, this.entry, this.editType);
+      } else {
+        this.entry.currerncy = this.selectedCurrency;
+        console.log("cureency", this.entry)
+        this.travelService.addEntry(this.entry);
+      }
+
+      this.currencyModalOpen = false;
+      this.editIndex = null;
+      this.editType = null;
     }
 
-    this.currencyModalOpen = false;
-    this.editIndex = null;
-    this.editType = null;
+
   }
 
-
-    }
-   
   editEntry(index: number, type: 'Card' | 'Cash') {
     const source = type === 'Card' ? this.cardEntries : this.cashEntries;
     this.entry = { ...source[index] };
@@ -121,39 +121,43 @@ entry:EntryModel = {
     this.travelService.deleteEntry(index, type);
   }
 
-calculateDays(start: string, end: string): number {
-  if (!start || !end) return 0;
+  calculateDays(start: string, end: string): number {
+    if (!start || !end) return 0;
 
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-  const diffMs = endDate.getTime() - startDate.getTime();
-  const diffDays = diffMs / (1000 * 60 * 60 * 24);
-  const roundedDays = parseFloat(diffDays.toFixed(2));
- 
-  this.totaldays = roundedDays; // Assigning to totaldays as a string
-  return roundedDays;
-}
-allowanceAmount: number = 0;
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const diffMs = endDate.getTime() - startDate.getTime();
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+    const roundedDays = parseFloat(diffDays.toFixed(2));
 
-calculateAllowance(): number {
-  
+    this.totaldays = roundedDays; // Assigning to totaldays as a string
+    return roundedDays;
+  }
+  allowanceAmount: number = 0;
 
- 
-debugger
-  const allowance = this.totaldays * 100;
-  
- this.allowanceAmount = this.travelService.getallowance()*allowance// ✅ Assign the result to the class property
-  this.travelService.setAllowance(this.allowanceAmount); 
+  calculateAllowance(): number {
 
-  return this.allowanceAmount;
-}
+
+
+    debugger
+    const allowance = this.totaldays * 100;
+
+    this.allowanceAmount = this.travelService.getallowance() * allowance// ✅ Assign the result to the class property
+    this.travelService.setAllowance(this.allowanceAmount);
+
+    return this.allowanceAmount;
+  }
 
 
   gotoreview() {
-     debugger
-    const allowance= this.calculateAllowance()
+    debugger
+    const allowance = this.calculateAllowance()
     this.router.navigate(['internationalcal'])
-   
-    console.log("cal",this.allowanceAmount)
+
+    console.log("cal", this.allowanceAmount)
+  }
+
+  backbtn(){
+    this.router.navigate([''])
   }
 }

@@ -242,6 +242,49 @@ clr-input-container input {
 }
 
 .preview{
-  text-align: right;
+  display: flex;
+justify-content:space-between;
   margin: 20px;
+}
+
+
+.personal-info-row {
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr 1fr ;
+  width: 100%;
+  gap: 1rem;
+}
+.personal-info-row p strong{
+  
+width: 150px;       /* Set fixed width */
+ 
+
+}
+.personal-info-row p {
+  flex: 1 1 calc(33.333% - 1rem);
+  box-sizing: border-box;
+  margin: 0;
+}
+#fill_button{
+  margin-top: 100px;
+}
+
+.datagriid {
+  margin: 10px;
+  height: 350px;
+  overflow-y: auto;
+  display: block;
+  
+}
+
+
+clr-datagrid{
+   height:350px;
+  overflow-y: auto;
+ 
+ 
+} 
+
+clr-input-container label.Screenshot::after {
+  content: "";
 }

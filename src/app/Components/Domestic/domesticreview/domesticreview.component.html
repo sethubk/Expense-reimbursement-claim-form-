@@ -8,7 +8,9 @@
     </div>
 
 </nav>
-<div class="clr-row">
+<!-- <div class="clr-row">
+
+
     <div class="clr-col-8">
         <div class="personaldetails">
             <div *ngIf="personalData " class="personaldata">
@@ -25,7 +27,24 @@
     <div class="clr-col-4">
 
     </div>
+</div> -->
+
+<div class="clr-row">
+  <div class="clr-col-8">
+    <div class="personaldetails">
+      <div *ngIf="personalData" class="personaldata">
+        <div class="data-row"><strong>Date of Submission:</strong><span>{{ personalData.today }}</span></div>
+        <div class="data-row"><strong>Expense Statement of:</strong><span>{{ personalData.username }}</span></div>
+        <div class="data-row"><strong>Employee Code:</strong><span>{{ personalData.employeeCode }}</span></div>
+        <div class="data-row"><strong>Purpose & Place:</strong><span>{{ personalData.purposePlace }}</span></div>
+        <div class="data-row"><strong>Company & Plant:</strong><span>{{ personalData.companyPlant }}</span></div>
+        <div class="data-row"><strong>Cost Center:</strong><span>{{ personalData.costCenter }}</span></div>
+        <div class="data-row"><strong>Vendor Code:</strong><span>{{ personalData.vendorCode }}</span></div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <div class="dates">
     <clr-datagrid *ngIf="entries.length > 0">
         <clr-dg-column>S.No</clr-dg-column>
@@ -46,25 +65,32 @@
             <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
             <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
             <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+            <!-- Totals by Payment Mode -->
 
         </clr-dg-row>
+            <clr-dg-row *ngFor="let total of getTotalsByPaymentMode()">
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell><strong>Total for {{ total.mode }}</strong></clr-dg-cell>
+                <clr-dg-cell><strong>₹{{ total.total }}</strong></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+            </clr-dg-row>
 
-        <!-- Totals Row -->
-        <clr-dg-row *ngFor="let total of getTotalsByPaymentMode()">
-            <clr-dg-cell colspan="4"><strong>Total for {{ total.mode }}</strong></clr-dg-cell>
-            <clr-dg-cell colspan="2"><strong> ₹{{ total.total }}</strong></clr-dg-cell>
-
-            <clr-dg-cell colspan="2"></clr-dg-cell>
-        </clr-dg-row>
-
-        <clr-dg-row>
-            <clr-dg-cell colspan="4"><strong>Grand Total</strong></clr-dg-cell>
-            <clr-dg-cell colspan="2"><strong>₹{{ totalAmounts}}</strong></clr-dg-cell>
-            <clr-dg-cell colspan="2"></clr-dg-cell>
-        </clr-dg-row>
-
+            <!-- Grand Total Row -->
+            <clr-dg-row>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+                <clr-dg-cell><strong>Grand Total</strong></clr-dg-cell>
+                <clr-dg-cell><strong>₹{{ totalAmounts }}</strong></clr-dg-cell>
+                <clr-dg-cell></clr-dg-cell>
+            </clr-dg-row>
     </clr-datagrid>
 </div>
+
 <div class="clr-row1">
     <div class="clr-col-12 clr-col-md-4">
         <div class="summary-box">
@@ -82,7 +108,7 @@
                         <td>Expense Paid by Company</td>
                         <td>₹{{ getTotalByMode('Card') }}</td>
                     </tr>
-                    
+
                     <tr>
                         <td>Advance </td>
                         <td>₹{{ advance }}</td>
@@ -91,7 +117,7 @@
                         <td colspan="2" [ngStyle]="{
     color: getSettlementDetails().type === 'recover' ? 'red' : 'green'
   }">
-                            {{ getSettlementDetails().message }}:    ₹{{ getSettlementDetails().amount }}
+                            {{ getSettlementDetails().message }}: ₹{{ getSettlementDetails().amount }}
                         </td>
                     </tr>
 
@@ -101,6 +127,7 @@
     </div>
 </div>
 <div class="button-group" style="margin: 20px 0;">
+    <button class="btn btn-info" (click)="backbtn()">back to </button>
     <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
     <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
 </div>

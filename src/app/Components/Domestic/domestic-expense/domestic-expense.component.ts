@@ -29,18 +29,46 @@ maxDate:string='';
 allowance:number=0
   ngOnInit(): void {
 
-    const today = new Date();
+//     const today = new Date();
+//   this.maxDate = today.toISOString().split('T')[0];
+//     this.personalData=this.service.getDetails()
+//   this.allowance=this.travelService.getallowance()
+//   this.entries.push({
+//     date: '',
+//       supportingNo: '', 
+//   particulars:'Allowance',
+//   amount:this.allowance || 0,
+//   paymentMode:'Cash',
+//   remarks: '',
+//  })
+
+// new updated codes 
+
+  const today = new Date();
   this.maxDate = today.toISOString().split('T')[0];
-    this.personalData=this.service.getDetails()
-  this.allowance=this.travelService.getallowance()
-  this.entries.push({
-    date: '',
-      supportingNo: '', 
-  particulars:'Allowance',
-  amount:this.allowance || 0,
-  paymentMode:'Cash',
-  remarks: '',
- })
+
+  this.personalData = this.service.getDetails();
+
+  // Check if entries already exist
+  const existingEntries = this.service.getentries();
+
+  if (existingEntries && existingEntries.length > 0) {
+    // Load all entries (including allowance and user-added)
+    this.entries = existingEntries;
+  } else {
+    // First time: only push allowance
+    const allowance = this.travelService.getAllowance();
+    console.log("calculation", allowance);
+
+    this.entries = [{
+      paymentMode: 'Cash',
+      particulars: 'Allowance',
+      amount: allowance || 0
+    }];
+
+    // Save to service
+    this.service.setentries(this.entries);
+  }
 }
 
   formData:FormDataModel = {
@@ -122,5 +150,8 @@ preview:any;
     }
      gotoreview() {
       this.router.navigate(['domesticreview'])
+    }
+    backbtn(){
+      this.router.navigate(['domestic'])
     }
 }

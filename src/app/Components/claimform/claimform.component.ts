@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { PersonalDataService } from '../../services/personal-data.service';
+import { TravelEntryService } from '../../services/travel-entry.service';
 
 
 export interface Expense {
@@ -58,11 +59,12 @@ ngOnInit() {
     this.personl.today=today 
     this.dataSource=this.service.getExpense()
    console.log("expense to claim ",this.personl.today)
-   
+   this.travelservice.clearCardEntries()
+   this.service.Clearentries()
   }
 
 
-constructor(private router:Router,private service:PersonalDataService){}
+constructor(private router:Router,private service:PersonalDataService,private travelservice:TravelEntryService){}
 selectedCategory: string | null = null;
 
 goToPersonalDetails(category: string){

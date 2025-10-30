@@ -133,4 +133,8 @@ if (this.editIndex !== null && this.editType) {
     this.router.navigate(['domesticexpense'])
    
   }
+
+  backbtn(){
+    this.router.navigate([''])
+  }
 }

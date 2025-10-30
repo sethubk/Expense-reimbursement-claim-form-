@@ -3,7 +3,7 @@
  <h1>International Travels</h1>
 </div>
 <clr-accordion>
-  <clr-accordion-panel >
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
     <clr-accordion-title>personaldata</clr-accordion-title>
     <clr-accordion-content>
       <div class="personal-info-row">
@@ -80,7 +80,7 @@
       </clr-textarea-container>
 
  <clr-input-container class="amount1">
-        <label>Screenshot</label>
+        <label  class="Screenshot">Screenshot</label>
         <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
         <img *ngIf="preview" [src]="preview" class="preview" />
       </clr-input-container>
@@ -99,7 +99,7 @@
   </div>
 
 </clr-modal>
-
+<div class="datagriid">
 <clr-datagrid *ngIf="entries.length > 0">
   <clr-dg-column>Sno</clr-dg-column>
   <clr-dg-column>Date</clr-dg-column>
@@ -126,13 +126,25 @@
 
 
     <clr-dg-cell >
-      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn remove" (click)="removeentry(i)">-</button>
-      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn edit" (click)="Editentry(entry, i)">EDIT</button>
+      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn remove" (click)="removeentry(i)">   <cds-icon shape="trash"></cds-icon></button>
+      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn edit" (click)="Editentry(entry, i)"><cds-icon shape="pencil"></cds-icon></button>
     </clr-dg-cell>
 
 
   </clr-dg-row>
+  <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
+          Items per page
+        </clr-dg-page-size>
+        {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+        {{ pagination.totalItems }} items
+      </clr-dg-pagination>
+    </clr-dg-footer>
 </clr-datagrid>
+</div>
+
 <div class="preview">
-  <button class="btn btn-primary" (click)="gotoreview()"> review </button>
+  <button class="btn btn-info" (click)="backbtn()">back to </button>
+  <button class="btn btn-success" (click)="gotoreview()"> review </button>
 </div>

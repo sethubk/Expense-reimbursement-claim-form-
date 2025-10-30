@@ -33,5 +33,7 @@ setExpense(data: any)  {
 getExpense(){
   return this.expense
 }
-
+Clearentries(){
+  this.entries=null;
+}
 }
