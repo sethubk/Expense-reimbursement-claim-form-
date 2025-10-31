@@ -25,6 +25,8 @@ export class InternationalComponent implements OnInit {
   personalData: any;
   ngOnInit(): void {
     debugger
+this.travelStart = this.travelService.getTravelStart();
+    this.travelEnd = this.travelService.getTravelEnd();
 
     const today = new Date();
     this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
@@ -151,6 +153,7 @@ export class InternationalComponent implements OnInit {
 
   gotoreview() {
     debugger
+     this.travelService.setTravelDates(this.travelStart, this.travelEnd);
     const allowance = this.calculateAllowance()
     this.router.navigate(['internationalcal'])
 

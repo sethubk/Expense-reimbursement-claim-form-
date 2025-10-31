@@ -20,7 +20,9 @@ h1{
 display: flex;
 justify-content: space-around;
   }
-
+#button1{
+  margin-left: 13px;
+}
   .datagrid-row {
   display: flex;
   gap: 20px;
@@ -59,12 +61,7 @@ justify-content: space-around;
 
 
 clr-input-container ,clr-select-container{
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  align-items: center;
-  gap: 15px;
-  
-  margin-bottom: 2px;
+ 
 }
 
 
@@ -293,4 +290,14 @@ clr-modal .modal-footer {
   display: flex;
 justify-content:space-between;
   margin: 20px;
+}
+clr-datagrid{
+  overflow-y: auto;
+  height:250px;
+  
+
+}
+clr-dg-row  clr-dg-cell{
+  width: 300px;
+  text-align: center;
 }

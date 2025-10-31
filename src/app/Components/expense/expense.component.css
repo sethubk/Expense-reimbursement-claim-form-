@@ -78,7 +78,7 @@ clr-input-container label.Screenshot::after {
 
 
 clr-input-container label ,clr-select-container label {
-  text-align: left;
+
   font-weight: 600;
   font-size: 14px;
   color: #333;
@@ -88,15 +88,15 @@ clr-input-container label ,clr-select-container label {
 }
 
 .amount12{
-  display: flex;
-  position: relative;
-  width: 100%;
-   z-index: 100;
+ 
+
+  text-align: left;
+  margin: 0px;
    text-decoration: none;
    list-style:none;  border: none;
   box-shadow: none;
   outline: none;
-    text-align: left;
+
   font-weight: 600;
   font-size: 14px;
   color: #333;
@@ -104,35 +104,24 @@ clr-input-container label ,clr-select-container label {
 }
 
 .amount12 input{
-  position:obsolute;
- top:5px;
- z-index: 100;
-  width: 100%;
-  margin-left:0;
-  padding: 8px 1px;
+
+ 
+  margin-left:73px;
+ 
   font-size: 14px;
-  margin: 0;
+padding: 10px;
   
-  
-  width: 100%;
-  outline: none; 
-  max-width:max-content;
+ 
 }
 
 
 clr-input-container input,clr-select-container select option {
   
-  padding: 8px 5px;
-  font-size: 14px;
-
-  margin-left: 20px;
   
-  width: 100%;
-  outline: none; 
   
 }
 .remarks-box textarea {
-  width: 400px;
+  width: 300px;
   border-radius: 8px;
   padding: 8px 8px;
   font-size: 14px;
@@ -202,13 +191,13 @@ margin-top: 20px;
 padding: 10px;
 }
 
-.submit-btn {
+.actions button{
   width: 100%;
   max-width: 200px;
-  padding: 12px 20px;
+  padding: 12px 50px;
   border-radius: 10px;
-  background: linear-gradient(180deg, #3f51ff, #2b35d9);
-  color: white;
+  
+
   font-size: 16px;
   font-weight: 600;
   border: none;
@@ -216,7 +205,7 @@ padding: 10px;
   cursor: pointer;
 }
 
-.submit-btn[disabled] {
+.btn btn-success[disabled] {
   opacity: 0.7;
   cursor: default;
 }
@@ -226,7 +215,7 @@ padding: 10px;
   background-color: transparent;
   border: 1px solid #dc3545;
   color: #dc3545;
-  padding: 12px 20px;
+  padding: 12px 50px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;

@@ -1,6 +1,5 @@
-
 <div class="header1">
- <h1>International Travels</h1>
+  <h1>International Travels</h1>
 </div>
 <clr-accordion>
   <clr-accordion-panel [clrAccordionPanelOpen]="true">
@@ -25,114 +24,120 @@
 
 <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
   <div class="modal-body">
-
+    <div class="modal-title">
+      <h1>International Claim Form</h1>
+    </div>
     <form clrForm #epenseForm="ngForm" class="expense-form">
-      <div class="grid-two">
-        <clr-input-container>
-          <label>Date</label>
-          <input clrInput type="date" [(ngModel)]="formData.date"  [max]="maxDate" name="date" required />
-        </clr-input-container>
 
-        <clr-input-container>
-          <label>Supporting No</label>
-          <input clrInput type="text" [(ngModel)]="formData.supportingNo" name="supportingNo" required />
-        </clr-input-container>
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-4">Date</label>
+        <input class="clr-col-12 clr-col-md-8" clrInput type="date" [(ngModel)]="formData.date" name="date" required
+          [min]="startDate" [attr.max]="showMax ? endDate : null" (focus)="showMax = true" />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-4">Supporting No</label>
+        <input class="clr-col-12 clr-col-md-8" clrInput type="text" [(ngModel)]="formData.supportingNo"
+          name="supportingNo" required />
+      </clr-input-container>
 
 
-      </div>
-      <div class="grid-two">
-        <clr-select-container>
-          <label>Particulars</label>
-          <select clrSelect [(ngModel)]="formData.particulars" name="particulars" required>
-            <option value="Hotel">Hotel</option>
-            <option value="Hotel">flight</option>
-            <option value="Transport">Transport</option>
-            <option value="Food">Food</option>
-            <option value="Allowance">Allowance</option>
-            <option value="Communication">Communication</option>
-            <option value="Visa Process Fees">Visa Process Fees</option>
-            <option value="Hotel"> Pre-Travel kit allowance</option>
-            <option value="Others">Extra Baggage</option>
-            <option value="Others">Others</option>
-          </select>
-        </clr-select-container>
 
-        <clr-select-container>
-          <label>Payment Mode</label>
-          <select clrSelect [(ngModel)]="formData.paymentMode" name="paymentMode" required>
-            <option value="Cash">Cash</option>
-            <option value="CC">CC</option>
-            <option value="itilite">itilite</option>
+      <clr-select-container>
+        <label class="clr-col-12 clr-col-md-4">Particulars</label>
+        <select class="clr-col-12 clr-col-md-8" clrSelect [(ngModel)]="formData.particulars" name="particulars"
+          required>
+          <option>select</option>
+          <option value="Hotel">Hotel</option>
+          <option value="Transport">Transport</option>
+          <option value="Food">Food</option>
+          <option value="Allowance">Allowance</option>
+          <option value="Communication">Communication</option>
+          <option value="Visa Process Fees">Visa Process Fees</option>
+          <option value="Others">Others</option>
+        </select>
+      </clr-select-container>
 
-          </select>
-        </clr-select-container>
+      <clr-select-container>
+        <label class="clr-col-12 clr-col-md-4">Payment Mode</label>
+        <select class="clr-col-12 clr-col-md-8" clrSelect [(ngModel)]="formData.paymentMode" name="paymentMode"
+          required>
+          <option value="Cash">Cash</option>
+        </select>
+      </clr-select-container>
 
-      </div>
 
-      <div class="divider"></div>
+
+
       <clr-input-container class="amount1">
-        <label>Amount</label>
-        <input clrInput type="number" [(ngModel)]="formData.amount" name="amount" required />
+        <label class="clr-col-12 clr-col-md-4"> Amount</label>
+        <input class="clr-col-12 clr-col-md-8" clrInput type="number" [(ngModel)]="formData.amount" name="amount"
+          required />
       </clr-input-container>
       <clr-textarea-container class="remarks-box">
-        <label>Remarks</label>
-        <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
+        <label class="clr-col-12 clr-col-md-4">Remarks</label>
+        <textarea class="clr-col-12 clr-col-md-8" clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
 
- <clr-input-container class="amount1">
-        <label  class="Screenshot">Screenshot</label>
-        <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
-        <img *ngIf="preview" [src]="preview" class="preview" />
-      </clr-input-container>
+      <div class="amount12">
+
+        <label class="clr-col-12 clr-col-md-4" class="Screenshot">Screenshot</label>
+        <input class="clr-col-12 clr-col-md-8" type="file" (change)="onFileChange($event)" accept="image/*" />
+
+      </div>
 
 
 
-      <div class="divider"></div>
+
+
       <div class="actions">
-        <button class="submit-btn" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
-          {{!isEdit? 'add': 'Update'}}</button>
-        <button class="btn-outline-danger" type="reset">Reset</button>
+        <button class="btn btn-info" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
+          {{!isEdit? 'Add': 'Update'}}</button>
+        <button class="btn outline-danger" type="reset">Reset</button>
       </div>
     </form>
+
 
 
   </div>
 
 </clr-modal>
 <div class="datagriid">
-<clr-datagrid *ngIf="entries.length > 0">
-  <clr-dg-column>Sno</clr-dg-column>
-  <clr-dg-column>Date</clr-dg-column>
-  <clr-dg-column>Supporting No</clr-dg-column>
-  <clr-dg-column>Particulars</clr-dg-column>
-  <clr-dg-column>Payment Mode</clr-dg-column>
-  <clr-dg-column>Amount</clr-dg-column>
-  <clr-dg-column>Remarks</clr-dg-column>
-  
-<clr-dg-column>Screenshot</clr-dg-column>
-  <clr-dg-column>Actions</clr-dg-column>
+  <clr-datagrid *ngIf="entries.length > 0">
+    <clr-dg-column>Sno</clr-dg-column>
+    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column>Supporting No</clr-dg-column>
+    <clr-dg-column>Particulars</clr-dg-column>
+    <clr-dg-column>Payment Mode</clr-dg-column>
+    <clr-dg-column>Amount</clr-dg-column>
+    <clr-dg-column>Remarks</clr-dg-column>
 
-  <clr-dg-row *ngFor="let entry of entries let i = index" >
-    <clr-dg-cell>{{ i+1}}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
-    <clr-dg-cell >{{ entry.particulars }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
-    <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
-    <clr-dg-cell>
+    <clr-dg-column>Screenshot</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+
+    <clr-dg-row *ngFor="let entry of entries let i = index">
+      <clr-dg-cell>{{ i+1}}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+      <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
+      <clr-dg-cell>
         <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
       </clr-dg-cell>
 
 
-    <clr-dg-cell >
-      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn remove" (click)="removeentry(i)">   <cds-icon shape="trash"></cds-icon></button>
-      <button  *ngIf="entry.particulars!='Allowance'"class="crud-btn edit" (click)="Editentry(entry, i)"><cds-icon shape="pencil"></cds-icon></button>
-    </clr-dg-cell>
+      <clr-dg-cell>
+        <button *ngIf="entry.particulars!='Allowance'" class="crud-btn remove" (click)="removeentry(i)"> <cds-icon
+            shape="trash"></cds-icon></button>
+        <button *ngIf="entry.particulars!='Allowance'" class="crud-btn edit" (click)="Editentry(entry, i)"><cds-icon
+            shape="pencil"></cds-icon></button>
+      </clr-dg-cell>
 
 
-  </clr-dg-row>
-  <clr-dg-footer>
+    </clr-dg-row>
+    <clr-dg-footer>
       <clr-dg-pagination #pagination [clrDgPageSize]="10">
         <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
           Items per page
@@ -141,10 +146,10 @@
         {{ pagination.totalItems }} items
       </clr-dg-pagination>
     </clr-dg-footer>
-</clr-datagrid>
+  </clr-datagrid>
 </div>
 
-<div class="preview">
+<div class="preview1">
   <button class="btn btn-info" (click)="backbtn()">back to </button>
-  <button class="btn btn-success" (click)="gotoreview()"> review </button>
+  <button class="btn btn-info" (click)="gotoreview()"> review </button>
 </div>

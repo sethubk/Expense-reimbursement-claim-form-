@@ -92,12 +92,12 @@ showClaimSummary() {
     Type: Expense
     Created Date: ${new Date().toLocaleDateString()}
     Purpose & Place: ${this.personalData?.purposePlace}
-    Total Amount: ₹${this.totalAmount}
+    Total Amount: ₹{this.totalAmount}
   `;
   alert(summary);
 }
 backbtn(){
-  this.router.navigate(['expense'])
+  this.router.navigate(['expense '])
 }
 
 }

@@ -18,7 +18,19 @@ isEdit: boolean = false;
 personalData:any;
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
 maxDate:string='';
+
+ startDate: string = '';
+  endDate: string = '';
+ showMax: boolean = false;
 ngOnInit(): void {
+  
+
+  const fullStart = this.travelService.getTravelStart(); // e.g., "2025-10-30T09:00"
+  const fullEnd = this.travelService.getTravelEnd();     // e.g., "2025-11-05T18:00"
+
+  this.startDate = fullStart.split('T')[0]; // "2025-10-30"
+  this.endDate = fullEnd.split('T')[0];
+
   const today = new Date();
   this.maxDate = today.toISOString().split('T')[0];
 

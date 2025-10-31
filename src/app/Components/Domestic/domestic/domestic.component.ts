@@ -31,9 +31,13 @@ formopen: boolean = false;
 
   
 
+ 
   constructor(private router: Router, private Service: PersonalDataService, private travelService:TravelEntryService) { }
 ngOnInit(): void {
-    
+  
+this.travelStart = this.travelService.getTravelStart();
+    this.travelEnd = this.travelService.getTravelEnd();
+  
 const today = new Date();
 this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
 this.personalData=this.Service.getDetails()

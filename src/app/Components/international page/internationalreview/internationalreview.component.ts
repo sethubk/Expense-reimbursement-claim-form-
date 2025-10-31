@@ -25,12 +25,12 @@ export class InternationalreviewComponent implements OnInit {
 constructor(private router:Router,private service:PersonalDataService,private TravelService:TravelEntryService){}
 entries:any[]=[];
 personalData: any;
-advance:number=130000;
+advance:number=0;
   ngOnInit(): void {
  
     this.entries=this.TravelService.getentries();
     this.personalData = this.service.getDetails();
-    //his.advance=this.TravelService.getAllowance()
+    this.advance=this.TravelService.getAllowance()
 
     console.log(this.entries)
    
@@ -108,7 +108,7 @@ getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pa
 
   if (difference > 0) {
     return { message: 'Amount Recover from Employee', amount: Math.abs(difference), type: 'recover' };
-  } else if (difference > 0) {
+  } else if (difference < 0) {
     return { message: 'Amount Payable to Employee', amount: Math.abs(difference), type: 'pay' };
   } else {
     return { message: '', amount: 0, type: 'none' };

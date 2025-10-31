@@ -42,7 +42,7 @@ justify-content: space-around;
 }
 .modal-body {
   
-  padding: 34px;
+ 
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
@@ -59,12 +59,7 @@ justify-content: space-around;
 
 
 clr-input-container ,clr-select-container{
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  align-items: center;
-  gap: 15px;
-  
-  margin-bottom: 2px;
+
 }
 
 
@@ -254,7 +249,9 @@ clr-modal .modal-body {
   padding: 20px;
   border-radius: 6px;
 }
-
+#button1{
+  margin-left: 20px;
+}
 clr-modal .modal-footer {
   display: flex;
   justify-content: flex-end;
@@ -286,13 +283,13 @@ clr-modal .modal-footer {
   background-color: #ffffff;
   padding: 15px;
   border-radius: 6px;
-   overflow-y: auto;
+   
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 clr-datagrid{
   overflow-y: auto;
-  height:200px;
- overflow-x: auto;
+  height:250px;
+  
 
 }
 /* Preview Button */
@@ -300,4 +297,8 @@ clr-datagrid{
   display: flex;
 justify-content:space-between;
   margin: 20px;
+}
+clr-dg-row  clr-dg-cell{
+  width: 300px;
+  text-align: center;
 }

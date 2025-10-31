@@ -28,8 +28,8 @@
 
   <div class="numberdays">
     <clr-input-container>
-      <label>Number of Days</label>
-      <input clrInput type="number" [value]="calculateDays(travelStart, travelEnd)" readonly />
+      <label >Number of Days</label>
+      <input  clrInput type="number" [value]="calculateDays(travelStart, travelEnd)" readonly />
     </clr-input-container>
     
   </div>
@@ -40,35 +40,39 @@
     <label>Euro</label>
     <input clrInput type="number" [(ngModel)]="Euro" />
   </clr-input-container> -->
-<button (click)="openCurrencyModal()" class="btn btn-primary" [disabled]="totaldays ==0" >add cash </button>
+<button (click)="openCurrencyModal()" id="button1" class="btn btn-primary" [disabled]="totaldays ==0" >add cash </button>
 <!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
   <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Cash or Card Entry' }}</h3>
   <div class="modal-body">
     <form clrForm #entryForm="ngForm">
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-4" >Loaded Date</label>
+       <input  class="clr-col-12 clr-col-md-8" clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="travelEndDateOnly" required />
+      </clr-input-container>
+      
       <clr-select-container>
-        <label>Type</label>
-        <select clrSelect [(ngModel)]="entry.type" name="type" required>
+
+        
+        <label  class="clr-col-12 clr-col-md-4" >Type</label>
+        <select class="clr-col-12 clr-col-md-8" clrSelect [(ngModel)]="entry.type" name="type" required>
           <option value="Card">Card</option>
           <option value="Cash">Cash</option>
         </select>
       </clr-select-container>
 <clr-input-container>
-  <label>
+  <label class="clr-col-12 clr-col-md-4">
     INR Rate
     <span class="badge badge-info ml-2">for 1 {{selectedCurrency}}</span>
   </label>
-  <input clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate" required />
+  <input  class="clr-col-12 clr-col-md-8 "clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate" required />
 </clr-input-container>
       <clr-input-container>
-        <label>Total Loaded</label>
-        <input clrInput type="number" [(ngModel)]="entry.totalLoaded" name="totalLoaded" required />
+        <label class="clr-col-12 clr-col-md-4" >Total Loaded</label>
+        <input class="clr-col-12 clr-col-md-8"clrInput type="number" [(ngModel)]="entry.totalLoaded" name="totalLoaded" required />
       </clr-input-container>
 
-      <clr-input-container>
-        <label>Loaded Date</label>
-       <input clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="travelEndDateOnly" required />
-      </clr-input-container>
+      
     </form>
   </div>
   <div class="modal-footer">
@@ -136,7 +140,7 @@
  
 <div class="preview">
   <button class="btn btn-info" (click)="backbtn()">back to </button>
-<button class="btn btn-success"
+<button class="btn btn-info"
         (click)="gotoreview()" 
         [disabled]="cardEntries.length === 0 && cashEntries.length === 0">
   Go to Claim Page

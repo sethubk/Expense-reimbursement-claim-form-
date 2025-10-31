@@ -26,7 +26,10 @@ formopen: boolean = false;
   constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
 maxDate:string='';
  personalData: any;
-allowance:number=0
+allowance:number=0;
+startDate: string = '';
+  endDate: string = '';
+ showMax: boolean = false;
   ngOnInit(): void {
 
 //     const today = new Date();
@@ -43,6 +46,11 @@ allowance:number=0
 //  })
 
 // new updated codes 
+  const fullStart = this.travelService.getTravelStart(); // e.g., "2025-10-30T09:00"
+  const fullEnd = this.travelService.getTravelEnd();     // e.g., "2025-11-05T18:00"
+
+  this.startDate = fullStart.split('T')[0]; // "2025-10-30"
+  this.endDate = fullEnd.split('T')[0];
 
   const today = new Date();
   this.maxDate = today.toISOString().split('T')[0];

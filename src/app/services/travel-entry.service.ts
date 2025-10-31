@@ -86,8 +86,26 @@ private allowanceAmount: number = 0;
 clearCardEntries(): void {
   this.cardEntries = [];
   this.cashEntries=[];
+   this.travelStart = '';
+    this.travelEnd = '';
+}
+
+  private travelStart: string = '';
+  private travelEnd: string = '';
+
+  setTravelDates(start: string, end: string) {
+    this.travelStart = start;
+    this.travelEnd = end;
+  }
+
+
+  getTravelStart(): string {
+    return this.travelStart;
+  }
+
+  getTravelEnd(): string {
+    return this.travelEnd;
+  }
 }
 
 
-
-}

@@ -34,20 +34,21 @@
     <form clrForm #epenseForm="ngForm" class="expense-form">
 
       <clr-input-container>
-        <label>Date</label>
-        <input clrInput type="date" [(ngModel)]="formData.date" name="date" required [max]="maxDate" />
+        <label class="clr-col-12 clr-col-md-4">Date</label>
+        <input class="clr-col-12 clr-col-md-8 " clrInput type="date" [(ngModel)]="formData.date" name="date" required [max]="maxDate" />
       </clr-input-container>
 
       <clr-input-container>
-        <label>Supporting No</label>
-        <input clrInput type="text" [(ngModel)]="formData.supportingNo" name="supportingNo" required />
+        <label class="clr-col-12 clr-col-md-4">Supporting No</label>
+        <input class="clr-col-12 clr-col-md-8"clrInput type="text" [(ngModel)]="formData.supportingNo" name="supportingNo" required />
       </clr-input-container>
 
 
 
       <clr-select-container>
-        <label>Particulars</label>
-        <select clrSelect [(ngModel)]="formData.particulars" name="particulars" required>
+        <label   class="clr-col-12 clr-col-md-4" >Particulars</label>
+        <select  class="clr-col-12 clr-col-md-8"  clrSelect [(ngModel)]="formData.particulars" name="particulars" required>
+          <option >select</option>
           <option value="Hotel">Hotel</option>
           <option value="Transport">Transport</option>
           <option value="Food">Food</option>
@@ -59,8 +60,8 @@
       </clr-select-container>
 
       <clr-select-container>
-        <label>Payment Mode</label>
-        <select clrSelect [(ngModel)]="formData.paymentMode" name="paymentMode" required>
+        <label   class="clr-col-12 clr-col-md-4" >Payment Mode</label>
+        <select  class="clr-col-12 clr-col-md-8" clrSelect [(ngModel)]="formData.paymentMode" name="paymentMode" required>
           <option value="Cash">Cash</option>
         </select>
       </clr-select-container>
@@ -69,18 +70,19 @@
 
 
       <clr-input-container class="amount1">
-        <label>Amount</label>
-        <input clrInput type="number" [(ngModel)]="formData.amount" name="amount" required />
+        <label  class="clr-col-12 clr-col-md-4"  > Amount</label>
+        <input  class="clr-col-12 clr-col-md-8" clrInput type="number" [(ngModel)]="formData.amount" name="amount" required />
       </clr-input-container>
       <clr-textarea-container class="remarks-box">
-        <label>Remarks</label>
-        <textarea clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
+        <label     class="clr-col-12 clr-col-md-4"   >Remarks</label>
+        <textarea  class="clr-col-12 clr-col-md-8" clrTextarea [(ngModel)]="formData.remarks" name="remarks"></textarea>
       </clr-textarea-container>
+      
       <div class="amount12">
 
-        <label class="Screenshot">Screenshot</label>
-        <input clrInput type="file" (change)="onFileChange($event)" accept="image/*" />
-        <img *ngIf="preview" [src]="preview" class="preview" />
+        <label  class="clr-col-12 clr-col-md-4" class="Screenshot">Screenshot</label>
+        <input  class="clr-col-12 clr-col-md-8"  type="file" (change)="onFileChange($event)" accept="image/*" />
+       
       </div>
 
 
@@ -88,9 +90,9 @@
 
 
       <div class="actions">
-        <button class="submit-btn" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
+        <button class="btn btn-info" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
           {{!isEdit? 'Add': 'Update'}}</button>
-        <button class="btn-outline-danger" type="reset">Reset</button>
+        <button class="btn outline-danger" type="reset">Reset</button>
       </div>
     </form>
 
