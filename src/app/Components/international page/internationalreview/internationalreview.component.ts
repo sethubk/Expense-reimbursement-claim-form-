@@ -76,6 +76,7 @@ printPage() {
 }
 
 
+
 getTotalByMode(mode: string): number {
   const totals = this.getTotalsByPaymentMode();
   const found = totals.find(t => t.mode === mode);
@@ -101,14 +102,14 @@ this.router.navigate([''])
 }
 
 
-getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pay' | 'none' } {
-  debugger
-  const cashPaid = this.getTotalByMode('Cash');
-  const difference =  this.advance -cashPaid ;
 
-  if (difference > 0) {
+getSettlementDetails(): { message: string, amount: number, type: 'recover' | 'pay' | 'none' } {
+  const cashPaid = this.getTotalByMode('Cash');
+  const difference =  cashPaid -this.advance ;
+
+  if (difference < 0) {
     return { message: 'Amount Recover from Employee', amount: Math.abs(difference), type: 'recover' };
-  } else if (difference < 0) {
+  } else if (difference > 0) {
     return { message: 'Amount Payable to Employee', amount: Math.abs(difference), type: 'pay' };
   } else {
     return { message: '', amount: 0, type: 'none' };
