@@ -131,9 +131,39 @@ if (this.editIndex !== null && this.editType) {
   deleteEntry(index: number, type: 'Card' | 'Cash') {
     this.travelService.deleteEntry(index, type);
   }
+  allowanceAmount: number = 0;
+  get totalEnteries(){
+    let allow=0;
+    let total;
+    // const cardvalue=this.travelService.getCardEntries();
+    // const cashvalue=this.travelService.getCashEntries();
+this.travelService.getCardEntries().forEach(x=>{
+  allow +=x['totalInr']
+})
+
+this.travelService.getCashEntries().forEach(x=>{
+  allow +=x['totalInr']
+})
+return allow
+  }
+  
+  calculateAllowance(): number {
+
+
+
+    debugger
+    // const allowance = this.totaldays * 100;
+
+    // this.allowanceAmount = this.travelService.getallowance() * allowance// ✅ Assign the result to the class property
+    
+    // this.travelService.setAllowance(this.allowanceAmount);
+    this.travelService.setAllowance(this.totalEnteries);
+
+    return this.allowanceAmount;
+  }
   gotoreview() {
      debugger
-   
+    const allowance = this.calculateAllowance()
     this.router.navigate(['domesticexpense'])
    
   }

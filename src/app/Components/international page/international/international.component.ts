@@ -79,6 +79,21 @@ this.travelStart = this.travelService.getTravelStart();
     return this.travelService.getCashEntries();
   }
 
+  get totalEnteries(){
+    let allow=0;
+    let total;
+    // const cardvalue=this.travelService.getCardEntries();
+    // const cashvalue=this.travelService.getCashEntries();
+this.travelService.getCardEntries().forEach(x=>{
+  allow +=x['totalInr']
+})
+
+this.travelService.getCashEntries().forEach(x=>{
+  allow +=x['totalInr']
+})
+return allow
+  }
+
   openCurrencyModal() {
     this.entry = {
       type: 'Card',
@@ -137,15 +152,17 @@ this.travelStart = this.travelService.getTravelStart();
   }
   allowanceAmount: number = 0;
 
-  calculateAllowance(): number {
+  calculateAllowance(){
 
 
 
     debugger
-    const allowance = this.totaldays * 100;
+    // const allowance = this.totaldays * 100;
 
-    this.allowanceAmount = this.travelService.getallowance() * allowance// ✅ Assign the result to the class property
-    this.travelService.setAllowance(this.allowanceAmount);
+    // this.allowanceAmount = this.travelService.getallowance() * allowance// ✅ Assign the result to the class property
+    
+    // this.travelService.setAllowance(this.allowanceAmount);
+   this.allowanceAmount = this.travelService.setAllowance(this.totalEnteries);
 
     return this.allowanceAmount;
   }

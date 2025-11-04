@@ -28,7 +28,7 @@ personalData: any;
 advance:number=0;
   ngOnInit(): void {
  
-    this.entries=this.TravelService.getentries();
+    this.entries=this.service.getentries();
     this.personalData = this.service.getDetails();
     this.advance=this.TravelService.getAllowance()
 
@@ -43,19 +43,19 @@ getTotalsByPaymentMode(): { mode: string; total: number }[] {
     const mode = entry.paymentMode;
     const amount = Number(entry.amount);
 
-    if (!totals[mode]) {
-      totals[mode] = 0;
+    // Only include 'Cash' or 'Card' payment modes
+    if (mode === 'Cash' || mode === 'Card') {
+      if (!totals[mode]) {
+        totals[mode] = 0;
+      }
+      totals[mode] += amount;
     }
-
-    totals[mode] += amount;
   });
 
   return Object.keys(totals).map(mode => ({
     mode,
     total: totals[mode]
   }));
-
-
 }
 totalAmount: number = 0;
 

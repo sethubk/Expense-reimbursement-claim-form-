@@ -24,7 +24,7 @@ maxDate:string='';
  showMax: boolean = false;
 ngOnInit(): void {
   
-
+debugger
   const fullStart = this.travelService.getTravelStart(); // e.g., "2025-10-30T09:00"
   const fullEnd = this.travelService.getTravelEnd();     // e.g., "2025-11-05T18:00"
 
@@ -37,25 +37,39 @@ ngOnInit(): void {
   this.personalData = this.service.getDetails();
 
   // Check if entries already exist
+
   const existingEntries = this.service.getentries();
 
-  if (existingEntries && existingEntries.length > 0) {
+  if (existingEntries && existingEntries.length > 0) { 
+
+    let allowanceEntry = existingEntries.find((x: { particulars: string; }) => x.particulars == "Allowance");
+    
+    let allowance = this.travelService.getAllowance();
+
+    if(allowanceEntry)
+    {
+    allowanceEntry.amount = allowance;
+    }
+  this.service.setentries(existingEntries);
+
     // Load all entries (including allowance and user-added)
     this.entries = existingEntries;
+    
   } else {
     // First time: only push allowance
     const allowance = this.travelService.getAllowance();
     console.log("calculation", allowance);
 
     this.entries = [{
-      paymentMode: 'Cash',
+      paymentMode:'cash',
       particulars: 'Allowance',
       amount: allowance || 0
     }];
 
-    // Save to service
-    this.service.setentries(this.entries);
+    
   }
+  // Save to service
+    this.service.setentries(this.entries);
 
 // const additionalEntries = this.service.getentries(); // Make sure it's a method
 // this.entries.push(...additionalEntries);
@@ -128,7 +142,7 @@ preview:any;
 
   this.formopen = false;
     }
-       this.travelService.setentries(this.entries)
+       this.service.setentries(this.entries)
     }
   
       Editentry(entry: any, index: number) {

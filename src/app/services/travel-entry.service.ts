@@ -18,21 +18,21 @@ private entries:any=[];
 getallowance() : number{
   let InrRate = 0;
   let totalInr = 0;
-  let allowance = 0;
+  let avg = 0;
   this.cardEntries.forEach(x=>{
-   InrRate +=  x['inrRate'];
+   InrRate +=  x['totalLoaded'];
    totalInr += x['totalInr'];
 
   })
 
   this.cashEntries.forEach(x=>{
-   InrRate +=  x['inrRate'];
+   InrRate +=  x['totalLoaded'];
    totalInr += x['inrRate'];
 
   })
-  allowance = totalInr/InrRate
+  avg = totalInr/InrRate
 
-  return allowance ;
+  return avg ;
 }
 
   addEntry(entry: any) {
@@ -74,8 +74,9 @@ getentries(){
 
 private allowanceAmount: number = 0;
 
-  setAllowance(amount: number): void {
+  setAllowance(amount: number) : number {
     this.allowanceAmount = amount;
+    return this.allowanceAmount;
   }
 
   getAllowance(): number {
@@ -88,6 +89,8 @@ clearCardEntries(): void {
   this.cashEntries=[];
    this.travelStart = '';
     this.travelEnd = '';
+    this.allowanceAmount=0
+    this.entries=[];
 }
 
   private travelStart: string = '';
