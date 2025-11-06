@@ -97,7 +97,7 @@ showClaimSummary() {
   alert(summary);
 }
 backbtn(){
-  this.router.navigate(['expense '])
+  this.router.navigate(['expense'])
 }
 
 }

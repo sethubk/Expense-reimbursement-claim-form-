@@ -18,66 +18,66 @@
     <input clrInput type="datetime-local" [(ngModel)]="travelStart" name="travelStart" [max]="maxDate" required />
   </clr-input-container>
 
-  <clr-input-container >
+  <clr-input-container>
     <label>Travel End Date & Time</label>
-    <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd"  [min]="travelStart"
-      [max]="maxDate" required [disabled]="!travelStart"/>
+    <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd" [min]="travelStart" [max]="maxDate"
+      required [disabled]="!travelStart" />
   </clr-input-container>
 
 
 
   <div class="numberdays">
     <clr-input-container>
-      <label >Number of Days</label>
-      <input  clrInput type="number" [value]="calculateDays(travelStart, travelEnd)" readonly />
+      <label>Number of Days</label>
+      <input clrInput type="number" [value]="calculateDays(travelStart, travelEnd)" readonly />
     </clr-input-container>
-    
+
   </div>
-  
+
 
 </div>
-  <!-- <clr-input-container>
+<!-- <clr-input-container>
     <label>Euro</label>
     <input clrInput type="number" [(ngModel)]="Euro" />
   </clr-input-container> -->
-<button
-  (click)="openCurrencyModal()" 
-  id="button1" 
-  class="btn btn-primary" 
+<button (click)="openCurrencyModal()" id="button1" class="btn btn-primary"
   [disabled]="totaldays === 0 || !selectedCurrency">
-  add cash
+  <cds-icon shape="plus"></cds-icon> add cash
 </button><!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
   <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Cash or Card Entry' }}</h3>
   <div class="modal-body">
     <form clrForm #entryForm="ngForm">
       <clr-input-container>
-        <label class="clr-col-12 clr-col-md-4" >Loaded Date</label>
-       <input  class="clr-col-12 clr-col-md-8" clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate" [max]="travelEndDateOnly" required />
+        <label class="clr-col-12 clr-col-md-4">Loaded Date</label>
+        <input class="clr-col-12 clr-col-md-8" clrInput type="date" [(ngModel)]="entry.loadedDate" name="loadedDate"
+          [max]="travelEndDateOnly" required />
       </clr-input-container>
-      
+
       <clr-select-container>
 
-        
-        <label  class="clr-col-12 clr-col-md-4" >Type</label>
+
+        <label class="clr-col-12 clr-col-md-4">Type</label>
         <select class="clr-col-12 clr-col-md-8" clrSelect [(ngModel)]="entry.type" name="type" required>
           <option value="Card">Card</option>
           <option value="Cash">Cash</option>
         </select>
       </clr-select-container>
-<clr-input-container>
-  <label class="clr-col-12 clr-col-md-4">
-    INR Rate
-    <span class="badge badge-info ml-2">for 1 {{selectedCurrency}}</span>
-  </label>
-  <input  class="clr-col-12 clr-col-md-8 "clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate" required />
-</clr-input-container>
       <clr-input-container>
-        <label class="clr-col-12 clr-col-md-4" >Total Loaded</label>
-        <input class="clr-col-12 clr-col-md-8"clrInput type="number" [(ngModel)]="entry.totalLoaded" name="totalLoaded" required />
+        <label class="clr-col-12 clr-col-md-4">
+          INR Rate
+          <span class="badge badge-info ml-2">for 1 {{selectedCurrency}}</span>
+        </label>
+        <input class="clr-col-12 clr-col-md-8 " clrInput type="number" [(ngModel)]="entry.inrRate" name="inrRate"
+          required />
+      </clr-input-container>
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-4">Total Loaded</label>
+        <input class="clr-col-12 clr-col-md-8" clrInput type="number" [(ngModel)]="entry.totalLoaded" name="totalLoaded"
+          required />
       </clr-input-container>
 
-      
+
     </form>
   </div>
   <div class="modal-footer">
@@ -106,13 +106,15 @@
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
         <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Card')"><cds-icon shape="pencil"></cds-icon></button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Card')"> <cds-icon shape="trash"></cds-icon></button>
+          <button class="crud-btn remove" (click)="editEntry(i, 'Card')"><cds-icon
+              shape="pencil"></cds-icon></button>
+          <button class="crud-btn edit" (click)="deleteEntry(i, 'Card')"> <cds-icon
+              shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
   </div>
-  
+
 
   <!-- Cash Table -->
   <div class="datagrid-box">
@@ -132,8 +134,10 @@
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
         <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Cash')"> <cds-icon shape="pencil"></cds-icon></button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Cash')"> <cds-icon shape="trash"></cds-icon></button>
+          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Cash')"> <cds-icon
+              shape="pencil"></cds-icon></button>
+          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Cash')"> <cds-icon
+              shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
@@ -142,11 +146,10 @@
 
 
 
- 
+
 <div class="preview">
   <button class="btn btn-info" (click)="backbtn()">back to </button>
-<button class="btn btn-info"
-        (click)="gotoreview()" 
-        [disabled]="cardEntries.length === 0 && cashEntries.length === 0">
-  Go to Claim Page
-</button></div>
+  <button class="btn btn-info" (click)="gotoreview()" [disabled]="cardEntries.length === 0 && cashEntries.length === 0">
+    Go to Claim Page
+  </button>
+</div>

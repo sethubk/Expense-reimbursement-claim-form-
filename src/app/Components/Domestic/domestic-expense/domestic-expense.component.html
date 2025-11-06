@@ -5,21 +5,44 @@
 <clr-accordion>
   <clr-accordion-panel [clrAccordionPanelOpen]="true">
     <clr-accordion-title>Personal Datails</clr-accordion-title>
-    <clr-accordion-content>
-      <div class="personal-info-row">
-        <p><strong>Date of Submission:</strong> {{ personalData.today }}</p>
-        <p><strong>Expense Statement of:</strong> {{ personalData.username }}</p>
-        <p><strong>Employee Code:</strong> {{ personalData.employeeCode }}</p>
-        <p><strong>Purpose & Place:</strong> {{ personalData.purposePlace }}</p>
-        <p><strong>Company & Plant:</strong> {{ personalData.companyPlant }}</p>
-        <p><strong>Cost Center:</strong> {{ personalData.costCenter }}</p>
-        <p><strong>Vendor Code:</strong> {{ personalData.vendorCode }}</p>
-      </div>
-    </clr-accordion-content>
+   <clr-accordion-content>
+  <div class="clr-row" style="margin-bottom: 1rem;">
+    <div class="clr-col-2"><strong>Date of Submission:</strong></div>
+    <div class="clr-col-2">{{ personalData?.today }}</div>
+
+    <div class="clr-col-2"><strong>Expense Statement of:</strong></div>
+    <div class="clr-col-2">{{ personalData?.username }}</div>
+
+    <div class="clr-col-2"><strong>Employee Code:</strong></div>
+    <div class="clr-col-2">{{ personalData?.employeeCode }}</div>
+  </div>
+
+  <div class="clr-row" style="margin-bottom: 1rem;">
+    <div class="clr-col-2"><strong>Purpose &amp; Place:</strong></div>
+    <div class="clr-col-2">{{ personalData?.purposePlace }}</div>
+
+    <div class="clr-col-2"><strong>Company &amp; Plant:</strong></div>
+    <div class="clr-col-2">{{ personalData?.companyPlant }}</div>
+
+    <div class="clr-col-2"><strong>Cost Center:</strong></div>
+    <div class="clr-col-2">{{ personalData?.costCenter }}</div>
+  </div>
+
+  <div class="clr-row" >
+    <div class="clr-col-2"><strong>Vendor Code:</strong></div>
+    <div class="clr-col-2">{{ personalData?.vendorCode }}</div>
+
+    <!-- Fill remaining space -->
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+  </div>
+</clr-accordion-content>
   </clr-accordion-panel>
 </clr-accordion>
 
-<button class="btn btn-primary" (click)="openmodel()" style="margin: 10px;">Fill the Domestic Claim form </button>
+<button class="btn btn-primary" (click)="openmodel()" style="margin: 10px;">  Fill the Domestic Claim form </button>
  <clr-modal [(clrModalOpen)]="formopen" [clrModalSize]="'md'">
   <div class="modal-body">
 <div class="modal-title">

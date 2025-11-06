@@ -8,7 +8,7 @@
   </div>
 
 </nav>
-
+<!-- 
 <div class="clr-row">
   <div class="clr-col-8">
     <div class="personaldetails">
@@ -23,7 +23,42 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="personalDetails">
+<div class="clr-row" style="margin-bottom: 1rem;">
+    <div class="clr-col-2"><strong>Date of Submission:</strong></div>
+    <div class="clr-col-2">{{ personalData?.today }}</div>
+
+    <div class="clr-col-2"><strong>Expense Statement of:</strong></div>
+    <div class="clr-col-2">{{ personalData?.username }}</div>
+
+    <div class="clr-col-2"><strong>Employee Code:</strong></div>
+    <div class="clr-col-2">{{ personalData?.employeeCode }}</div>
+  </div>
+
+  <div class="clr-row" style="margin-bottom: 1rem;">
+    <div class="clr-col-2"><strong>Purpose &amp; Place:</strong></div>
+    <div class="clr-col-2">{{ personalData?.purposePlace }}</div>
+
+    <div class="clr-col-2"><strong>Company &amp; Plant:</strong></div>
+    <div class="clr-col-2">{{ personalData?.companyPlant }}</div>
+
+    <div class="clr-col-2"><strong>Cost Center:</strong></div>
+    <div class="clr-col-2">{{ personalData?.costCenter }}</div>
+  </div>
+
+  <div class="clr-row" >
+    <div class="clr-col-2"><strong>Vendor Code:</strong></div>
+    <div class="clr-col-2">{{ personalData?.vendorCode }}</div>
+
+    <!-- Fill remaining space -->
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+  </div>
 </div>
+ 
 
 <clr-datagrid *ngIf="entries.length > 0">
   <clr-dg-column>Sno</clr-dg-column>
@@ -40,7 +75,7 @@
   <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
   <clr-dg-cell>{{ entry.particulars }}</clr-dg-cell>
   <clr-dg-cell>{{ entry.paymentMode }}</clr-dg-cell>
-  <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
+  <clr-dg-cell>₹{{ entry.amount }}</clr-dg-cell>
   <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
 </clr-dg-row>
 

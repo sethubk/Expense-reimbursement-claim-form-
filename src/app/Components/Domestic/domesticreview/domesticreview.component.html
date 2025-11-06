@@ -29,22 +29,40 @@
     </div>
 </div> -->
 
-<div class="clr-row">
-  <div class="clr-col-8">
-    <div class="personaldetails">
-      <div *ngIf="personalData" class="personaldata">
-        <div class="data-row"><strong>Date of Submission:</strong><span>{{ personalData.today }}</span></div>
-        <div class="data-row"><strong>Expense Statement of:</strong><span>{{ personalData.username }}</span></div>
-        <div class="data-row"><strong>Employee Code:</strong><span>{{ personalData.employeeCode }}</span></div>
-        <div class="data-row"><strong>Purpose & Place:</strong><span>{{ personalData.purposePlace }}</span></div>
-        <div class="data-row"><strong>Company & Plant:</strong><span>{{ personalData.companyPlant }}</span></div>
-        <div class="data-row"><strong>Cost Center:</strong><span>{{ personalData.costCenter }}</span></div>
-        <div class="data-row"><strong>Vendor Code:</strong><span>{{ personalData.vendorCode }}</span></div>
-      </div>
-    </div>
+<div class="personalDetails">
+<div class="clr-row" style="margin-bottom: 1rem;">
+    <div class="clr-col-2"><strong>Date of Submission:</strong></div>
+    <div class="clr-col-2">{{ personalData?.today }}</div>
+
+    <div class="clr-col-2"><strong>Expense Statement of:</strong></div>
+    <div class="clr-col-2">{{ personalData?.username }}</div>
+
+    <div class="clr-col-2"><strong>Employee Code:</strong></div>
+    <div class="clr-col-2">{{ personalData?.employeeCode }}</div>
+  </div>
+
+  <div class="clr-row" style="margin-bottom: 1rem;">
+    <div class="clr-col-2"><strong>Purpose &amp; Place:</strong></div>
+    <div class="clr-col-2">{{ personalData?.purposePlace }}</div>
+
+    <div class="clr-col-2"><strong>Company &amp; Plant:</strong></div>
+    <div class="clr-col-2">{{ personalData?.companyPlant }}</div>
+
+    <div class="clr-col-2"><strong>Cost Center:</strong></div>
+    <div class="clr-col-2">{{ personalData?.costCenter }}</div>
+  </div>
+
+  <div class="clr-row" >
+    <div class="clr-col-2"><strong>Vendor Code:</strong></div>
+    <div class="clr-col-2">{{ personalData?.vendorCode }}</div>
+
+    <!-- Fill remaining space -->
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
+    <div class="clr-col-2"></div>
   </div>
 </div>
-
 <div class="dates">
     <clr-datagrid *ngIf="entries.length > 0">
         <clr-dg-column>S.No</clr-dg-column>

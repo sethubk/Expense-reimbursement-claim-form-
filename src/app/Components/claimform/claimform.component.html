@@ -110,7 +110,7 @@
       <clr-dg-cell>{{ item.type }}</clr-dg-cell>
       <clr-dg-cell>{{ item.createdDate | date:'mediumDate' }}</clr-dg-cell>
       <clr-dg-cell>{{ item.purposePlace }}</clr-dg-cell>
-      <clr-dg-cell>₹{{ item.totalAmount }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.totalAmount }}</clr-dg-cell>
      <clr-dg-cell>
    <span [ngClass]="getStatusClass(item.status)" class="status-badge">
   {{ item.status }}

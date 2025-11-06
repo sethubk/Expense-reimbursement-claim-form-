@@ -2,6 +2,13 @@
     margin: 0%;
     padding: 0
 }
+.navbar-brand{
+  display: flex;
+}
+.brand-title{
+  flex: auto;
+  margin-left: 190px;
+}
 .personaldetails {
   max-width: 500px;
   padding: 10px;
@@ -91,3 +98,7 @@ align-items: center;
     display: none !important;
   }
 }
+
+.personalDetails{
+  margin: 10px 15px 20px 20px;
+  padding: 10px;}

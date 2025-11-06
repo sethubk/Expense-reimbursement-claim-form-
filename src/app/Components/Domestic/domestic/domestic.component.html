@@ -33,7 +33,7 @@
   
 
 </div>
-<button (click)="openCurrencyModal()" class="btn btn-primary" id="button1" [disabled]="totaldays ==0">add cash </button>
+<button (click)="openCurrencyModal()" class="btn btn-primary" id="button1" [disabled]="totaldays ==0">  add cash </button>
 <!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
   <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Cash or Card Entry' }}</h3>
@@ -99,9 +99,11 @@
         <clr-dg-cell>{{ item.totalLoaded }}</clr-dg-cell>
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
-        <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Card')"><cds-icon shape="pencil"></cds-icon></button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Card')">   <cds-icon shape="trash"></cds-icon></button>
+         <clr-dg-cell>
+          <button class="crud-btn remove" (click)="editEntry(i, 'Card')"><cds-icon
+              shape="pencil"></cds-icon></button>
+          <button class="crud-btn edit" (click)="deleteEntry(i, 'Card')"> <cds-icon
+              shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
