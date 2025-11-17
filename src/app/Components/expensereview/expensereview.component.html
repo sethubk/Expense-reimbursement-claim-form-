@@ -24,41 +24,40 @@
     </div>
   </div>
 </div> -->
-<div class="personalDetails">
-<div class="clr-row" style="margin-bottom: 1rem;">
-    <div class="clr-col-2"><strong>Date of Submission:</strong></div>
-    <div class="clr-col-2">{{ personalData?.today }}</div>
-
-    <div class="clr-col-2"><strong>Expense Statement of:</strong></div>
-    <div class="clr-col-2">{{ personalData?.username }}</div>
-
-    <div class="clr-col-2"><strong>Employee Code:</strong></div>
-    <div class="clr-col-2">{{ personalData?.employeeCode }}</div>
+<div  class="card">
+  <div class="card-header">
+<h3>Personal Details</h3>
   </div>
+    
+  
+    <div class="clr-row" style="margin-bottom: 1rem;">
+      <div class="clr-col-2"><strong>Date of Submission:</strong></div>
+      <div class="clr-col-2">{{ personalData?.today }}</div>
 
-  <div class="clr-row" style="margin-bottom: 1rem;">
-    <div class="clr-col-2"><strong>Purpose &amp; Place:</strong></div>
-    <div class="clr-col-2">{{ personalData?.purposePlace }}</div>
+      <div class="clr-col-2"><strong>Expense Statement of:</strong></div>
+      <div class="clr-col-2">{{ personalData?.username }}</div>
 
-    <div class="clr-col-2"><strong>Company &amp; Plant:</strong></div>
-    <div class="clr-col-2">{{ personalData?.companyPlant }}</div>
+      <div class="clr-col-2"><strong>Employee Code:</strong></div>
+      <div class="clr-col-2">{{ personalData?.employeeCode }}</div>
+    </div>
 
-    <div class="clr-col-2"><strong>Cost Center:</strong></div>
-    <div class="clr-col-2">{{ personalData?.costCenter }}</div>
-  </div>
+    <div class="clr-row" style="margin-bottom: 1rem;">
+      <div class="clr-col-2"><strong>Purpose &amp; Place:</strong></div>
+      <div class="clr-col-2">{{ personalData?.purposePlace }}</div>
 
-  <div class="clr-row" >
-    <div class="clr-col-2"><strong>Vendor Code:</strong></div>
-    <div class="clr-col-2">{{ personalData?.vendorCode }}</div>
+      <div class="clr-col-2"><strong>Company &amp; Plant:</strong></div>
+      <div class="clr-col-2">{{ personalData?.companyPlant }}</div>
 
-    <!-- Fill remaining space -->
-    <div class="clr-col-2"></div>
-    <div class="clr-col-2"></div>
-    <div class="clr-col-2"></div>
-    <div class="clr-col-2"></div>
-  </div>
+      <div class="clr-col-2"><strong>Cost Center:</strong></div>
+      <div class="clr-col-2">{{ personalData?.costCenter }}</div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-2"><strong>Vendor Code:</strong></div>
+      <div class="clr-col-2">{{ personalData?.vendorCode }}</div>
+    </div>
+  
 </div>
- 
 
 <clr-datagrid *ngIf="entries.length > 0">
   <clr-dg-column>Sno</clr-dg-column>
@@ -80,15 +79,7 @@
 </clr-dg-row>
 
 <!-- Total row -->
-<clr-dg-row>
-  <clr-dg-cell ></clr-dg-cell>
-  <clr-dg-cell ></clr-dg-cell>
-  <clr-dg-cell ></clr-dg-cell>
-  <clr-dg-cell ></clr-dg-cell>
-  <clr-dg-cell ></clr-dg-cell>
-  <clr-dg-cell><strong>Total: ₹{{ totalAmount }}</strong></clr-dg-cell>
-  <clr-dg-cell></clr-dg-cell>
-</clr-dg-row>
+
 
 
  
@@ -110,7 +101,7 @@
           </tr>
           <tr>
             <td>Expense Paid by Employee</td>
-            <td>₹0</td>
+            <td>₹{{ totalAmount }}</td>
           </tr>
           <tr>
             <td>Expense Paid by Company</td>
@@ -125,13 +116,15 @@
     </div>
   </div>
 </div>
+<div class="footer">
+<div class="button-group" >
+      <button class="btn btn-info" (click)="backbtn()">back </button>
 
-<div class="button-group" style="margin: 20px 0;">
-      <button class="btn btn-info" (click)="backbtn()">back to </button>
-
-  <button class="btn btn-primary" (click)="printPage()">🖨️ Print</button>
-  <button class="btn btn-success" (click)="submitExpense()">✅ Submit</button>
-  <button class="btn btn-info" (click)="showClaimSummary()">📄 View Claim</button>
+  <button class="btn btn-primary" (click)="printPage()">Print</button>
+  <button class="btn btn-success" (click)="submitExpense()">Submit</button>
+  
 </div>
+</div>
+
 
 

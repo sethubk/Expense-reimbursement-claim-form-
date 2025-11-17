@@ -13,11 +13,20 @@
   </clr-select-container>
 
 
-  <clr-input-container>
-    <label>Travel Start Date & Time</label>
-    <input clrInput type="datetime-local" [(ngModel)]="travelStart" name="travelStart" [max]="maxDate" required />
-  </clr-input-container>
+<clr-input-container>
+  <label>Travel Start Date & Time</label>
+  <input
+    clrInput
+    type="datetime-local"
+    [(ngModel)]="travelStart"
+    name="travelStart"
+    [max]="maxDate"
+    required
+    (input)="validateDate()"
+    (onmouseup)="maxDateValidator()"
+  />
 
+</clr-input-container>
   <clr-input-container>
     <label>Travel End Date & Time</label>
     <input clrInput type="datetime-local" [(ngModel)]="travelEnd" name="travelEnd" [min]="travelStart" [max]="maxDate"
@@ -42,8 +51,10 @@
   </clr-input-container> -->
 <button (click)="openCurrencyModal()" id="button1" class="btn btn-primary"
   [disabled]="totaldays === 0 || !selectedCurrency">
-  <cds-icon shape="plus"></cds-icon> add cash
-</button><!-- Clarity Modal -->
+ add cash
+</button>
+
+<!-- Clarity Modal -->
 <clr-modal [(clrModalOpen)]="currencyModalOpen">
   <h3 class="modal-title">{{ editIndex !== null ? 'Edit Entry' : 'Add Cash or Card Entry' }}</h3>
   <div class="modal-body">
@@ -133,10 +144,10 @@
         <clr-dg-cell>{{ item.totalLoaded }}</clr-dg-cell>
         <clr-dg-cell>{{ item.loadedDate }}</clr-dg-cell>
         <clr-dg-cell>{{ item.totalInr }}</clr-dg-cell>
-        <clr-dg-cell>
-          <button class="btn btn-sm btn-link" (click)="editEntry(i, 'Cash')"> <cds-icon
+         <clr-dg-cell>
+          <button class="crud-btn remove" (click)="editEntry(i, 'Card')"><cds-icon
               shape="pencil"></cds-icon></button>
-          <button class="btn btn-sm btn-link btn-outline-danger" (click)="deleteEntry(i, 'Cash')"> <cds-icon
+          <button class="crud-btn edit" (click)="deleteEntry(i, 'Card')"> <cds-icon
               shape="trash"></cds-icon></button>
         </clr-dg-cell>
       </clr-dg-row>
@@ -148,8 +159,8 @@
 
 
 <div class="preview">
-  <button class="btn btn-info" (click)="backbtn()">back to </button>
+  <button class="btn btn-info" (click)="backbtn()">back  </button>
   <button class="btn btn-info" (click)="gotoreview()" [disabled]="cardEntries.length === 0 && cashEntries.length === 0">
-    Go to Claim Page
+    Claim Page
   </button>
 </div>

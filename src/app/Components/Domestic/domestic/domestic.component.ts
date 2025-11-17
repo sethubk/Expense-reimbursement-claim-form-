@@ -151,7 +151,7 @@ return allow
 
 
 
-    debugger
+     
     // const allowance = this.totaldays * 100;
 
     // this.allowanceAmount = this.travelService.getallowance() * allowance// ✅ Assign the result to the class property
@@ -162,7 +162,7 @@ return allow
     return this.allowanceAmount;
   }
   gotoreview() {
-     debugger
+      
     const allowance = this.calculateAllowance()
     this.router.navigate(['domesticexpense'])
    

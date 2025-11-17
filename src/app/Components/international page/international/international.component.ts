@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormBuilder, FormsModule, NgForm } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
@@ -20,21 +20,11 @@ export class InternationalComponent implements OnInit {
   travelEnd: string = '';
   totaldays: number = 0;
 
-  constructor(private travelService: TravelEntryService, private router: Router, private service: PersonalDataService) { }
+  entries: FormDataModel[] = [];
+  editIndex: number | null = null;
+  editType: 'Card' | 'Cash' | null = null;
   maxDate: string = ''
   personalData: any;
-  ngOnInit(): void {
-    debugger
-this.travelStart = this.travelService.getTravelStart();
-    this.travelEnd = this.travelService.getTravelEnd();
-
-    const today = new Date();
-    this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
-
-    //this.personalData = this.service.getDetails();
-    console.log('perso', this.personalData)
-  }
-
   selectedCurrency: string = '';
   currencyModalOpen: boolean = false;
   formopen: boolean = false;
@@ -58,13 +48,42 @@ this.travelStart = this.travelService.getTravelStart();
     remarks: '',
     screenshot: ''
   };
+
+  constructor(private fb: FormBuilder,private travelService: TravelEntryService, private router: Router, private service: PersonalDataService) { }
+
+  ngOnInit(): void {
+
+    this.travelStart = this.travelService.getTravelStart();
+    this.travelEnd = this.travelService.getTravelEnd();
+
+    const today = new Date();
+    this.maxDate = today.toISOString().slice(0, 16); // 'yyyy-MM-ddTHH:mm'
+
+    //this.personalData = this.service.getDetails();
+    console.log('perso', this.personalData)
+
+    
+  }
+  isInvalidDate: boolean = false;
+  validateDate() {
+    debugger
+    if (this.travelStart && this.maxDate) {
+      this.isInvalidDate = new Date(this.travelStart) > new Date(this.maxDate);
+      this.isInvalidDate = true
+    } else {
+      this.isInvalidDate = false;
+    }
+  }
+
+  maxDateValidator(): boolean {
+    if (!this.travelStart) return true;
+    return new Date(this.travelStart) <= new Date(this.maxDate);
+  }
+
+
   openmodel() {
     this.router.navigate(['/internationalcal']);
   }
-
-  entries: FormDataModel[] = [];
-  editIndex: number | null = null;
-  editType: 'Card' | 'Cash' | null = null;
 
 
   get travelEndDateOnly(): string {
@@ -79,19 +98,19 @@ this.travelStart = this.travelService.getTravelStart();
     return this.travelService.getCashEntries();
   }
 
-  get totalEnteries(){
-    let allow=0;
+  get totalEnteries() {
+    let allow = 0;
     let total;
     // const cardvalue=this.travelService.getCardEntries();
     // const cashvalue=this.travelService.getCashEntries();
-this.travelService.getCardEntries().forEach(x=>{
-  allow +=x['totalInr']
-})
+    this.travelService.getCardEntries().forEach(x => {
+      allow += x['totalInr']
+    })
 
-this.travelService.getCashEntries().forEach(x=>{
-  allow +=x['totalInr']
-})
-return allow
+    this.travelService.getCashEntries().forEach(x => {
+      allow += x['totalInr']
+    })
+    return allow
   }
 
   openCurrencyModal() {
@@ -152,32 +171,32 @@ return allow
   }
   allowanceAmount: number = 0;
 
-  calculateAllowance(){
+  calculateAllowance() {
 
 
 
-    debugger
+
     // const allowance = this.totaldays * 100;
 
     // this.allowanceAmount = this.travelService.getallowance() * allowance// ✅ Assign the result to the class property
-    
+
     // this.travelService.setAllowance(this.allowanceAmount);
-   this.allowanceAmount = this.travelService.setAllowance(this.totalEnteries);
+    this.allowanceAmount = this.travelService.setAllowance(this.totalEnteries);
 
     return this.allowanceAmount;
   }
 
 
   gotoreview() {
-    debugger
-     this.travelService.setTravelDates(this.travelStart, this.travelEnd);
+
+    this.travelService.setTravelDates(this.travelStart, this.travelEnd);
     const allowance = this.calculateAllowance()
     this.router.navigate(['internationalcal'])
 
     console.log("cal", this.allowanceAmount)
   }
 
-  backbtn(){
+  backbtn() {
     this.router.navigate([''])
   }
 }

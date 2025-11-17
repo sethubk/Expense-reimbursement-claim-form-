@@ -102,7 +102,7 @@ startDate: string = '';
   };
 
   openmodel() {
-    debugger
+     
     this.formopen=true
     this.formData = {
       date: '',
@@ -128,7 +128,7 @@ preview:any;
   }
 
     addEntry(form: NgForm) {
-    debugger
+     
 
     if (form.valid) {
   const entry = {
@@ -152,7 +152,7 @@ preview:any;
   this.travelService.setentries(this.entries);
 }}
       Editentry(entry: any, index: number) {
-      debugger
+       
       this.formData = ({ ...entry })
       this.editIndex = index;
       this.formopen = true

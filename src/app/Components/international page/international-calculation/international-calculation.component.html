@@ -3,6 +3,9 @@
 </div>
 <clr-accordion>
   <clr-accordion-panel [clrAccordionPanelOpen]="true">
+      <clr-accordion-title>
+        <strong>Personal Details</strong>
+      </clr-accordion-title>
     <clr-accordion-content>
   <div class="clr-row" style="margin-bottom: 1rem;">
     <div class="clr-col-2"><strong>Date of Submission:</strong></div>
@@ -114,9 +117,10 @@
 
 
       <div class="actions">
-        <button class="btn btn-info" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
-          {{!isEdit? 'Add': 'Update'}}</button>
+       
         <button class="btn outline-danger" type="reset">Reset</button>
+         <button class="btn btn-info" [disabled]="!epenseForm.valid" type="button" (click)="addEntry(epenseForm)">
+          {{!isEdit? 'Add': 'Update'}}</button>
       </div>
     </form>
 
@@ -126,7 +130,7 @@
 
 </clr-modal>
 <div class="datagriid">
-  <clr-datagrid *ngIf="entries.length > 0">
+  <clr-datagrid>
     <clr-dg-column>Sno</clr-dg-column>
     <clr-dg-column>Date</clr-dg-column>
     <clr-dg-column>Supporting No</clr-dg-column>
@@ -138,7 +142,7 @@
     <clr-dg-column>Screenshot</clr-dg-column>
     <clr-dg-column>Actions</clr-dg-column>
 
-    <clr-dg-row *ngFor="let entry of entries let i = index">
+    <clr-dg-row *clrDgItems="let entry of entries let i = index">
       <clr-dg-cell>{{ i+1}}</clr-dg-cell>
       <clr-dg-cell>{{ entry.date }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.supportingNo }}</clr-dg-cell>
@@ -147,7 +151,8 @@
       <clr-dg-cell>{{ entry.amount }}</clr-dg-cell>
       <clr-dg-cell>{{ entry.remarks }}</clr-dg-cell>
       <clr-dg-cell>
-        <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" />
+        <!-- <img *ngIf="entry.preview" [src]="entry.preview" alt="Preview" class="thumb" /> -->
+         {{entry.fileName}}
       </clr-dg-cell>
 
 

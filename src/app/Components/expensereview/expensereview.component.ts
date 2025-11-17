@@ -69,21 +69,50 @@ printPage() {
 }
 
 
+// submitExpense() {
+//   const expenseData = {
+//     type: 'Expense',
+//     createdDate: new Date().toISOString(),
+//     purposePlace: this.personalData?.purposePlace || '',
+//     totalAmount: '₹'+this.totalAmount,
+//     entries: this.entries,
+//     status:'Pending'
+//   };
+//   localStorage.setItem('expenseSummary', JSON.stringify(expenseData));
+//   this.service.setExpense(expenseData);
+//   alert('Expense saved locally!');
+
+
+// this.router.navigate(['']);
+// }
 submitExpense() {
+   
   const expenseData = {
     type: 'Expense',
     createdDate: new Date().toISOString(),
     purposePlace: this.personalData?.purposePlace || '',
-    totalAmount: '₹'+this.totalAmount,
+    totalAmount: '₹' + this.totalAmount,
     entries: this.entries,
-    status:'Pending'
+    status: 'Pending'
   };
+
+  // Get existing data and ensure it's an array
+  let existingData = JSON.parse(localStorage.getItem('expenseSummary') || '[]');
+
+  if (!Array.isArray(existingData)) {
+    existingData = []; // Reset if corrupted
+  }
+
+  // Push new expense
+  existingData.push(expenseData);
+
+  // Save back to localStorage
+  localStorage.setItem('expenseSummary', JSON.stringify(existingData));
 
   this.service.setExpense(expenseData);
   alert('Expense saved locally!');
 
-
-this.router.navigate(['']);
+  this.router.navigate(['']);
 }
 
 
@@ -94,6 +123,7 @@ showClaimSummary() {
     Purpose & Place: ${this.personalData?.purposePlace}
     Total Amount: ₹{this.totalAmount}
   `;
+ 
   alert(summary);
 }
 backbtn(){

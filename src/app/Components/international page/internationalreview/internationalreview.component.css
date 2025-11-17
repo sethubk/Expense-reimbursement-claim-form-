@@ -80,6 +80,10 @@ align-items: center;
   .button-group {
     display: none !important;
   }
+  .brand-title{
+  flex: auto;
+  margin-left: 50px;
+}
 }
 
 .personalDetails{

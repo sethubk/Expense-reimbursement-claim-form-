@@ -47,7 +47,7 @@
         </clr-input-container>
 
         <clr-input-container>
-          <label>Expense statement of </label>
+          <label>Expense statement of Mr/Ms </label>
           <input clrInput [(ngModel)]="personl.username" name="username" required />
         </clr-input-container>
       </div>
@@ -66,7 +66,7 @@
 
       <div class="grid-two">
         <clr-input-container>
-          <label>Company & Plant</label>
+          <label>Company OR Plant</label>
           <input clrInput [(ngModel)]="personl.companyPlant" name="companyPlant" required />
         </clr-input-container>
 
@@ -84,10 +84,11 @@
       <div class="divider"></div>
 
       <div class="actions">
-        <button class="btn btn-primary" [disabled]="!personalForm.valid" (click)="onPersonalNext(personalForm)">
+      
+        <button class="btn outline-danger" type="button" (click)="reset()">Reset</button>
+          <button class="btn btn-primary" [disabled]="!personalForm.valid" (click)="onPersonalNext(personalForm)">
           Next
         </button>
-        <button class="btn btn-danger" type="button" (click)="reset()">Reset</button>
       </div>
     </form>
   </div>
@@ -106,18 +107,17 @@
     <clr-dg-column>Status</clr-dg-column>
 
 
-    <clr-dg-row *clrDgItems="let item of dataSource">
-      <clr-dg-cell>{{ item.type }}</clr-dg-cell>
-      <clr-dg-cell>{{ item.createdDate | date:'mediumDate' }}</clr-dg-cell>
-      <clr-dg-cell>{{ item.purposePlace }}</clr-dg-cell>
-      <clr-dg-cell>{{ item.totalAmount }}</clr-dg-cell>
-     <clr-dg-cell>
-   <span [ngClass]="getStatusClass(item.status)" class="status-badge">
-  {{ item.status }}
-</span>
-
-     </clr-dg-cell>
-    </clr-dg-row>
+   <clr-dg-row *clrDgItems="let item of dataSource">
+  <clr-dg-cell>{{ item.type }}</clr-dg-cell>
+  <clr-dg-cell>{{ item.createdDate | date:'mediumDate' }}</clr-dg-cell>
+  <clr-dg-cell>{{ item.purposePlace }}</clr-dg-cell>
+  <clr-dg-cell>{{ item.totalAmount }}</clr-dg-cell>
+  <clr-dg-cell>
+    <span [ngClass]="getStatusClass(item.status)" class="status-badge">
+      {{ item.status }}
+    </span>
+  </clr-dg-cell>
+</clr-dg-row>
 
     <clr-dg-footer>
       <clr-dg-pagination #pagination [clrDgPageSize]="10">

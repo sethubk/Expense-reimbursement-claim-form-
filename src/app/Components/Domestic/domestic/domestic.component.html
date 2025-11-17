@@ -120,7 +120,7 @@
       <clr-dg-column>Total in INR</clr-dg-column>
       <clr-dg-column>Actions</clr-dg-column>
 
-      <clr-dg-row *ngFor="let item of cashEntries ; let i = index">
+      <clr-dg-row *clrDgItems="let item of cashEntries ; let i = index">
         <clr-dg-cell>{{ item.currency }}</clr-dg-cell>
         <clr-dg-cell>{{ item.inrRate }} </clr-dg-cell>
         <clr-dg-cell>{{ item.totalLoaded }}</clr-dg-cell>

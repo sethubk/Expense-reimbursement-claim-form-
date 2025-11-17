@@ -7,6 +7,7 @@ export interface FormDataModel {
   remarks: string;
   screenshot: string;
    preview?: string;
+   fileName?:string
 }
 
 export interface EntryModel {

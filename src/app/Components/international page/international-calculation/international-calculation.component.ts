@@ -5,6 +5,7 @@ import { PersonalDataService } from '../../../services/personal-data.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { CommonModule } from '@angular/common';
+import { FormDataModel } from '../../../Models/formsData';
 
 @Component({
   selector: 'app-international-calculation',
@@ -24,7 +25,7 @@ maxDate:string='';
  showMax: boolean = false;
 ngOnInit(): void {
   
-debugger
+ 
   const fullStart = this.travelService.getTravelStart(); // e.g., "2025-10-30T09:00"
   const fullEnd = this.travelService.getTravelEnd();     // e.g., "2025-11-05T18:00"
 
@@ -82,17 +83,18 @@ formopen: boolean = false;
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
 
-  formData: any = {
+  formData:FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
     paymentMode: 'Cash',
     amount: null,
     remarks: '',
-    screenshot: ''
+    screenshot: '',
+     fileName:''
   };
   openmodel() {
-    debugger
+     
     this.formopen=true
     this.formData = {
       date: '',
@@ -101,7 +103,8 @@ formopen: boolean = false;
       paymentMode: 'Cash',
       amount: null,
       remarks: '',
-      screenshot: ''
+      screenshot: '',
+      fileName:'',
     };
   }
 
@@ -111,18 +114,19 @@ preview:any;
     const file = event.target.files[0];
     if (!file) return;
  
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.preview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.preview = reader.result as string;
+    // };
+    // reader.readAsDataURL(file);
+     this.formData.fileName = file.name;
   }
 
 
 
   
   addEntry(form: NgForm) {
-    debugger
+     
 
     if (form.valid) {
   const entry = {
@@ -146,7 +150,7 @@ preview:any;
     }
   
       Editentry(entry: any, index: number) {
-      debugger
+       
       this.formData = ({ ...entry })
       this.editIndex = index;
       this.formopen = true

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { PersonaldataService } from '../../services/personaldata.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { PersonalDataService } from '../../services/personal-data.service';
 import { FormDataModel } from '../../Models/formsData';
@@ -12,7 +12,7 @@ import { FormDataModel } from '../../Models/formsData';
 @Component({
   selector: 'app-expense',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClarityModule],
+  imports: [CommonModule, FormsModule, ClarityModule,ReactiveFormsModule],
   templateUrl: './expense.component.html',
   styleUrl: './expense.component.css'
 })
@@ -29,19 +29,22 @@ export class ExpenseComponent implements OnInit {
     paymentMode: 'Cash',
     amount: null,
     remarks: '',
-    screenshot: ''
+    screenshot: '',
+    fileName:''
+
   };
   preview:any;
- onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (!file) return;
- 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.preview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  }
+//  onFileChange(event: any) {
+//     const file = event.target.files[0];
+//     if (!file) return;
+   
+//     // const reader = new FileReader();
+//     // reader.onload = () => {
+//     //   this.preview = reader.result as string;
+//     // };
+//     // reader.readAsDataURL(file);
+//     this.formData.fileName = file.name;
+//   }
   //expenseForm: FormGroup;
   maxDate: string = '';
 
@@ -61,11 +64,12 @@ export class ExpenseComponent implements OnInit {
 const today = new Date();
   this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
   this.personalData = this.Service.getDetails();
-
+//this.formData=new FormGroup({date:new FormControl('',[Validators.required,maxDateInclusiveValidator(this.maxDate)])})
 const existingEntries=this.Service.getentries()
    if (existingEntries && existingEntries.length > 0) {
     // Load all entries (including allowance and user-added)
     this.entries = existingEntries;}
+     this.from1()
   }
 
   // onFileChange(event: any) {
@@ -74,13 +78,67 @@ const existingEntries=this.Service.getentries()
   //       this.formData.screenshot = file.name; // You can store base64 if needed
   //     }
   //   }
+ 
+  
+ isFutureDate: boolean = false;
+ validateDate(): void {
+    if (!this.formData.date) {
+      this.isFutureDate = false;
+      return;
+    }
+    this.isFutureDate = new Date(this.formData.date) > new Date(this.maxDate);
+  }
 
-  addEntry(form: NgForm) {
-    debugger
+ isDateValid(): boolean {
+    if (!this.formData.date) return true;
+    return new Date(this.formData.date) <= new Date(this.maxDate);
+  }
+expenseForm!: FormGroup;
+from1(){
+  
+ this.expenseForm = this.fb.group({
+      date: ['', [Validators.required, this.maxDateValidator.bind(this)]],
+      supportingNo: ['', Validators.required],
+      particulars: ['', Validators.required],
+      paymentMode: ['', Validators.required],
+      amount: ['', [Validators.required, Validators.min(1)]],
+      remarks: [''],
+      screenshot: [null],
+      fileName: ''
+    });
+    
+this.expenseForm.get('particulars')?.valueChanges.subscribe(value => {
+    const remarksControl = this.expenseForm.get('remarks');
+    if (value === 'Others') {
+      remarksControl?.setValidators([Validators.required]);
+    } else {
+      remarksControl?.clearValidators();
+    }
+    remarksControl?.updateValueAndValidity();
+  });
 
-    if (form.valid) {
+  }
+  
+  maxDateValidator(control: any) {
+    if (!control.value) return null;
+    return new Date(control.value) > new Date(this.maxDate)
+      ? { maxDate: true }
+      : null;
+  }
+
+  onFileChange(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    this.expenseForm.patchValue({ screenshot: file ,fileName: file.name});
+  }
+}
+
+addEntry() {
+   debugger  
+
+    if (this.expenseForm.valid) {
   const entry = {
-    ...this.formData,
+    ...this.expenseForm.value,
     preview: this.preview // include the image preview here
   };
 
@@ -99,14 +157,7 @@ const existingEntries=this.Service.getentries()
   // Save entries using the service
   this.Service.setentries(this.entries);
 }
-    // this.Service.setentries({
-    //         date: this.formData.Date,
-    //         supportingNo: this.formData.supportingNo,
-    //         particulars: this.formData.particulars,
-    //         paymentMode: 'Cash',
-    //         amount: this.formData.amount,
-    //         remarks: this.formData.remarks,
-    // })
+  
 
   }
   removeentry(index: number) {
@@ -117,23 +168,35 @@ const existingEntries=this.Service.getentries()
 
   }
   
+
+
+  
+  //open clarity model
   openmodel() {
-    debugger
-    this.formopen = true;
+     
+    this.expenseForm.reset()
+    this.expenseForm.patchValue({ fileName: ''});
+    
     this.isEdit = false;
-    this.formData = {
-      date: '',
-      supportingNo: '',
-      particulars: '',
-      paymentMode: 'Cash',
-      amount: null,
-      remarks: '',
-      screenshot: ''
-    };
+    
+    
+this.expenseForm.reset({
+    date: '',
+    supportingNo: '',
+    particulars: '',
+    paymentMode: '',
+    amount: '',
+    remarks: '',
+    screenshot: null,
+    fileName: ''
+  });
+this.preview = '';
+    
+    this.formopen = true;
   }
 
   Editentry(entry: any, index: number) {
-    debugger
+     
     this.formData = ({ ...entry })
     this.editIndex = index;
     this.formopen = true
@@ -142,6 +205,28 @@ const existingEntries=this.Service.getentries()
 
 
   }
+  closeModal() {
+  this.formopen = false;
+
+  // ✅ Reset all form controls to their initial state
+  this.expenseForm.reset({
+    date: '',
+    supportingNo: '',
+    particulars: '',
+    paymentMode: '',
+    amount: '',
+    remarks: '',
+    screenshot: null,
+    fileName: ''
+  });
+
+  // ✅ Clear additional properties
+
+  this.preview = null; // If you have image preview
+  this.isEdit = false;
+  this.editIndex = null;
+}
+  
   gotoreview() {
     this.router.navigate(['expensereview'])
   }
@@ -149,3 +234,7 @@ const existingEntries=this.Service.getentries()
     this.router.navigate([''])
   }
 }
+function maxDateInclusiveValidator(maxDate: string): import("@angular/forms").ValidatorFn {
+  throw new Error('Function not implemented.');
+}
+

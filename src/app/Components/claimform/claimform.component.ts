@@ -52,12 +52,25 @@ personl:Personal={
 dataSource:Expense[]=[
  ];
   
+// getExpense(): any {
+//    
+//   const data = localStorage.getItem('expenseSummary');
+//   return data ? [JSON.parse(data)] : [];
+// }
+
+
+getExpense(): any[] {
+  const data = localStorage.getItem('expenseSummary');
+  return data ? JSON.parse(data) : [];
+}
 
 ngOnInit() {
     const now = new Date();
     const today= now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
     this.personl.today=today 
-    this.dataSource=this.service.getExpense()
+     
+    this.dataSource=this.getExpense()
+    console.log("datasoue",this.dataSource)
    console.log("expense to claim ",this.personl.today)
    this.travelservice.clearCardEntries()
    this.service.Clearentries()
