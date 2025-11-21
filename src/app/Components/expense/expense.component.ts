@@ -12,7 +12,7 @@ import { FormDataModel } from '../../Models/formsData';
 @Component({
   selector: 'app-expense',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClarityModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ClarityModule, ReactiveFormsModule],
   templateUrl: './expense.component.html',
   styleUrl: './expense.component.css'
 })
@@ -21,8 +21,8 @@ export class ExpenseComponent implements OnInit {
   editIndex: number | null = null;
   isEdit: boolean = false;
   formopen: boolean = false;
-  personal_open:boolean=false;
-  formData:FormDataModel = {
+  personal_open: boolean = false;
+  formData: FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
@@ -30,21 +30,23 @@ export class ExpenseComponent implements OnInit {
     amount: null,
     remarks: '',
     screenshot: '',
-    fileName:''
+    fileName: ''
 
   };
-  preview:any;
-//  onFileChange(event: any) {
-//     const file = event.target.files[0];
-//     if (!file) return;
-   
-//     // const reader = new FileReader();
-//     // reader.onload = () => {
-//     //   this.preview = reader.result as string;
-//     // };
-//     // reader.readAsDataURL(file);
-//     this.formData.fileName = file.name;
-//   }
+  preview: any;
+
+  isFutureDate: boolean = false;
+  //  onFileChange(event: any) {
+  //     const file = event.target.files[0];
+  //     if (!file) return;
+
+  //     // const reader = new FileReader();
+  //     // reader.onload = () => {
+  //     //   this.preview = reader.result as string;
+  //     // };
+  //     // reader.readAsDataURL(file);
+  //     this.formData.fileName = file.name;
+  //   }
   //expenseForm: FormGroup;
   maxDate: string = '';
 
@@ -61,15 +63,16 @@ export class ExpenseComponent implements OnInit {
   }
   personalData: any;
   ngOnInit() {
-const today = new Date();
-  this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
-  this.personalData = this.Service.getDetails();
-//this.formData=new FormGroup({date:new FormControl('',[Validators.required,maxDateInclusiveValidator(this.maxDate)])})
-const existingEntries=this.Service.getentries()
-   if (existingEntries && existingEntries.length > 0) {
-    // Load all entries (including allowance and user-added)
-    this.entries = existingEntries;}
-     this.from1()
+    const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0]; // Format: yyyy-MM-dd
+    this.personalData = this.Service.getDetails();
+    //this.formData=new FormGroup({date:new FormControl('',[Validators.required,maxDateInclusiveValidator(this.maxDate)])})
+    const existingEntries = this.Service.getentries()
+    if (existingEntries && existingEntries.length > 0) {
+      // Load all entries (including allowance and user-added)
+      this.entries = existingEntries;
+    }
+    this.from1()
   }
 
   // onFileChange(event: any) {
@@ -78,10 +81,9 @@ const existingEntries=this.Service.getentries()
   //       this.formData.screenshot = file.name; // You can store base64 if needed
   //     }
   //   }
- 
-  
- isFutureDate: boolean = false;
- validateDate(): void {
+
+
+  validateDate(): void {
     if (!this.formData.date) {
       this.isFutureDate = false;
       return;
@@ -89,14 +91,14 @@ const existingEntries=this.Service.getentries()
     this.isFutureDate = new Date(this.formData.date) > new Date(this.maxDate);
   }
 
- isDateValid(): boolean {
+  isDateValid(): boolean {
     if (!this.formData.date) return true;
     return new Date(this.formData.date) <= new Date(this.maxDate);
   }
-expenseForm!: FormGroup;
-from1(){
-  
- this.expenseForm = this.fb.group({
+  expenseForm!: FormGroup;
+  from1() {
+
+    this.expenseForm = this.fb.group({
       date: ['', [Validators.required, this.maxDateValidator.bind(this)]],
       supportingNo: ['', Validators.required],
       particulars: ['', Validators.required],
@@ -106,19 +108,19 @@ from1(){
       screenshot: [null],
       fileName: ''
     });
-    
-this.expenseForm.get('particulars')?.valueChanges.subscribe(value => {
-    const remarksControl = this.expenseForm.get('remarks');
-    if (value === 'Others') {
-      remarksControl?.setValidators([Validators.required]);
-    } else {
-      remarksControl?.clearValidators();
-    }
-    remarksControl?.updateValueAndValidity();
-  });
+
+    this.expenseForm.get('particulars')?.valueChanges.subscribe(value => {
+      const remarksControl = this.expenseForm.get('remarks');
+      if (value === 'Others') {
+        remarksControl?.setValidators([Validators.required]);
+      } else {
+        remarksControl?.clearValidators();
+      }
+      remarksControl?.updateValueAndValidity();
+    });
 
   }
-  
+
   maxDateValidator(control: any) {
     if (!control.value) return null;
     return new Date(control.value) > new Date(this.maxDate)
@@ -126,38 +128,41 @@ this.expenseForm.get('particulars')?.valueChanges.subscribe(value => {
       : null;
   }
 
-  onFileChange(event: any) {
-  const file = event.target.files[0];
-  if (file) {
-    this.expenseForm.patchValue({ screenshot: file ,fileName: file.name});
+  onFileChange(event: any) 
+  {
+    debugger
+    const file = event.target.files[0];
+    if (file) {
+      this.expenseForm.patchValue({ screenshot: file, 
+        fileName:file.name });
+    }
   }
-}
 
-addEntry() {
-   debugger  
+  addEntry() {
+    debugger
 
     if (this.expenseForm.valid) {
-  const entry = {
-    ...this.expenseForm.value,
-    preview: this.preview // include the image preview here
-  };
+      const entry = {
+        ...this.expenseForm.value,
+        preview: this.preview // include the image preview here
+      };
 
-  if (this.editIndex != null && this.isEdit) {
-    // Update existing entry
-    this.entries[this.editIndex] = entry;
-    this.editIndex = null;
-    this.isEdit = false;
-  } else {
-    // Add new entry
-    this.entries.push(entry);
-  }
+      if (this.editIndex != null && this.isEdit) {
+        // Update existing entry
+        this.entries[this.editIndex] = entry;
+        this.editIndex = null;
+        this.isEdit = false;
+      } else {
+        // Add new entry
+        this.entries.push(entry);
+      }
 
-  this.formopen = false;
+      this.formopen = false;
 
-  // Save entries using the service
-  this.Service.setentries(this.entries);
-}
-  
+      // Save entries using the service
+      this.Service.setentries(this.entries);
+    }
+
 
   }
   removeentry(index: number) {
@@ -167,70 +172,82 @@ addEntry() {
     }
 
   }
-  
 
 
-  
+
+
   //open clarity model
   openmodel() {
-     
+
     this.expenseForm.reset()
-    this.expenseForm.patchValue({ fileName: ''});
-    
+    this.expenseForm.patchValue({ fileName: '' });
+
     this.isEdit = false;
-    
-    
-this.expenseForm.reset({
-    date: '',
-    supportingNo: '',
-    particulars: '',
-    paymentMode: '',
-    amount: '',
-    remarks: '',
-    screenshot: null,
-    fileName: ''
-  });
-this.preview = '';
-    
+
+
+    this.expenseForm.reset({
+      date: '',
+      supportingNo: '',
+      particulars: '',
+      paymentMode: '',
+      amount: '',
+      remarks: '',
+      screenshot: null,
+      fileName: ''
+    });
+    this.preview = '';
+
     this.formopen = true;
   }
 
   Editentry(entry: any, index: number) {
-     
+
     this.formData = ({ ...entry })
     this.editIndex = index;
     this.formopen = true
     this.isEdit = true;
+      this.expenseForm.patchValue({
+    date: entry.date,
+    supportingNo: entry.supportingNo,
+    particulars: entry.particulars,
+    paymentMode: entry.paymentMode,
+    selectedCurrency_amt: entry.selectedCurrency_amt,
+    amount: entry.amount,
+    remarks: entry.remarks,
+    screenshot: entry.screenshot,
+    fileName: entry.fileName
+  });
+
     console.log("forms", this.formData);
 
 
   }
   closeModal() {
-  this.formopen = false;
+    this.formopen = false;
 
-  // ✅ Reset all form controls to their initial state
-  this.expenseForm.reset({
-    date: '',
-    supportingNo: '',
-    particulars: '',
-    paymentMode: '',
-    amount: '',
-    remarks: '',
-    screenshot: null,
-    fileName: ''
-  });
+    // ✅ Reset all form controls to their initial state
+    this.expenseForm.reset({
+      date: '',
+      supportingNo: '',
+      particulars: '',
+      paymentMode: '',
+      amount: '',
+      remarks: '',
+      screenshot: null,
+      fileName: ''
+    });
 
-  // ✅ Clear additional properties
+    // ✅ Clear additional properties
 
-  this.preview = null; // If you have image preview
-  this.isEdit = false;
-  this.editIndex = null;
-}
-  
+    this.preview = null; // If you have image preview
+    this.isEdit = false;
+    this.editIndex = null;
+  }
+
   gotoreview() {
     this.router.navigate(['expensereview'])
   }
-  backbtn(){
+  backbtn() {
     this.router.navigate([''])
   }
 }

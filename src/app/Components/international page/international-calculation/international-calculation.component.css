@@ -6,6 +6,10 @@
   margin-top: 20px;
  
 }
+.FULL{
+
+
+}
 .header1{
   h1{
     text-align: center;
@@ -27,7 +31,7 @@ clr-modal .modal-body {
 
 /* Optional: Reduce padding around modal content */
 clr-modal .modal-body {
-  padding: 1rem;
+
 }
 
 /* Style the modal title */
@@ -58,22 +62,8 @@ clr-modal .modal-title h1 {
 }
 
 
-/* .grid-two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 14px;
-} */
 
 
-clr-input-container ,clr-select-container{
-  /* display: grid;
-  grid-template-columns: 150px 1fr;
-  align-items: center;
-  gap: 10px;
-  
-  margin-bottom: 2px; */
-}
 
 
 
@@ -100,39 +90,16 @@ clr-input-container label ,clr-select-container label {
   
 }
 
-.amount12{
- 
-
-  text-align: left;
-  margin: 0px;
-   text-decoration: none;
-   list-style:none;  border: none;
-  box-shadow: none;
-  outline: none;
-
-  font-weight: 600;
-  font-size: 14px;
-  color: #333;
+#fill_international{
+    float: right;
+    display: block;
+    
+  }
   
-}
-
-.amount12 input{
-
- 
-  margin-left:73px;
- 
-  font-size: 14px;
-padding: 10px;
-  
- 
-}
-
-
 clr-input-container input,clr-select-container select option {
   
   
-  
-  
+
 }
 .remarks-box textarea {
   width: 300px;
@@ -297,15 +264,51 @@ justify-content: space-between;
   display: block;
   
 }
-
+.datagriid{
+  display: inline-block;
+  width: 100%;
+  
+}
 
 clr-datagrid{
+ 
    height:350px;
   overflow-y: auto;
+ 
  
  
 } 
  
 clr-input-container label.Screenshot::after {
   content: "";
+}
+.amount12{
+position: relative;
+display: flex;
+  text-align: left;
+  margin: 0px;
+   text-decoration: none;
+   list-style:none;  border: none;
+  box-shadow: none;
+  outline: none;
+
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin-top: 10px;
+  left: 0%;
+}
+.amount12 label{
+
+
+}
+.amount12 input{
+
+ margin-left: 80px;
+ 
+ 
+  font-size: 14px;
+
+  
+ 
 }

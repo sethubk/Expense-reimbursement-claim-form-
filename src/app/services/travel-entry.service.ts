@@ -15,7 +15,7 @@ private entries:any=[];
     return this.cashEntries;
   }
 
-getallowance() : number{
+getavg() : number{
   let InrRate = 0;
   let totalInr = 0;
   let avg = 0;
@@ -95,10 +95,12 @@ clearCardEntries(): void {
 
   private travelStart: string = '';
   private travelEnd: string = '';
+  private selectedcurrencyType :string='';
 
-  setTravelDates(start: string, end: string) {
+  setTravelDates(start: string, end: string,currency:string) {
     this.travelStart = start;
     this.travelEnd = end;
+    this.selectedcurrencyType=currency
   }
 
 
@@ -108,6 +110,10 @@ clearCardEntries(): void {
 
   getTravelEnd(): string {
     return this.travelEnd;
+  }
+
+  getselectedcurrencyType():string{
+    return this.selectedcurrencyType
   }
 }
 

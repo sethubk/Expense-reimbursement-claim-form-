@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelEntryService } from '../../../services/travel-entry.service';
 import { PersonalDataService } from '../../../services/personal-data.service';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, FormGroup, NgForm, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { CommonModule } from '@angular/common';
 import { FormDataModel } from '../../../Models/formsData';
@@ -10,80 +10,30 @@ import { FormDataModel } from '../../../Models/formsData';
 @Component({
   selector: 'app-international-calculation',
   standalone: true,
-  imports: [ClarityModule,FormsModule,CommonModule],
+  imports: [ClarityModule, FormsModule, CommonModule,ReactiveFormsModule],
   templateUrl: './international-calculation.component.html',
   styleUrl: './international-calculation.component.css'
 })
-export class InternationalCalculationComponent implements OnInit{
-isEdit: boolean = false;
-personalData:any;
-  constructor(private travelService:TravelEntryService ,private router:Router ,private service:PersonalDataService) {}
-maxDate:string='';
+export class InternationalCalculationComponent implements OnInit {
+  isEdit: boolean = false;
+  personalData: any;
+  constructor(private fb: FormBuilder, private travelService: TravelEntryService, private router: Router, private service: PersonalDataService) { }
+  maxDate: string = '';
 
- startDate: string = '';
+  startDate: string = '';
   endDate: string = '';
- showMax: boolean = false;
-ngOnInit(): void {
-  
- 
-  const fullStart = this.travelService.getTravelStart(); // e.g., "2025-10-30T09:00"
-  const fullEnd = this.travelService.getTravelEnd();     // e.g., "2025-11-05T18:00"
+  showMax: boolean = false;
 
-  this.startDate = fullStart.split('T')[0]; // "2025-10-30"
-  this.endDate = fullEnd.split('T')[0];
-
-  const today = new Date();
-  this.maxDate = today.toISOString().split('T')[0];
-
-  this.personalData = this.service.getDetails();
-
-  // Check if entries already exist
-
-  const existingEntries = this.service.getentries();
-
-  if (existingEntries && existingEntries.length > 0) { 
-
-    let allowanceEntry = existingEntries.find((x: { particulars: string; }) => x.particulars == "Allowance");
-    
-    let allowance = this.travelService.getAllowance();
-
-    if(allowanceEntry)
-    {
-    allowanceEntry.amount = allowance;
-    }
-  this.service.setentries(existingEntries);
-
-    // Load all entries (including allowance and user-added)
-    this.entries = existingEntries;
-    
-  } else {
-    // First time: only push allowance
-    const allowance = this.travelService.getAllowance();
-    console.log("calculation", allowance);
-
-    this.entries = [{
-      paymentMode:'cash',
-      particulars: 'Allowance',
-      amount: allowance || 0
-    }];
-
-    
-  }
-  // Save to service
-    this.service.setentries(this.entries);
-
-// const additionalEntries = this.service.getentries(); // Make sure it's a method
-// this.entries.push(...additionalEntries);
-}
-
-
-formopen: boolean = false;
- entries: any[] = [];
- index1:number=this.entries.length
+  isFutureDate: boolean = false;
+  formopen: boolean = false;
+  entries: any[] = [];
+  index1: number = this.entries.length
   editIndex: number | null = null;
   editType: 'Card' | 'Cash' | null = null;
-
-  formData:FormDataModel = {
+avg:number=0;
+  preview: any;
+ selectedCurrency_amt:string=''
+  formData: FormDataModel = {
     date: '',
     supportingNo: '',
     particulars: '',
@@ -91,85 +41,274 @@ formopen: boolean = false;
     amount: null,
     remarks: '',
     screenshot: '',
-     fileName:''
+    fileName: ''
   };
+  ngOnInit() {
+
+    this.from1()
+    const fullStart = this.travelService.getTravelStart(); // e.g., "2025-10-30T09:00"
+    const fullEnd = this.travelService.getTravelEnd();     // e.g., "2025-11-05T18:00"
+this.selectedCurrency_amt=this.travelService.getselectedcurrencyType()
+this.avg=this.travelService.getavg()
+    this.startDate = fullStart.split('T')[0]; // "2025-10-30"
+    this.endDate = fullEnd.split('T')[0];
+
+    const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0];
+
+    this.personalData = this.service.getDetails();
+
+    // Check if entries already exist
+
+    const existingEntries = this.service.getentries();
+
+    if (existingEntries && existingEntries.length > 0) {
+
+      let allowanceEntry = existingEntries.find((x: { particulars: string; }) => x.particulars == "Allowance");
+
+      let allowance = this.travelService.getAllowance();
+
+      if (allowanceEntry) {
+        allowanceEntry.amount = allowance;
+      }
+      this.service.setentries(existingEntries);
+
+      // Load all entries (including allowance and user-added)
+      this.entries = existingEntries;
+
+    } else {
+      // First time: only push allowance
+      const allowance = this.travelService.getAllowance();
+      console.log("calculation", allowance);
+
+      this.entries = [{
+        paymentMode: 'cash',
+        particulars: 'Allowance',
+        amount: allowance || 0
+      }];
+
+
+    }
+    // Save to service
+    this.service.setentries(this.entries);
+
+
+  }
+
+  expenseForm!: FormGroup;
+  from1() {
+
+  this.expenseForm = this.fb.group({
+  date: ['', [Validators.required, this.maxDateValidator.bind(this)]],
+  supportingNo: ['', Validators.required],
+  particulars: ['', Validators.required],
+  paymentMode: ['', Validators.required],
+  selectedCurrency_amt: [''], // Currency dropdown
+  amount: ['', [Validators.required, Validators.min(1)]], // Amount input
+  remarks: [''],
+  screenshot: [null],
+  fileName: ''
+});
+
+    this.expenseForm.get('particulars')?.valueChanges.subscribe(value => {
+      const remarksControl = this.expenseForm.get('remarks');
+      if (value === 'Others') {
+        remarksControl?.setValidators([Validators.required]);
+      } else {
+        remarksControl?.clearValidators();
+      }
+      remarksControl?.updateValueAndValidity();
+    });
+
+  }
+
+  maxDateValidator(control: any) {
+    if (!control.value) return null;
+    return new Date(control.value) > new Date(this.maxDate)
+      ? { maxDate: true }
+      : null;
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.expenseForm.patchValue({ screenshot: file, fileName: file.name });
+    }
+  }
+
+
+
+
+
+  //  onFileChange(event: any) {
+  //     const file = event.target.files[0];
+  //     if (!file) return;
+
+  //     // const reader = new FileReader();
+  //     // reader.onload = () => {
+  //     //   this.preview = reader.result as string;
+  //     // };
+  //     // reader.readAsDataURL(file);
+  //      this.formData.fileName = file.name;
+  //   }
+
+
+
+
+  // addEntry() {
+  //   debugger
+
+  //   if (this.expenseForm.valid) {
+  //     const entry = {
+  //       ...this.expenseForm.value,
+  //       preview: this.preview // include the image preview here
+  //     };
+
+  //     if (this.editIndex != null && this.isEdit) {
+  //       // Update existing entry
+  //       this.entries[this.editIndex] = entry;
+  //       this.editIndex = null;
+  //       this.isEdit = false;
+  //     } else {
+  //       // Add new entry
+  //       this.entries.push(entry);
+  //     }
+
+  //     this.formopen = false;
+
+  //     // Save entries using the service
+  //     this.service.setentries(this.entries);
+  //   }
+
+
+  // }
+
+  addEntry() {
+  if (this.expenseForm.valid) {
+    const formValue = this.expenseForm.value;
+
+    // ✅ Calculate converted amount if currency is selected
+    let convertedAmount = null;
+   
+
+    if (formValue.selectedCurrency_amt && formValue.amount) {
+      
+if (formValue.selectedCurrency_amt === 'INR') {
+    // No conversion needed for INR
+    convertedAmount = formValue.amount;
+  } else {
+    // Apply conversion for other currencies
+    convertedAmount = formValue.amount * 70;
+  }
+
+    }
+
+    const entry = {
+      ...formValue,
+      convertedAmount, // ✅ Add calculated value
+      preview: this.preview // include the image preview here
+    };
+
+    if (this.editIndex != null && this.isEdit) {
+      // Update existing entry
+      this.entries[this.editIndex] = entry;
+      this.editIndex = null;
+      this.isEdit = false;
+    } else {
+      // Add new entry
+      this.entries.push(entry);
+    }
+
+    this.formopen = false;
+
+    // Save entries using the service
+    this.service.setentries(this.entries);
+  }
+}
+  removeentry(index: number) {
+    const of = confirm("are you sure")
+    if (of) {
+      this.entries.splice(index, 1)
+    }
+
+  }
+
+
+
+
+  //open clarity model
   openmodel() {
-     
-    this.formopen=true
-    this.formData = {
+
+    this.expenseForm.reset()
+    this.expenseForm.patchValue({ fileName: '' });
+
+    this.isEdit = false;
+
+
+    this.expenseForm.reset({
       date: '',
       supportingNo: '',
       particulars: '',
-      paymentMode: 'Cash',
-      amount: null,
+      paymentMode: '',
+      amount: '',
       remarks: '',
-      screenshot: '',
-      fileName:'',
-    };
+      screenshot: null,
+      fileName: ''
+    });
+    this.preview = '';
+
+    this.formopen = true;
   }
 
+Editentry(entry: any, index: number) {
+  this.formData = { ...entry };
+  this.editIndex = index;
+  this.formopen = true;
+  this.isEdit = true;
 
-preview:any;
- onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (!file) return;
+  // ✅ Patch form with entry values
+  this.expenseForm.patchValue({
+    date: entry.date,
+    supportingNo: entry.supportingNo,
+    particulars: entry.particulars,
+    paymentMode: entry.paymentMode,
+    selectedCurrency_amt: entry.selectedCurrency_amt,
+    amount: entry.amount,
+    remarks: entry.remarks,
+    screenshot: entry.screenshot,
+    fileName: entry.fileName
+  });
+
+  // ✅ Recalculate converted amount for UI if needed
  
-    // const reader = new FileReader();
-    // reader.onload = () => {
-    //   this.preview = reader.result as string;
-    // };
-    // reader.readAsDataURL(file);
-     this.formData.fileName = file.name;
-  }
 
+  console.log("Editing entry:", this.formData);
+}
+  closeModal() {
+    this.formopen = false;
 
+    // ✅ Reset all form controls to their initial state
+    this.expenseForm.reset({
+      date: '',
+      supportingNo: '',
+      particulars: '',
+      paymentMode: '',
+      amount: '',
+      remarks: '',
+      screenshot: null,
+      fileName: ''
+    });
 
-  
-  addEntry(form: NgForm) {
-     
+    // ✅ Clear additional properties
 
-    if (form.valid) {
-  const entry = {
-    ...this.formData,
-    preview: this.preview // include the image preview here
-  };
-
-  if (this.editIndex != null && this.isEdit) {
-    // Update existing entry
-    this.entries[this.editIndex] = entry;
-    this.editIndex = null;
+    this.preview = null; // If you have image preview
     this.isEdit = false;
-  } else {
-    // Add new entry
-    this.entries.push(entry);
+    this.editIndex = null;
   }
-
-  this.formopen = false;
-    }
-       this.service.setentries(this.entries)
-    }
-  
-      Editentry(entry: any, index: number) {
-       
-      this.formData = ({ ...entry })
-      this.editIndex = index;
-      this.formopen = true
-      this.isEdit = true;
-      console.log("forms", this.formData);
-  
-  
-    }
-    removeentry(index: number) {
-      const of = confirm("are you sure")
-      if (of) {
-        this.entries.splice(index, 1)
-      }
-  
-    }
-    gotoreview() {
-      this.router.navigate(['internationalreview'])
-    }
-    backbtn(){
-this.router.navigate(['international'])
-    }
+  gotoreview() {
+    this.router.navigate(['internationalreview'])
+  }
+  backbtn() {
+    this.router.navigate(['international'])
+  }
 }

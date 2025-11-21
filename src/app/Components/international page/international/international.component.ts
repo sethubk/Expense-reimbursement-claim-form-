@@ -189,7 +189,7 @@ export class InternationalComponent implements OnInit {
 
   gotoreview() {
 
-    this.travelService.setTravelDates(this.travelStart, this.travelEnd);
+    this.travelService.setTravelDates(this.travelStart, this.travelEnd ,this.selectedCurrency);
     const allowance = this.calculateAllowance()
     this.router.navigate(['internationalcal'])
 

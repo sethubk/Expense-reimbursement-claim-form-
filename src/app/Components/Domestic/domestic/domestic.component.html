@@ -138,5 +138,5 @@
  
 <div class="preview">
   <button class="btn btn-info" (click)="backbtn()">back to </button>
-  <button class="btn btn-info"  (click)="gotoreview()"  > go cto claim page </button>
+  <button class="btn btn-info"  (click)="gotoreview()" [disabled]="totaldays ==0" > go cto claim page </button>
 </div>

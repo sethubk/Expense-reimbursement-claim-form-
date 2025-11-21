@@ -46,22 +46,6 @@ clr-modal .modal-title h1 {
 }
 
 
-/* .grid-two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 14px;
-} */
-
-
-clr-input-container ,clr-select-container{
-  /* display: grid;
-  grid-template-columns: 150px 1fr;
-  align-items: center;
-  gap: 10px;
-  
-  margin-bottom: 2px; */
-}
 
 
 
